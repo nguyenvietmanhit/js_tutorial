@@ -46,6 +46,40 @@
     // - (interpreter) giống như thông dịch viên . doanh nhân Việt Nam đi làm ăn đối tác nước ngoài cần người thông dịch viên
     // và lần sau vẫn cần có người thông dịch viên.<br>
     // - (compiler) giống như nhà biên dịch dịch cuốn sách tiếng anh sang tiếng việt chỉ dịch 1 lần nhưng có thể in bán ra hàng ngàn cuốn.</div>
+
+    console.log(Number.MAX_VALUE + Number.MAX_VALUE);
+    console.log(-Number.MAX_VALUE - Number.MAX_VALUE);
+
+    console.log(NaN / 2);
+    console.log(NaN == NaN)
+
+    let s = 'Javascript';
+    s[0] = 'j';
+    console.log(s)
+
+    console.log(Boolean(0));
+
+    let s1 = Symbol();
+    console.log(Symbol() == Symbol());
+
+    let pageView = 123n;
+    console.log(typeof pageView)
+
+    let contact = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'abc@gmail.com',
+        phone: '121212121',
+        address: {
+            building: 4000,
+            street: 'HN',
+            city: 'San abc',
+            state: 'CA',
+            country: 'USA'
+        }
+    }
+
+    console.log(contact.firstName);
 </script>
 <!--<script src="script.js" defer async></script>-->
 <input id="fullname" type="text">
