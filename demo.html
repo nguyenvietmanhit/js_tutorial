@@ -1,93 +1,51 @@
 <script>
-    var a = 5;
-    var b = 6;
-    if (a > 0) {
-        // debugger;
-    }
+    let a = 20,
+        b = 30;
 
-
-    var animals = [
-        { animal: 'Horse', name: 'Henry', age: 43 },
-        { animal: 'Dog', name: 'Fred', age: 13 },
-        { animal: 'Cat', name: 'Frodo', age: 18 },
-    ];
-
-    console.table(animals)
-
-
-    console.time('Timer1');
-
-    var items = [];
-
-    for (var i = 0; i < 100000; i++) {
-        items.push({ index: i})
-    }
-
-    console.timeEnd('Timer1');
-
-
-
-    var car;
-    var func1 = function() {
-        func2();
-    }
-
-    var func2 = function() {
-        func4();
-    }
-
-    var func3 = function() {
-
-    }
-
-    var func4 = function() {
-        car = new Car();
-        car.funcX();
-    }
-
-    var Car = function() {
-        this.brand = 'volvo';
-        this.color = 'red';
-        this.funcX = function() {
-            this.funcY();
+    function divide(a, b) {
+        if (b == 0) {
+            throw 'Division by zero';
         }
-
-        this.funcY = function() {
-            this.funcZ();
-        }
-
-        this.funcZ = function() {
-            console.trace('trace car');
-        }
+        return a / b;
     }
 
-    func1();
-    var car;
-    var func1 = function() {
-        func2();
-    }
-    var func2 = function() {
-        func4()
-    }
-    var func3 = function () {
+    // console.log(divide(20, 0))
 
+    let items = [1, 2, 3];
+
+    for (let item of items) {
+        console.log(item)
     }
-    var func4 = function() {
-        car = new Car();
-        car.funcX();
-    }
-    var Car = function() {
-        this.brand = 'volvo';
-        this.color = 'red';
-        this.funcX = function() {
-            this.funcY();
-        }
-        this.funcY = function() {
-            this.funcZ();
-        }
-        this.funcZ = function() {
-            console.trace('trace car');
-        }
-    }
-    func1();
+    //thuộc tính async ko đảm bảo file script đc thực thi theo thứ tự mà nó xuất hiện
+    // thuộc tính defer chờ cho đến khi trình duyệt nhận thẻ đóng /html thì mới thực thi
+
+    var ab30add = 'adss'
+    // nên dùng let để khai báo biến
+
+    let message;
+    // console.log(message)
+    // console.log("Dsadsad")
+    // console.log(counter)
+    let counter = 120;
+    counter = false;
+    counter = 'foo';
+    console.log(typeof counter)
+    console.log(typeof abcdefdsadsa);
+
+    let obj = null;
+    console.log(typeof obj); //trả về object là 1 bug trong JS, do lo ngại nó break nhiếu site đã tồn tại
+    console.log(null == undefined)
+
+    let price = 200.00;
+    console.log(price)
+    console.log(typeof price)
+    // thông dịch(interpreter) dịch từng lệnh 1 thông qua chương trình ta gọi là trình thông dịch(interpreter)
+    // lần sau chạy lại thì phải trình thông dịch lại. file <br>
+    // Biên dịch(compiler) dịch toàn bộ thông qua chương trình ta gọi là trình biên dịch(compiler),
+    // dịch 1 lần và sử dụng mãi mãi không cần biên dịch nữa.  <br>lấy ví dụ thực tế:<br>
+    // (interpreter) giống như thông dịch viên . doanh nhân Việt Nam đi làm ăn đối tác nước ngoài cần người thông dịch viên và lần sau vẫn cần có người thông dịch viên.<br>
+    // (compiler) giống như nhà biên dịch dịch cuốn sách tiếng anh sang tiếng việt chỉ dịch 1 lần nhưng có thể in bán ra hàng ngàn cuốn.</div>
 </script>
+<!--<script src="script.js" defer async></script>-->
+<input id="fullname" type="text">
+
