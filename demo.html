@@ -1,4 +1,5 @@
 <script>
+    // "use strict"
     let a = 20,
         b = 30;
 
@@ -76,10 +77,122 @@
             city: 'San abc',
             state: 'CA',
             country: 'USA'
-        }
+        },
+        "first-name": 'sadsadsa'
     }
 
     console.log(contact.firstName);
+    console.log(contact['first-name']);
+
+    let num = 071;
+    console.log(num); //57 = 0 * 8^2 + 7 * 8^1 + 1 * 8^0
+    let num2 = 080;
+    console.log(num2); //80
+    let num3 = 0o71;
+    console.log(num3)
+    // let num4 = 0o80;
+    // consol
+
+    let num4 = 0x1a;
+    console.log(num4); //26 = 1 * 16^1 + 10 * 16^0
+
+    let amount = 3.14e7;
+    console.log(amount)
+    let amount2 = 5e-7;
+    console.log(amount2)
+    let amount3 = 0.0000005;
+    console.log(amount3);
+
+    let amount4 = 0.2 + 0.1;
+    console.log(amount4)
+
+    let pageView1 = 12123n;
+    console.log(pageView1)
+
+    const budget = 1000000000;
+    console.log(budget)
+    const budget2 = 1_000_000_000;
+    console.log(budget2)
+
+    let amount5 = 120_121_122.05;
+    console.log(amount5)
+
+    const max1 = 9_123_456n;
+    const max2 = 0b01010101;
+    const max3 = 0o12;
+    const max4 = 0x124abc;
+
+
+    let aa = 051;
+    console.log(aa)
+
+    let bb = 058;
+    console.log(bb)
+
+    // let cc = 0o58;
+    // console.log(cc)
+
+    let e = parseInt('111', 2);
+    console.log(e)
+
+    let error = 'An error occurred';
+    let hasError = Boolean(error)
+    console.log(hasError)
+
+    let str = 'Hi';
+    let name1 = `John \t \t \\ abcdef \r\n dsadsadsa  \n new line`; //es6
+    let message11 = `I'm good, hello "manhnv"`;
+    console.log(message11)
+
+    let messsage2 = `Hi, I'm ${name1}`;
+    console.log(messsage2)
+
+
+    let str2 = "Hello";
+    console.log(str2[0])
+    console.log(str2[str2.length - 1]);
+
+    let number2 = 123;
+    console.log(typeof number2)
+    let var1 =  number2.toString() //String(number2);
+    console.log(typeof var1);
+
+    let status = false;
+    let str1 = status.toString();
+    console.log(str1)
+    let back = Boolean(str1);
+    console.log(back)
+
+
+    let result1 = 'a' < 'b';
+    console.log(result1)
+
+    let address2 = {
+        "building no": 3960,
+        street: 'North i1st street',
+        state: 'CA',
+        country: 'USA'
+    }
+    console.log(address2)
+    console.log(address2["building no"]);
+    address2.state = 'ABC';
+    address2.def = 'dasdsadsa';
+
+    delete address2.country;
+
+    console.log(address2)
+    // console.log(address2.'building no');
+
+
+    let employee1 = {
+        firstName: 'Peter',
+        lastName: 'Doe',
+        employeeId: 1
+    }
+
+    console.log('ssn' in employee1)
+    console.log('employeeId' in employee1)
+
 </script>
 <!--<script src="script.js" defer async></script>-->
 <input id="fullname" type="text">
