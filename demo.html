@@ -317,6 +317,98 @@
     user4.nickname ??= 'anonymous'; // // user4.nickname ?? (user4.nickname = 'anonymous'), chi gan neu null hoac undefined
     console.log(user4);
 
+
+    const name5 = null ?? 'John';
+    console.log(name5)
+
+    const age5 = undefined ?? 28;
+    console.log(age5)
+
+    let count6;
+    let result6 = count6 || 1; //neu ben trai false thi moi gan bang ben phai
+    console.log(result6)
+
+    let result7 = null ?? console.log('Hi');
+    // console.log(result7)
+
+    const result8 = (null || undefined) ?? 'OK';
+    console.log(result8)
+
+
+    let cal1 = Math.pow(2, 3);
+    console.log(cal1)
+
+    let cal2 = 2 ** 4;
+    console.log(cal2)
+
+    let cal3 = (-2) ** 3;
+    console.log(cal3)
+
+
+    let authenticated = true;
+    let nextURL = authenticated
+    ? (a1 = 4, a2 = 55, '/admin', 'ghi', console.log('dsadsads'), 'abc'.indexOf('c'))
+        : (alert('ACcess denied', '/403'))
+    console.log(a1)
+    console.log(a2)
+    console.log(nextURL)
+
+    let colors1 = ['red', 'green', 'blue'];
+    let rgb1 = [...colors1];
+    console.log(rgb1);
+
+    let rgb2 = ['red', 'green', 'blue'];
+    let cmyk2 = ['cyan', 'magenta', 'yellow', 'black'];
+    let merge2 = [...rgb2, ...cmyk2];
+    console.log(merge2)
+
+    const circle3 = {
+        radius: 10
+    };
+    console.log(circle3)
+
+    const coloredCircle = {
+        ...circle3,
+        color: 'black'
+    }
+    console.log(coloredCircle);
+
+    const circle4 = {
+        radius: 100,
+        abc: '123',
+        def: '456'
+    }
+
+    const clonedCircle = {...circle4};
+    console.log(circle4)
+
+
+    const circle5 = {
+        radius: 10,
+        style: {
+            color: 'blue'
+        }
+    };
+    const clonedCircle5 = {
+        ...circle5
+    }
+    console.log(clonedCircle5);
+
+
+    const circle6 = {
+        radius: 10
+    };
+
+    const style6 = {
+        backgroundColor: 'red'
+    };
+
+    const solidCircle6 = {
+        ...circle6,
+        ...style6
+    }
+    console.log(solidCircle6)
+
 </script>
 <!--<script src="script.js" defer async></script>-->
 <input id="fullname" type="text">
