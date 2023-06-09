@@ -192,6 +192,130 @@
 
     console.log('ssn' in employee1)
     console.log('employeeId' in employee1)
+    // kiểu dữ liệu nguyên thủy lưu trong stack
+    // kiểu object lưu trong heap
+
+    let person1 = {
+        name: 'John',
+        age: 25
+    };
+
+    person1.ssn = '123-456';
+    person1.name = 'John edit';
+    console.log(person1);
+
+    delete person1.age;
+
+    console.log(person1)
+
+    let name11 = 'Hohn';
+    name11.alias = 'abc';
+    console.log(name11.alias)
+
+    let age2 = 25;
+    let newAge = age2;
+
+    newAge = newAge + 1;
+    console.log(age2, newAge)
+
+
+    let person3 = {
+        name: 'john',
+        age: 25
+    };
+
+    let member3 = person3;
+    member3.age = 26;
+    console.log(person3)
+    console.log(member3)
+
+    let scores = new Array(10);
+    console.log(scores)
+    console.log(typeof scores)
+
+    let scores1 = new Array(1, 2, 3, 4, 5);
+    console.log(scores1)
+
+    let arr1 = new Array(3);
+    let arr2 = new Array(1, 2, 3)
+    let arr3 = new Array('Red')
+    console.log(arr1, arr2, arr3)
+
+
+    let arr4 = Array();
+    console.log(arr4)
+
+    let colors = ['red', 'blue', 'white'];
+    console.log(colors)
+
+    let mountains = ['a', 'b', 'c'];
+    console.log(mountains)
+    console.log(mountains[0])
+    console.log(mountains[1])
+    console.log(mountains[2])
+    mountains[2] = 'cccc';
+    console.log(mountains)
+
+    console.log(mountains.length)
+
+
+
+    let seas = ['Black Sea', 'Caribbean Sea', 'North Sea', 'Baltic Sea'];
+    console.log(seas)
+    seas.push('Red Sea');
+    console.log(seas)
+
+    seas.unshift('Red Sea')
+    console.log(seas)
+
+    const lastElement = seas.pop();
+    console.log(lastElement);
+    console.log(seas)
+
+    const firstElement = seas.shift();
+    console.log(firstElement);
+    console.log(seas)
+
+    let index = seas.indexOf('North Sea');
+    console.log(index)
+
+    let isArray = Array.isArray(seas);
+    console.log(isArray)
+
+
+    let energy = {
+        valueOf() {
+            return 100;
+        }
+    }
+
+    let currentEnergy = energy - 10;
+    console.log(currentEnergy)
+
+
+    let b1 = false;
+    let result4 = b1 && (1/0);
+    console.log(result4)
+
+
+    let title1;
+    title1 ||= 'untitled'; // title1 || (title1 = 'untitled'), neu ben trai false thi moi gan, nguoc lai true thi ko gan
+    console.log(title1)
+
+    let person4 = {
+        firstName: 'Jane',
+        lastName: 'Doe'
+    };
+
+    person4.lastName &&= 'Smith'; // neu ben trai true thi moi gan, nguoc lai false thi ko gan
+    console.log(person4);
+
+    let user4 = {
+        username: 'Satoshi',
+        nickname: null
+    };
+    user4.nickname ??= 'anonymous'; // // user4.nickname ?? (user4.nickname = 'anonymous'), chi gan neu null hoac undefined
+    console.log(user4);
 
 </script>
 <!--<script src="script.js" defer async></script>-->
