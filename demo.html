@@ -409,6 +409,126 @@
     }
     console.log(solidCircle6)
 
+    class Circle7 {
+        constructor(radius) {
+            this.radius = radius;
+        }
+
+        set diameter(value) {
+            this.radius = value / 2;
+            console.log('SET', value);
+        }
+
+        get diameter() {
+            return this.radius * 2;
+        }
+    }
+
+    let circle7 = new Circle7(100);
+    console.log(circle7)
+
+    // Object.assign goi ham setter trong khi ... ko goi khi clone
+    let cloneCircle1 = Object.assign(circle7, {
+        diameter: 200
+    })
+
+    let cloneCircle2 = {
+        ...circle7
+    }
+    console.log(cloneCircle1)
+    console.log(cloneCircle2)
+
+    const blueSquare = {
+        length: 100,
+        color: 'blue'
+    }
+
+    Object.defineProperty(blueSquare, 'color', {
+        value: 'blue',
+        enumerable: true,
+        writable: false
+    })
+
+    Object.defineProperty(blueSquare, 'test', {
+        value: 'manhnv1',
+        enumerable: true,
+        writable: false
+    })
+
+
+    console.log(blueSquare)
+
+    const style1 = {
+        color: 'green'
+    };
+
+    const greenSquare = {
+        ...blueSquare,
+        ...style1
+    };
+    console.log(greenSquare)
+
+    // Object assign ko the thao tac voi gia tri chi doc
+    // const redSquare = Object.assign(blueSquare, {
+    //     color: 'red'
+    // })
+    // console.log(redSquare)
+
+    let day = '3'
+    let dayName;
+    //su dung so sanh tuyet doi ===
+    switch (day) {
+        case '3': dayName = ' Tuesday'; break;
+        default: dayName = 'Invalid day';
+    }
+    console.log(dayName)
+
+    // Queue giong phuc vu khach hang o bank, FIFO, stack = LIFO
+
+    class Queue {
+        constructor() {
+            this.elements = {};
+            this.head = 0;
+            this.tail = 0;
+        }
+
+        enqueue(element) {
+            this.elements[this.tail] = element;
+            this.tail++;
+        }
+
+        dequeue() {
+            const item = this.elements[this.head];
+            delete this.elements[this.head];
+            this.head++;
+            return item;
+        }
+
+        peek() {
+            return this.elements[this.head];
+        }
+
+        get length() {
+            return this.tail - this.head;
+        }
+
+        get isEmpty() {
+            return this.length === 0;
+        }
+    }
+
+    let q = new Queue();
+    for (let i = 4; i <= 11; i++) {
+        q.enqueue(i);
+    }
+    console.log(q)
+    // console.log(q.peek())
+
+    while(!q.isEmpty) {
+        console.log(q.dequeue())
+    }
+    console.log(q)
+
 </script>
 <!--<script src="script.js" defer async></script>-->
 <input id="fullname" type="text">
