@@ -1,3 +1,4 @@
+<body></body>
 <script>
     // "use strict"
     let a = 20,
@@ -669,6 +670,250 @@
     increaseAge1(person55);
     console.log(person55)
 
+
+    function countDown(fromNumber) {
+        console.log(fromNumber);
+
+        let nextNumber = fromNumber - 1;
+        if (nextNumber > 0) {
+            countDown(fromNumber - 1)
+        }
+    }
+    countDown(3)
+
+    // let newYearCountDown = countDown;
+    // countDown = null;
+    // newYearCountDown(10)
+
+    let countDown1 = function f(fromNumber) {
+        console.log(fromNumber)
+        let nextNumber = fromNumber - 1;
+        if (nextNumber > 0) {
+            f(nextNumber)
+        }
+    }
+
+    let newYearCountDown1 = countDown1;
+    countDown1 = null;
+    newYearCountDown1(10)
+
+
+    function sum1(n) {
+        if (n <= 1) {
+            return n;
+        }
+        return n + sum(n-1);
+    }
+    console.log(sum1(4))
+
+    function say(message = 'Hi') {
+        console.log(message)
+    }
+    say();
+    say('Hello')
+
+    function say1(message) {
+        message = typeof message !== 'undefined' ? message : 'Hi'
+        console.log(message)
+    }
+    say1();
+
+    function createDiv(height = '100px', width = '100px', border = '1px solid red') {
+        let div = document.createElement('div');
+        console.log(div)
+        div.style.height = height;
+        div.style.width = width;
+        div.style.border = border;
+        document.body.appendChild(div);
+        return div;
+    }
+    createDiv()
+
+    createDiv(undefined, undefined, '2px solid blue')
+
+
+    function put(toy, toyBox = []) {
+        toyBox.push(toy);
+        return toyBox;
+    }
+
+    console.log(put('Toy Car'))
+
+    console.log(put('Teddy Car'))
+
+
+    function date(d = today()) {
+        console.log(d)
+    }
+
+    function today() {
+        return (new Date().toLocaleDateString('en-US'))
+    }
+
+    date();
+
+
+    function requiredArg() {
+        throw new Error('The argument is required');
+    }
+
+    function add1(x = requiredArg(), y = requiredArg()) {
+        return x + y;
+    }
+
+    console.log(add1('dsa', 'bv'))
+
+
+    function add33(x = 1, y = x, z = x + y) {
+        return z + y + z;
+    }
+    console.log(add33())
+
+
+    function subtract(x = y, y = 1) {
+        return x - y;
+    }
+    console.log(subtract(10))
+
+    let taxRate = () => 0.1;
+    let getPrice = function(price, tax = price * taxRate()) {
+        return price + tax
+    }
+     let fullPrice = getPrice(100)
+    console.log(fullPrice)
+
+
+    function add222(x, y = 1, z = 2) {
+        console.log(arguments.length)
+        return x + y + z;
+    }
+    add222(10)
+
+
+    let persona = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+
+    persona.greet = function() {
+        console.log('Hello')
+    }
+
+    persona.greet()
+
+
+    let personb = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+
+    function greet() {
+        console.log('Hello, World')
+    }
+
+    personb.greet = greet;
+
+    personb.greet();
+
+
+    let personc = {
+        firstName: 'John',
+        lastName: 'Doe',
+        greet: function() {
+            console.log('Hello World')
+        }
+    }
+
+    let persond = {
+        firstName: 'John',
+        lastName: 'Doe',
+        greet() {
+            console.log('Hello World')
+        }
+    }
+
+
+    let persone = {
+        firstName: 'John',
+        lastName: 'Doe',
+        greet: function() {
+            console.log('Hello World')
+        },
+        getFullName: function() {
+            return this.firstName + ' ' + this.lastName
+        }
+    }
+
+    console.log(persone.getFullName())
+
+    function Person(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName
+    }
+
+    let pa = new Person('John', 'Doe');
+    console.log(pa)
+
+    let pa1 = new Person('Jane', 'Doe');
+    let pa2 = new Person('James', 'Smith')
+
+
+    function Person1(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.getFullName = function() {
+            return this.firstName + ' ' + this.lastName
+        }
+    }
+
+    let personc1 = new Person1('John', 'Doe');
+    console.log(personc1.getFullName())
+
+
+    let person2 = Person1('a', 'b');
+    console.log(person2)
+
+
+    function Person3(firstName, lastName) {
+        console.log(new.target);
+
+        if (!new.target) {
+            throw Error('Cannot be called without the new keyword')
+        }
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.getFullName = function() {
+            return this.firstName + ' ' + this.lastName;
+        }
+    }
+
+    // let personf = Person3('nguyen viet', 'manh');
+
+    let persong = new Person3('abc', 'def');
+    console.log('dsdsaads')
+
+
+    function Person4(firstName, lastName) {
+        if (!new.target) {
+            return new Person4(firstName, lastName)
+        }
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    let personn = new Person4('John', 'Doe');
+    let personm = Person4('aaa', 'bbbb')
+    console.log(personn.lastName)
+    console.log(personm.lastName)
+
+    let persono = {
+        'name': 'John'
+    };
+    console.log(persono)
+    console.log(persono.toString());
+
+    console.log(typeof(Object))
 </script>
 <!--<script src="script.js" defer async></script>-->
 <input id="fullname" type="text">
