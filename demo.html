@@ -914,7 +914,367 @@
     console.log(persono.toString());
 
     console.log(typeof(Object))
+
+    // Khi tim phuong thuc voi doi tuong, neu ko co thi tim trong Prototype
+    console.log(Object.prototype)
+
+    console.log(Object.prototype.constructor)
+    console.log(Object.prototype.hasOwnProperty)
+
+
+    function PersonA(name) {
+        this.name = name;
+    }
+
+    console.log(PersonA)
+    console.log(PersonA.prototype)
+
+    PersonA.prototype.greet = function() {
+        return "Hi, I'm " + this.name + "!"
+    }
+
+    let personA = new PersonA('john');
+    console.log(personA)
+
+    let greeting1 = personA.greet();
+    console.log(greeting1)
+
+    let greeting2 = personA.toString();
+    console.log(greeting2)
+
+    // greeting2.fly();
+
+    let p2 = new PersonA('Jane');
+    p2.draw = function() {
+        return 'I can draw';
+    }
+    p2.draw();
+    // personA.draw()
+    console.log(Object.getPrototypeOf(p2));
+    console.log(p2.__proto__)
+    console.log(p2.constructor.prototype)
+    console.log(p2.constructor)
+
+
+    function Person_1(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    Person_1.prototype.getFullname = function() {
+        return this.firstName + ' ' + this.lastName;
+    }
+
+    let person_1_1 = new Person_1('John', 'Doe');
+    let person_1_2 = new Person_1('Jane', 'Doe');
+    console.log(person_1_1.getFullname())
+    console.log(person_1_2.getFullname())
+
+
+    // Thay the cho viec dung function va patter thi dung class cua ES6
+    class PersonAA {
+        constructor(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        getFullname() {
+            return this.firstName + ' ' + this.lastName;
+        }
+    }
+
+    let personA_1 = new PersonAA('John', 'Doe');
+    personA_1.abc = function() {
+        return 'abc';
+    }
+    let personA_2 = new PersonAA('Jane', 'Doe');
+    console.log(personA_1.abc());
+    console.log(personA_1.getFullname())
+    console.log(personA_2.getFullname())
+
+    //JS ko su dung ke thua co dien, ma dung ke thua prototype
+
+    let person_aa = {
+        name: 'John Doe',
+        greet: function() {
+            return "Hi, I'm " + this.name
+        }
+    }
+    console.log(person_aa.toString())
+    console.log(person_aa.__proto__)
+    console.log(person_aa.__proto__ === Object.prototype)
+
+
+    let teacher = {
+        teach: function (subject) {
+            return "I can teach " + subject
+        }
+    }
+    // Chu y ko su dung __proto__ trong thuc te
+    teacher.__proto__ = person_aa;
+    console.log(teacher.__proto__ === Object.prototype)
+    console.log(teacher.greet())
+
+    console.log(teacher.__proto__ === person_aa.__proto__)
+
+    let person_bb = {
+        name: 'john doe',
+        greet: function() {
+            return "Hi, I'm " + this.name
+        }
+    };
+
+    let teacher_bb = Object.create(person_bb);
+    console.log(teacher_bb)
+
+    teacher_bb.name = 'Jane Doe';
+    teacher_bb.teach = function (subject) {
+        return 'I can teach ' + subject;
+    }
+
+    console.log(teacher_bb.teach('PHP'))
+    console.log(teacher_bb)
+
+    let teacher_cc = Object.create(person_bb, {
+        fullname: { value: 'abc'},
+        email: {value: 'def' },
+        teach: {value: function() { return 'dsadsadsa'}}
+    })
+    console.log(teacher_cc)
+
+    console.log(Object.getPrototypeOf(teacher_cc))
+    console.log(person_bb)
+    console.log(Object.getPrototypeOf(teacher_cc) === person_bb)
+
+    // this hoat dong trong global va function, khac voi cac ngon ngu khac la chi trong class
+
+    let counter1 = {
+        count: 0,
+        next: function() {
+            return ++this.count
+        }
+    };
+    counter1.next()
+
+
+    console.log(this === window)
+    this.color = 'Red'
+    console.log(this)
+
+
+    function show_aa() {
+        "use strict";
+        //no strict, this la window ben trong ham, nguoc lai la undefined
+        console.log(this)
+        console.log(this === window)
+    }
+    show_aa()
+    // window.show_aa()
+
+
+    let car_aa = {
+        brand: 'Honda',
+        getBrand: function() {
+            return this.brand
+        }
+    }
+    console.log(car_aa.getBrand())
+
+    let brand_aa = car_aa.getBrand;
+    console.log(brand_aa())
+
+    let brand_bb = car_aa.getBrand.bind(car_aa);
+    console.log(brand_bb())
+
+
+    let car_cc = {
+        brand: 'Honda',
+        getBrand: function() {
+            return this.brand;
+        }
+    }
+
+    let bike_cc = {
+        brand: 'Harley Davidson'
+    }
+
+    // set this toi doi tuong bike_cc
+    let brand_cc = car_cc.getBrand.bind(bike_cc);
+    console.log(brand_cc())
+
+
+    function CarDD(brand) {
+        if (!(this instanceof CarDD)) {
+            throw Error('Must use the new operator to call the function')
+        }
+
+        // ES6
+        if (!new.target) {
+            throw Error('Must use the new operator to call the function')
+        }
+
+        this.brand = brand;
+    }
+
+    CarDD.prototype.getBrand = function() {
+        return this.brand;
+    }
+
+    let car_dd = new CarDD('Honda');
+    console.log(car_dd.getBrand())
+
+    // Neu bo new thi this = window, bao loi
+    // let bmw_dd = CarDD('BMW');
+    // console.log(bmw_dd)
+    // console.log(bmw_dd.brand)
+    //
+    // console.log("Dsadsads")
+
+
+    function getBrand(prefix, suffix) {
+        console.log(prefix + this.brand + " " + suffix);
+    }
+
+    let honda = {
+        brand: 'Honda'
+    }
+
+    let audi = {
+        brand: 'Audi'
+    }
+     let abdef = getBrand;
+    abdef.call(honda, "It's a ", 'xccccccccccccccc');
+    abdef.call(audi, "It's an ")
+
+    abdef.apply(honda, ["Its'", "dsadsa"]);
+    abdef.apply(audi, ["Its'", "dsadsa"]);
+
+
+    let getThis = () => this;
+    console.log(getThis() === window)
+
+
+    function CarEE() {
+        this.speed = 120;
+    }
+
+    CarEE.prototype.getSpeed = () => {
+        // console.log(this)
+        return this.speed;
+    }
+
+    var car_ee = new CarEE();
+    console.log(car_ee.getSpeed())
+    console.log(globalThis)
+
+    const canFetch = typeof globalThis.fetch === 'function'
+    console.log(canFetch)
+
+    let person_ff = {
+        firstName: 'John',
+        lastName: 'Doe'
+    };
+    console.log(person_ff)
+
+
+    let person_gg = {};
+    person_gg.age = 25;
+    console.log(person_gg)
+
+    delete person_gg.age;
+    console.log(person_gg)
+
+
+    let person_hh = {};
+    Object.defineProperty(person_hh, 'ssn', {
+        configurable: false,
+        value: '012-345-567'
+    })
+    console.log(person_hh)
+    delete person_hh.ssn;
+    console.log(person_hh)
+
+    // define lai thuoc tinh da configurable = false se bao loi
+    // Object.defineProperty(person_hh, 'ssn', {
+    //     configurable: true
+    // })
+
+
+
+    let person_ii = {}
+    person_ii.age = 25;
+    person_ii.ssn = '012-345-567';
+    for (let property in person_ii) {
+        console.log(property)
+    }
+
+    let person_jj = {};
+    person_jj.age = 25;
+    person_jj.ssn = '012-345-678';
+
+    Object.defineProperty(person_jj, 'ssn', {
+        enumerable: false
+    });
+
+    for (let proper in person_jj) {
+        console.log(proper)
+    }
+
+    let person_kk = {
+        firstName: 'John',
+        lastName: 'Doe'
+    };
+
+    Object.defineProperty(person_kk, 'fullName', {
+        get: function() {
+            return this.firstName + ' ' + this.lastName
+        },
+        set: function (value) {
+            let parts = value.split(' ')
+            if (parts.length == 2) {
+                this.firstName = parts[0];
+                this.lastName = parts[1]
+            } else {
+                throw 'Invalid name format';
+            }
+        }
+    });
+    person_kk.fullName = 'dsad sa';
+    console.log(person_kk)
+    console.log(person_kk.fullName)
+
+    let product1 = {};
+    Object.defineProperties(product1, {
+        name: {
+            value: 'Smartphone'
+        },
+        price: {
+            value: 799
+        },
+        tax: {
+            value: 0.1
+        },
+        netPrice: {
+            get: function() {
+                return this.price * (1 + this.tax)
+            }
+        }
+    })
+
+    console.log('The net price of a ' + product1.name + ' is ' + product1.netPrice.toFixed(2) + ' USD')
+
+
+    let person_ll = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+
+    let descriptor = Object.getOwnPropertyDescriptor(person_ll, 'firstName');
+    console.log(descriptor)
+    console.log(Object.getOwnPropertyDescriptor(person_kk, 'fullName'))
+
 </script>
+
 <!--<script src="script.js" defer async></script>-->
 <input id="fullname" type="text">
 
