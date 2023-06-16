@@ -1273,6 +1273,153 @@
     console.log(descriptor)
     console.log(Object.getOwnPropertyDescriptor(person_kk, 'fullName'))
 
+
+    var person_mm = {
+        firstName: 'John',
+        lastName: 'Doe',
+        ssn: '123-456'
+    };
+
+    for (var prop in person_mm) {
+        console.log(prop + ':' + person_mm[prop])
+    }
+
+    var decoration = {
+        color: 'red'
+    }
+
+    var circle = Object.create(decoration);
+    circle.radius = 10;
+
+    for (const prop in circle) {
+        // console.log(prop)
+        if (circle.hasOwnProperty(prop)) {
+            console.log(prop)
+        }
+    }
+
+
+
+    const items1 = [10, 20, 30];
+    let total = 0;
+
+    for (const item in items1) {
+        total += items1[item];
+    }
+    console.log(total)
+
+    // Set thuoc tinh o prototype nen for in se co them thuoc tinh moi, de nham lan
+    Array.prototype.foo = 100;
+    const items2 = [10, 20, 30];
+    let total2 = 0;
+
+    for (var prop in items2) {
+        console.log({prop, value: items2[prop]})
+        total2 += items2[prop];
+    }
+    console.log(total2)
+
+    var arr = [];
+    arr[2] = 3;
+    console.log(arr)
+
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i])
+    }
+
+    for (const key in arr) {
+        console.log(key + ": " + arr[key])
+    }
+    //ko dung for in de lap mang
+
+    const person_nn = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+
+    person_nn.age = 25;
+
+    Object.defineProperty(person_nn, 'lastName', {
+        enumerable: false,
+        value: 'sdadsadsad'
+    })
+
+    Object.defineProperty(person_nn, 'ssn', {
+        enumerable: false,
+        value: '122121'
+    })
+    // enumerable cho phep hien thi trong for in va Objects.key()
+
+    for (const key in person_nn) {
+        console.log(key)
+    }
+
+    console.log(person_nn.propertyIsEnumerable('firstName'));
+    console.log(person_nn.propertyIsEnumerable('lastName'));
+    console.log(person_nn.propertyIsEnumerable('ssn'));
+
+    const person_oo = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+
+    const employee_oo = Object.create(person_oo, {
+        job: {
+            value: 'JS Developer',
+            enumerable: true
+        }
+    })
+
+    console.log(person_oo)
+    console.log(employee_oo)
+
+    console.log(person_oo.hasOwnProperty('firstName'))
+    console.log(person_oo.hasOwnProperty('lastName'))
+    console.log(person_oo.hasOwnProperty('dfssaddsad'))
+
+    console.log(employee_oo.hasOwnProperty('job'))
+    console.log(employee_oo.hasOwnProperty('firstName'))
+
+    const person_pp = {
+        firstName: 'John',
+        lastName: 'Doe',
+        age: 25
+    };
+    Object.prototype.test = 'dsadsadsa';
+    // console.log(person_pp)
+    //trc ES2017
+    for (const key in person_pp) {
+        // console.log(key)
+        if (person_pp.hasOwnProperty(key)) {
+            const value = person_pp[key]
+            console.log(value)
+        }
+    }
+
+    const person_qq = {
+        firstName: 'John',
+        lastName: 'Doe',
+        age: 25
+    }
+    // for in lap toan bo thuoc tinh hien tai va prototy, con Object.values chi lap thuoc tinh hien tai cua obj
+    const profile_qq = Object.values(person_qq);
+    console.log(profile_qq)
+
+
+    const ssn_rr = Symbol('ssn');
+    const person_rr = {
+        firstName: 'John',
+        lastName: 'Doe',
+        age: 25,
+        [ssn_rr]: '123456'
+    }
+
+    // ham entries khac voi for in la ko lap tren prototy chain
+    const kv = Object.entries(person_rr);
+    console.log(kv)
+
+
+
 </script>
 
 <!--<script src="script.js" defer async></script>-->
