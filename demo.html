@@ -1418,7 +1418,30 @@
     const kv = Object.entries(person_rr);
     console.log(kv)
 
+    let widget = {
+        color: 'red',
+        abc: {
+            def: 'ghi'
+        }
+    };
 
+    let clonedWidget = Object.assign({}, widget);
+    console.log(clonedWidget)
+
+
+    // ES6: Object.assign dung de clone hoac merge 1 object
+    let box = {
+        width: 10,
+        height: 20,
+    }
+
+    let style = {
+        color: 'Red',
+        borderStyle: 'solid'
+    };
+
+    let styleBox = Object.assign({}, box, style)
+    console.log(styleBox)
 
 </script>
 
