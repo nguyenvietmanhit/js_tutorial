@@ -1443,6 +1443,236 @@
     let styleBox = Object.assign({}, box, style)
     console.log(styleBox)
 
+    // Object.is giong === tru 2 gia tri +0 -0 va NaN
+    let amount_a = +0;
+    let volume_a = -0;
+    console.log(amount_a === volume_a)
+    console.log(3 === '3');
+    console.log(Object.is(3, '3'));
+    console.log(Object.is(amount_a, volume_a));
+
+    let quantity_a = NaN;
+    console.log(quantity_a === quantity_a)
+    console.log(Object.is(quantity_a, quantity_a))
+
+    let person_f = {
+        firstName: 'John',
+        lastName: 'Doe',
+        getFullname() {
+            return this.firstName + ' ' + this.lastName;
+        }
+    }
+    console.log(person_f.getFullname())
+
+    let person_g = {
+        firstName: 'John',
+        lastName: 'Doe',
+        getFullname() {
+            return this.firstName + ' ' + this.lastName;
+        }
+    }
+    console.log(person_g.getFullname())
+
+
+    function createPerson(firstName, lastName) {
+        return {
+            firstName: firstName,
+            lastName: lastName,
+            getFullName() {
+                return firstName + ' ' + lastName
+            }
+        }
+    }
+
+    let person11 = createPerson('John', 'Doe');
+    let person22 = createPerson('Jane', 'Doe');
+    console.log(person11)
+    console.log(person22)
+
+    function createPerson2(firstName, lastName) {
+        return {
+            firstName: firstName,
+            lastName: lastName
+        }
+    }
+
+    var personActions = {
+        getFullname() {
+            return this.firstName + ' ' + this.lastName;
+        }
+    }
+
+    let person_333 = createPerson2('John', 'Doe');
+    let person_444 = createPerson2('Jane', 'Doe');
+    person_333.getFullname = personActions.getFullname;
+    person_444.getFullname = personActions.getFullname;
+
+    console.log(person_333.getFullname())
+    console.log(person_444.getFullname())
+
+    // Su dung Object.create de tao cho tien
+    var personActions1a = {
+        getFullname() {
+            return this.firstName + ' ' + this.lastName;
+        }
+    };
+
+    function createPerson1a(firstName, lastName) {
+        let person = Object.create(personActions1a);
+         person.firstName = firstName;
+         person.lastName = lastName;
+         return person;
+    }
+
+    let person1a_1 = createPerson1a('John', 'Doe');
+    let person1a_2 = createPerson1a('Jane', 'Doe');
+    console.log(person1a_1.getFullname())
+    console.log(person1a_2.getFullname())
+
+    let person_d = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+    let firstName_d = person_d.firstName;
+    let lastName_d = person_d.lastName;
+
+    // su dungj object destructuring trong ES6
+    let { firstName: fname, lastName: lname } = person_d;
+    console.log(fname)
+    console.log(lname)
+
+    // let { firstName, lastName} = person_d;
+
+
+    //
+    // ({ firstname, lastName } = person_d)
+    // console.log(firstName)
+    // console.log(lastName)
+
+    let person_e = {
+        firstName: 'John',
+        lastName: 'Doe',
+        currentAge: 28
+    };
+
+    let { firstName, lastName, middleName = '', currentAge = 18 } = person_e;
+    console.log(firstName)
+    console.log(lastName)
+    console.log(middleName)
+    console.log(currentAge)
+
+
+    function getPerson1() {
+        return null;
+    }
+
+    let {firstName1, lastName1 } = getPerson1() || {}; //tranh truong hop null
+    console.log(firstName1, lastName1)
+
+    let employee11 = {
+        id: 1001,
+        name11: {
+            firstName11: 'John',
+            lastName11: 'Doe'
+        }
+    };
+
+    let {
+        name11: {
+            firstName11,
+            lastName11
+        }
+    } = employee11;
+    console.log(firstName11)
+    console.log(lastName11)
+
+    let display1 = (person) => console.log(`${person.firstName} ${person.lastName}`);
+
+    let person1b = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+
+    display1(person1b)
+
+    let display2 = ({firstName, lastName}) => console.log(`${firstName} ${lastName}`);
+
+    let person2b = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+
+    display2(person2b)
+    //
+
+    function getUser(id) {
+        if (id <= 0) {
+            return null;
+        }
+        return  {
+            id: id,
+            username: 'admin',
+            profile: {
+                avatar: '/avatar.png',
+                language: 'English'
+            }
+        }
+    }
+
+    let user1 = getUser(1);
+    let profile1 = user1 && user1.profile;
+    console.log(profile1)
+    //ES2020
+    let user2 = getUser(2);
+    let profile2 = user2 ?. profile;
+    console.log(profile2)
+    let user3 = getUser(3);
+    let profile3 = (user3 !== null || user3 !== undefined) ? user3.profile : undefined;
+    console.log(profile3)
+
+    //
+    let user44 = getUser(-1);
+    let avatar44 = user44 ?. profile ?. avatar;
+    console.log(avatar44)
+
+    let defaultProfile = {
+        default: '/default.png',
+        language: 'English'
+    };
+    let user55 = getUser(2);
+    let profile55 = user55 ?. profile ?? defaultProfile;
+    console.log(profile55)
+
+    let file1 = {
+        read() {
+            return 'file content';
+        },
+        write(content) {
+            console.log(`Writing ${content} to file...`);
+            return true;
+        }
+    }
+
+    let data1 = file1.read();
+    console.log(data1)
+    let compressdData = file1.compress ?. ();
+    console.log(compressdData)
+
+
+    function getUser2(id, callback) {
+        let user = {
+            id: id,
+            username: 'admin'
+        }
+
+        // if (callback) {
+        //     callback(user);
+        // }
+        callback ?. (user);
+        return user;
+    }
+
+
 </script>
 
 <!--<script src="script.js" defer async></script>-->
