@@ -1672,6 +1672,105 @@
         return user;
     }
 
+    // Truoc ES6
+    function createMachine(name, status) {
+        return {
+            name: name,
+            status: status
+        }
+    }
+
+    // ES6:
+    function createMachine1(name, status) {
+        return {
+            name,
+            status
+        }
+    }
+
+    let abc1 = createMachine1(1, 2);
+    console.log(abc1)
+
+    let name_aa = 'Computer';
+    let status_aa = 'On';
+    let machine_aa = {
+        name_aa, status_aa
+    }
+    console.log(machine_aa)
+
+    // Computed property name, su dung [] de co the tinh toan ten thuoc tinh trong obj
+    let name_bb = 'machine name';
+    let machine_bb = {
+        [name_bb]: 'server',
+        'machine hours': 10000
+    };
+    console.log(machine_bb[name_bb]);
+    console.log(machine_bb['machine hours'])
+    console.log(machine_bb)
+
+    let prefix_cc = 'machine';
+    let machine_cc = {
+        [prefix_cc + ' name']: 'server',
+        [prefix_cc + ' hours']: 10000
+    };
+    console.log(machine_cc['machine name']);
+
+    // trc es6
+    let server_aa = {
+        name: 'Server',
+        restart: function () {
+            console.log("The" + this.name + " is restarting...");
+        },
+        'starting up': function () {
+            console.log('dsadasdsa')
+        }
+    }
+    console.log(server_aa['starting up']())
+
+    //es6
+    let server_bb = {
+        name: 'Server',
+        restart() {
+            console.log("The" + this.name + " is restarting...");
+        },
+    }
+
+    let server_cc = {
+        name: 'Server',
+        restart() {
+            console.log("This" + this.name + " is restarting....")
+        },
+        'starting up'() {
+            console.log("The " + this.name + " is starting up!");
+        }
+    }
+
+    //trc es6
+    function PersonAAA(name) {
+        this.name = name;
+    }
+
+    PersonAAA.prototype.getName = function() {
+        return this.name;
+    }
+
+    var john = new PersonAAA('John Doe');
+
+    console.log(john.getName())
+    console.log(john instanceof PersonAAA);
+    console.log(john instanceof Object):
+
+    // es6
+    class PersonBBB {
+        constructor(name) {
+            this.name = name;
+        }
+        getName() {
+            return this.name;
+        }
+    }
+    let john_bbb = new Perrson
+
 
 </script>
 
