@@ -1758,7 +1758,7 @@
 
     console.log(john.getName())
     console.log(john instanceof PersonAAA);
-    console.log(john instanceof Object):
+    console.log(john instanceof Object);
 
     // es6
     class PersonBBB {
@@ -1769,9 +1769,127 @@
             return this.name;
         }
     }
-    let john_bbb = new Perrson
+    let john_bbb = new PersonBBB('John Doe');
+    let name_bbb = john_bbb.getName();
+    console.log(name_bbb)
+    console.log(typeof PersonBBB)
+    console.log(john_bbb instanceof PersonBBB)
+    console.log(john_bbb instanceof Object)
+
+    // let person_c = new PersonC('dsads');
+    class PersonC {
+        constructor(name) {
+            this.name = name;
+        }
+        getName() {
+            return this.name;
+        }
+    }
+    // let person_c1 = PersonC('name');
+
+    class PersonDD {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    let person_dd = new PersonDD('John');
+    console.log(person_dd.name)
+
+    // getter va setter trc es6
+    class PersonEE {
+        constructor(name) {
+            this.setName(name);
+        }
+
+        getName() {
+            return this.name;
+        }
+
+        setName(newName) {
+            newName = newName.trim();
+            if (newName === '') {
+                throw 'The name cannot be empty'
+            }
+            this.name = newName;
+        }
+    }
+
+    let person_ee = new PersonEE('Jane Doe');
+    console.log(person_ee)
+
+    person_ee.setName('abc');
+    console.log(person_ee)
+
+    //ES6
+    class PersonFF {
+        constructor(name) {
+            this.name = name;
+        }
+
+        // dat la _name de tranh xung dot voi ten ham
+        // ten setter va getter trung ten thuoc tinh
+        get name() {
+            return this._name;
+        }
+
+        set name(newName) {
+            newName = newName.trim();
+            if (newName === '') {
+                throw 'The name cannot be empty'
+            }
+            this._name = newName;
+        }
+    }
+    let person_ff1 = new PersonFF('manhnv');
+    let person_name = person_ff1.name;
+    console.log(person_ff1)
+    console.log(person_name)
+
+    person_ff1.name = '1';
+    console.log(person_ff1.name)
 
 
+    class PersonGG1 {
+        constructor(name) {
+            this._name = name;
+            // this.name = name;
+        }
+
+        get name() {
+            return this._name;
+        }
+    }
+    let person_gg1 = new PersonGG1('def');
+    console.log(person_gg1)
+    console.log(person_gg1.name)
+
+    person_gg1.name = 'ghi';
+    console.log(person_gg1.name)
+
+    let meeting = {
+        attendees: [],
+        add(attendee) {
+            console.log(`${attendee} joined the meeting`);
+            this.attendees.push(attendee);
+            return this;
+        },
+        get lastest() {
+            let count = this.attendees.length;
+            return count == 0 ? undefined : this.attendees[count - 1];
+        },
+        // set attendees123(string) {
+        //     this.attendees = string;
+        // }
+    };
+
+    meeting.add('John').add('Jane').add('Peter');
+    console.log(`The latest attendee is ${meeting.lastest}`);
+    // meeting.attendees = ['1', '2', '3'];
+    // meeting.attendees = [1, 2];
+    // meeting.attendees123;
+    // meeting.attendees('dsadsa')
+    console.log(meeting.attendees)
 </script>
 
 <!--<script src="script.js" defer async></script>-->
