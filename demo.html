@@ -1947,6 +1947,8 @@
     let person_qq1 = new PersonQQ('John', 'Doe');
     console.log(person_qq1.fullName)
 
+
+    // trc ES6
     function Animal(legs) {
         this.legs = legs;
     }
@@ -1956,11 +1958,145 @@
     }
 
     function Bird(legs) {
+        console.log(this)
         Animal.call(this, legs);
     }
 
     Bird.prototype = Object.create(Animal.prototype);
     Bird.prototype.constructor = Animal;
+
+    Bird.prototype.fly = function() {
+        console.log('flying');
+    }
+
+    Object.prototype.fly = function() {
+        console.log('flying');
+    }
+    var pigeon = new Bird(2);
+    pigeon.walk();
+    pigeon.fly();
+
+    var animal1 = new Animal(3);
+    animal1.fly();
+
+    // ES6
+    class AnimalA {
+        constructor(legs) {
+            this.legs = legs;
+        }
+        walk() {
+            console.log('walking on ' + this.legs + ' legs');
+        }
+    }
+
+    class BirdA extends AnimalA {
+        constructor(legs, color) {
+            super(legs); // tuong duong voi Animal.call(this, legs);
+            this.color = color;
+        }
+        fly() {
+            console.log('flying');
+        }
+        getColor() {
+            return this.color;
+        }
+    }
+
+    let birdA = new BirdA(2, 'white');
+    birdA.walk();
+    birdA.fly();
+    console.log(birdA.getColor())
+
+    class DogA extends AnimalA {
+        constructor() {
+            super(6);
+        }
+
+        walk() {
+            super.walk();
+            console.log('go walking');
+        }
+    }
+    let bingo = new DogA();
+    bingo.walk();
+
+
+    class Animal2 {
+        constructor(legs) {
+            this.legs = legs;
+        }
+        walk() {
+            console.log('walking on ' + this.legs + ' legs');
+        }
+        static helloWorld() {
+            console.log('hello world')
+        }
+    }
+
+    class Bird2 extends Animal2 {
+        fly() {
+            console.log('flying');
+        }
+    }
+    Bird2.helloWorld();
+
+    class Queue1 extends Array {
+        enqueue(e) {
+            super.push(e);
+        }
+
+        dequeue() {
+            return super.shift();
+        }
+        peek() {
+            return !this.empty() ? this[0] : undefined
+        }
+        empty() {
+            return this.length === 0;
+        }
+    }
+
+    var customers = new Queue1();
+    customers.enqueue('A');
+    customers.enqueue('B');
+    customers.enqueue('C');
+
+    while (!customers.empty()) {
+        console.log(customers.dequeue());
+    }
+
+    function PersonAB(name) {
+        if (!new.target) {
+            throw 'must use new operator with Person';
+        }
+        this.name = name;
+    }
+
+    let person_ab = new PersonAB('John');
+    console.log(person_ab.name)
+
+    // PersonAB('Lilly');
+    // console.log(window.name)
+
+    class PersonAC {
+        constructor(name) {
+            console.log(new.target)
+            this.name = name;
+            console.log(new.target.name);
+        }
+    }
+
+    class EmployeeAC extends PersonAC {
+        constructor(name, title) {
+            super(name);
+            this.title = title;
+        }
+    }
+
+    let john_ac = new PersonAC('John Doe');
+    let lily_ac = new EmployeeAC('Lily Bush', 'Programmer');
+
+    //phuong thuc tinh
 
 </script>
 
