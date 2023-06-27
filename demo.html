@@ -2097,10 +2097,370 @@
     let lily_ac = new EmployeeAC('Lily Bush', 'Programmer');
 
     //phuong thuc tinh
+    //truoc es6
+    function PersonAD(name) {
+        this.name = name;
+    }
+
+    PersonAD.prototype.getName = function() {
+        return this.name;
+    }
+
+    PersonAD.getBcde = function () {
+        return this.name;
+    }
+
+    PersonAD.createAnonymous = function (gender) {
+        let name = gender === 'male' ? 'John Doe' : 'Jane Doe';
+        return new PersonAD(name);
+    }
+    var anonymous = PersonAD.createAnonymous();
+    console.log(anonymous)
+
+    // es6
+    class PersonAF {
+        constructor(name) {
+            this.name = name;
+        }
+        getName() {
+            return this.name;
+        }
+        static createAnonymous(gender) {
+            let name = gender === 'male' ? 'John Doe' : 'Jane Doe';
+            return new PersonAF(name);
+        }
+    }
+
+    let anonymous1 = PersonAF.createAnonymous('abc');
+    console.log(anonymous1)
+    let person_af = new PersonAF('James Doe');
+    // let anonymous2 = person_af.createAnonymous('dsadsa');
+
+    // thuoc tinh static
+    class Item {
+        static count = 0;
+    }
+    console.log(Item.count)
+
+    class Item1 {
+        static count = 111;
+        static getCount() {
+            // return this.constructor.count;
+            return Item1.count;
+        }
+    }
+
+    console.log(Item1.getCount())
+
+    class Item3 {
+        fullname = 'dsadsadsad';
+        constructor(name, quantity) {
+            this.name = name;
+            this.quantity = quantity;
+            //truy capj thuoc tinh tinh trong constructor
+            this.constructor.count++;
+        }
+        static count = 0;
+        static getCount() {
+            return Item3.count;
+        }
+    }
+
+    let item1 = new Item3()
+    console.log(item1.fullname)
+    console.log(Item3.count)
+    let item2 = new Item3()
+    console.log(Item3.count)
+
+    //private fields
+    // ES2022
+    class Circle {
+        #radius;
+        constructor(value) {
+            this.#radius = value;
+        }
+        get area() {
+            return Math.PI * Math.pow(this.#radius, 2);
+        }
+    }
+    let circle1 = new Circle(10);
+    console.log(circle1.area);
+    // console.log(circle1.#radius);
+
+    class Circle2 {
+        #radius = 0;
+        constructor(radius) {
+            this.radius = radius; //goi setter ngay khi gan
+        }
+
+        get area() {
+            return Math.PI * Math.pow(this.#radius, 2);
+        }
+        set radius(value) {
+            if (typeof value === 'number' && value > 0) {
+                this.#radius = value;
+            } else {
+                throw 'The radius must be a positive number'
+            }
+        }
+
+        get radius() {
+            return this.#radius;
+        }
+    }
+
+    let circle2 = new Circle2(3);
+    console.log(circle2)
+    console.log(circle2.area)
+    console.log(circle2.radius)
+
+    class Cylinder extends Circle2 {
+        #height;
+        constructor(radius, height) {
+            super(radius);
+            this.#height = height;
+        }
+
+        // test() {
+        //     return this.#radius;
+        // }
+    }
+
+
+    class Circle3 {
+        #radius = 0;
+        constructor(radius) {
+            this.radius = radius;
+        }
+        get area() {
+            return Math.PI * Math.pow(this.radius, 2)
+        }
+
+        set radius(value) {
+            if (typeof value === 'number' && value > 0) {
+                this.#radius = value;
+                console.log('dsadsa')
+                console.log(this.#radius)
+            } else {
+                throw 'The radius must be a positive number';
+            }
+        }
+        get radius() {
+            return this.#radius;
+        }
+        static hasRadius(circle) {
+            // ktra private ton tai hay ko
+            return #radius in circle;
+        }
+    }
+
+    let circle33 = new Circle3(10);
+    console.log(Circle3.hasRadius(circle33))
+
+    //static private fields, tu ES2020 moi co, trc do auto public
+    class Circle4 {
+        #radius = 0;
+        static #count = 0;
+        constructor(radius) {
+            this.radius = radius;
+            Circle4.#count++;
+        }
+        get area() {
+            return Math.PI * Math.pow(this.radius, 2);
+        }
+        set radius(value) {
+            if (typeof value === 'number' && value > 0) {
+                this.#radius = value;
+            } else {
+                throw 'The radius must be a positive number';
+            }
+        }
+        get radius() {
+            return this.#radius;
+        }
+        static hasRadius(circle) {
+            return #radius in circle;
+        }
+        static getCount() {
+            return Circle4.#count;
+        }
+    }
+
+    let circle44 = [new Circle4(10), new Circle4(20), new Circle4(30)];
+    console.log(circle44)
+    console.log(Circle4.getCount())
+
+    class Person5 {
+        #firstName;
+        #lastName;
+        constructor(firstName, lastName) {
+            this.#firstName = firstName;
+            this.#lastName = lastName;
+        }
+
+        getFullname(format = true) {
+            return format ? this.#firstLast() : this.#lastFirst();
+        }
+        #firstLast() {
+            return `${this.#firstName} ${this.#lastName}`;
+        }
+        #lastFirst() {
+            return `${this.#lastName}, ${this.#firstName}`
+        }
+    }
+
+    let person5 = new Person5('John', 'Doe');
+    console.log(person5.getFullname())
+
+
+    class Person6 {
+        #firstName;
+        #lastName;
+        constructor(firstName, lastName) {
+            this.#firstName = Person6.#validate(firstName);
+            this.#lastName = Person6.#validate(lastName);
+        }
+        getFullname(format = true) {
+            return format ? this.#firstLast() : this.#lastFirst();
+        }
+        static #validate(name) {
+            if (typeof name === 'string') {
+                let str = name.trim();
+                if (str.length >= 3) {
+                    return str;
+                }
+            }
+            throw 'The name must be a string with at least 3 character';
+        }
+        #firstLast() {
+            return `${this.#firstName} ${this.#lastName}`;
+        }
+        #lastFirst() {
+            return `${this.#lastName}, ${this.#firstName}`
+        }
+    }
+
+    let person6 = new Person6('John', 'Doe');
+    console.log(person6.getFullname())
+
+    function Person7(name) {
+        this.name = name;
+    }
+
+    let person7_1 = new Person7('John');
+    console.log(person7_1 instanceof Person7);
+    console.log(person7_1 instanceof Object)
+
+    class Person8 {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+    let person8_1 = new Person8('John');
+    console.log(person8_1 instanceof Person8);
+
+
+    class Person9 {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    class Employee9 extends Person9 {
+        constructor(name, title) {
+            super(name);
+            this.title = title;
+        }
+    }
+
+    let employee9_1 = new Employee9();
+    console.log(employee9_1)
+    console.log(employee9_1 instanceof Employee9);
+    console.log(employee9_1 instanceof Person9);
+    console.log(employee9_1 instanceof Object);
+
+    class Person10 {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    let person10_1 = new Person10('John');
+    console.log(Person10[Symbol.hasInstance](person10_1));
+
+    class Person11 {
+        constructor(name) {
+            this.name = name
+        }
+
+        static [Symbol.hasInstance]() {
+            return false;
+        }
+    }
+
+    class Android11 extends Person11 {
+        static [Symbol.hasInstance]() {
+            return false;
+        }
+    }
+
+    let android11_1 = new Android11('Sony');
+    console.log(android11_1 instanceof Android11);
+    console.log(android11_1 instanceof Person11);
+
+    //
+    function add1(x, y) {
+        console.log(new.target)
+        return x + y;
+    }
+    console.log(add1.length);
+    console.log(add1.prototype)
+
+    let result11 = add1(10, 20);
+    console.log(result11)
+
+    let obj11 = new add1(10, 20);
+    console.log(obj11)
+
+    let cat1 = { type: 'Cat', sound: 'Meow' };
+    let dog1 = { type: 'Dog', sound: 'Woof' };
+
+    const say11 = function (message) {
+        console.log(message);
+        console.log(this.type + ' says ' + this.sound)
+    }
+    // apply vaf call dung de goi function
+    say11.apply(cat1, ['What does a cat say?']);
+    say11.apply(dog1, ['What does a dog say?']);
+
+    say11.call(cat1, 'cat111');
+    say11.call(dog1, 'dog111');
+
+    let car22 = {
+        speed: 5,
+        start: function() {
+            console.log('Start with ' + this.speed + ' km/h');
+        }
+    }
+
+    let aircraft22 = {
+        speed: 10,
+        fly: function() {
+            console.log('Flying');
+        }
+    }
+
+    // bind thuc thi sau con call thuc thi truc tiep, 3 ham nay con goi la ham muon
+    let taxiing22 = car22.start.bind(aircraft22);
+    console.log(taxiing22)
+    taxiing22();
+
+    car22.start.call(aircraft22)
 
 </script>
 
 <!--<script src="script.js" defer async></script>-->
 <input id="fullname" type="text">
+
 
 
