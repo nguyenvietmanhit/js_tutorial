@@ -2457,6 +2457,255 @@
 
     car22.start.call(aircraft22)
 
+    function addA(x, y) {
+        return x + y;
+    }
+
+    let resultA = add(10, 20);
+    console.log(resultA)
+
+    function addB(x, y) {
+        return x + y;
+    }
+
+    let resultB = addB.call(this, 10, 20);
+
+    console.log(resultB)
+
+    var greetingA = 'Hi';
+    var messengerA = {
+        greetingA: 'Hello'
+    }
+
+    function sayA(name) {
+        console.log(this.greetingA + ' ' + name);
+    }
+
+    //this tham chieu den doi tuong Window
+    sayA.call(this, 'John')
+    //this tham chieu den doi tuong messenger
+    sayA.call(messengerA, 'John')
+
+    function BoxA(height, width) {
+        this.height = height;
+        this.width = width;
+    }
+
+    function WidgetA(height, width, color) {
+        BoxA.call(this, height, width);
+        this.color = color;
+    }
+
+    let widgetA = new WidgetA('red', 100, 200)
+    console.log(widgetA)
+
+    const carD = {
+        name: 'car',
+        start() {
+            console.log('Start the ' + this.name);
+        },
+        speedUp() {
+            console.log('Speed up the ' + this.name)
+        },
+        stop() {
+            console.log('Stop the ' + this.name);
+        }
+
+    }
+
+    const aircraftD = {
+        name: 'aircraft',
+        fly() {
+            console.log('fly')
+        }
+    }
+
+    carD.start.call(aircraftD);
+    carD.speedUp.call(aircraftD);
+    aircraftD.fly()
+
+    function isOddA(number) {
+        return number % 2;
+    }
+
+    function getOddNumbersA() {
+        return Array.prototype.filter.call(arguments, isOddA);
+    }
+
+    let resultsA = getOddNumbersA(10, 1, 2, 3, 4, 5);
+    console.log(resultsA)
+
+    //apply method
+    const personBB = {
+        firstName: 'John',
+        lastName: 'Doe'
+    };
+
+    function greetBB(greeting, message) {
+        return `${greeting} ${this.firstName}. ${message}`;
+    }
+
+
+    let resultBB = greetBB.apply(personBB, ['HEllo', 'How are you?']);
+    console.log(resultBB)
+    let resultCC = greetBB.call(personBB, 'Hello', 'How are you?')
+    console.log(resultCC)
+
+    const computerDD = {
+        name: 'MacBook',
+        isOn: false,
+        turnOn() {
+            this.isOn = true;
+            return `The ${this.name} is On`;
+        },
+        turnOff() {
+            this.isOn = false;
+            return `The ${this.name} is Off`;
+        }
+    }
+
+    const serverDD = {
+        name: 'Dell PowerEdge T30',
+        isOn: false
+    }
+
+    let resultDD = computerDD.turnOn.apply(serverDD)
+    console.log(resultDD)
+    let resultDD1 = computerDD.turnOff.apply(serverDD);
+    console.log(resultDD1)
+
+    let arrEE = [1, 2, 3];
+    let numbersEE = [4, 5, 6];
+    arrEE.push.apply(arrEE, numbersEE);
+    console.log(arrEE)
+
+    let arrEE1 = Array.prototype.concat(arrEE, numbersEE)
+    console.log(arrEE1)
+
+    //bind method
+    let personGG = {
+        name1: 'John Doe',
+        getName: function() {
+            console.log(this.name1);
+        }
+    }
+    let f = personGG.getName;
+    setTimeout(personGG.getName, 1000);
+
+    setTimeout(function() {
+        personGG.getName()
+    }, 1000)
+
+    setTimeout(personGG.getName.bind(personGG), 1000);
+
+    let runnerA = {
+        name: 'Runner',
+        run: function(speed) {
+            console.log(this.name + ' runs at ' + speed + ' mph.');
+        }
+    };
+
+    let flyerA = {
+        name: 'Flyer',
+        fly: function(speed) {
+            console.log(this.name + ' flies at ' + speed + ' mph.');
+        }
+    }
+
+    let runA = runnerA.run.bind(flyerA, 20);
+    runA();
+
+    //Closure
+    let nameB = 'John';
+    function greetingB() {
+        let messsageB = 'Hi';
+        console.log(messsageB + ' ' + nameB)
+    }
+
+    function greetingC() {
+        let messageC = 'Hi';
+
+        function sayHiC() {
+            console.log(messageC);
+        }
+
+        sayHiC();
+    }
+
+    // sayHiC();
+    greetingC();
+
+    function greetingD() {
+        let messageD = 'Hi';
+
+        function sayHiD() {
+            console.log(messageD);
+        }
+
+        return sayHiD;
+    }
+
+    let hiD = greetingD();
+    hiD();
+
+
+    function greetingE(message) {
+        return function (name) {
+            return message + ', chao nha, ' + name;
+        }
+    }
+
+    let sayHiE = greetingE('Hi');
+    let sayHelloE = greetingE('Hello');
+
+    console.log(sayHiE('John'));
+    console.log(sayHelloE('John'));
+
+    for (var indexA = 1; indexA <= 3; indexA++) {
+        setTimeout(function() {
+            console.log('after ' + indexA + ' second(s):' + indexA)
+        }, indexA * 1000);
+    }
+
+    // IIFE = Intermediately invoked function expression
+    for (var indexB = 1; indexB <= 3; indexB++) {
+        (function(index) {
+            setTimeout(function() {
+                console.log('after ' + index + ' second(s):' + index)
+            }, index * 1000)
+        })(indexB)
+    }
+
+    for (let indexC = 1; indexC <= 3; indexC++) {
+        setTimeout(function() {
+            console.log('after ' + indexC + ' second(s):' + indexC);
+        }, indexC * 1000)
+    }
+
+    // IIFE
+    function addGG(a, b) {
+        return a+b;
+    }
+    console.log(window.addGG);
+
+    var counterAA = 10;
+    console.log(window.counterAA)
+
+    'This is a string';
+    (10 + 20);
+
+    let sumBB = (function(a, b) {
+        return a+b;
+    })(10, 20);
+    console.log(sumBB);
+
+    (function() {
+        var counter = 0;
+        function add(a,b) {
+            return a+b;
+        }
+        console.log(add(10, 20))
+    } ())
 </script>
 
 <!--<script src="script.js" defer async></script>-->
