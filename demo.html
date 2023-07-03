@@ -87,7 +87,8 @@
 
     let num = 071;
     console.log(num); //57 = 0 * 8^2 + 7 * 8^1 + 1 * 8^0
-    let num2 = 080;
+    let num2 = 0
+    80;
     console.log(num2); //80
     let num3 = 0o71;
     console.log(num3)
@@ -127,7 +128,8 @@
     let aa = 051;
     console.log(aa)
 
-    let bb = 058;
+    let bb = 05
+    8;
     console.log(bb)
 
     // let cc = 0o58;
@@ -155,7 +157,7 @@
 
     let number2 = 123;
     console.log(typeof number2)
-    let var1 =  number2.toString() //String(number2);
+    let var1 = number2.toString() //String(number2);
     console.log(typeof var1);
 
     let status = false;
@@ -260,7 +262,6 @@
     console.log(mountains.length)
 
 
-
     let seas = ['Black Sea', 'Caribbean Sea', 'North Sea', 'Baltic Sea'];
     console.log(seas)
     seas.push('Red Sea');
@@ -295,7 +296,7 @@
 
 
     let b1 = false;
-    let result4 = b1 && (1/0);
+    let result4 = b1 && (1 / 0);
     console.log(result4)
 
 
@@ -348,7 +349,7 @@
 
     let authenticated = true;
     let nextURL = authenticated
-    ? (a1 = 4, a2 = 55, '/admin', 'ghi', console.log('dsadsads'), 'abc'.indexOf('c'))
+        ? (a1 = 4, a2 = 55, '/admin', 'ghi', console.log('dsadsads'), 'abc'.indexOf('c'))
         : (alert('ACcess denied', '/403'))
     console.log(a1)
     console.log(a2)
@@ -479,8 +480,11 @@
     let dayName;
     //su dung so sanh tuyet doi ===
     switch (day) {
-        case '3': dayName = ' Tuesday'; break;
-        default: dayName = 'Invalid day';
+        case '3':
+            dayName = ' Tuesday';
+            break;
+        default:
+            dayName = 'Invalid day';
     }
     console.log(dayName)
 
@@ -525,7 +529,7 @@
     console.log(q)
     // console.log(q.peek())
 
-    while(!q.isEmpty) {
+    while (!q.isEmpty) {
         console.log(q.dequeue())
     }
     console.log(q)
@@ -543,7 +547,7 @@
 
     // Paramerter = tham so cua ham  vs argument = truyen gia tri vao ham
     // Khong them cap ngoac de ko thuc thi
-   let sum  = add;
+    let sum = add;
     console.log(sum)
 
     let result88 = sum(1, 2);
@@ -551,7 +555,7 @@
 
 
     function average(a, b, fn) {
-        return fn(a,b) / 2;
+        return fn(a, b) / 2;
     }
 
     let result10 = average(10, 20, sum);
@@ -559,7 +563,7 @@
 
 
     function compareBy(propertyName) {
-        return function (a,b) {
+        return function (a, b) {
             let x = a[propertyName], y = b[propertyName];
             if (x > y) {
                 return 1;
@@ -606,16 +610,16 @@
     //     console.log('anonymous function')
     // });
 
-    let show = function() {
+    let show = function () {
         console.log('anonymous function');
     }
     show();
-    setTimeout(function() {
+    setTimeout(function () {
         console.log('Execute later after 1 second');
     }, 1000);
 
 
-    (function() {
+    (function () {
         console.log('IIFE')
     })();
 
@@ -625,11 +629,11 @@
         lastName: 'Doe'
     };
 
-    (function() {
+    (function () {
         console.log(person333.firstName + ' ' + person333.lastName)
-    }) ();
+    })();
 
-    let show1 = function() {
+    let show1 = function () {
         console.log('anonymous function');
     }
 
@@ -637,10 +641,10 @@
     show2();
 
     let add2 = function (a, b) {
-        return a+b;
+        return a + b;
     }
 
-    let add3 = (a,b) => a+b;
+    let add3 = (a, b) => a + b;
     // Ham trong JS chi truyen value, ko tham chieu
 
 
@@ -652,6 +656,7 @@
     function increaseAge(person44) {
         person44.age += 1;
     }
+
     increaseAge(person44);
     console.log(person44)
 
@@ -679,6 +684,7 @@
             countDown(fromNumber - 1)
         }
     }
+
     countDown(3)
 
     // let newYearCountDown = countDown;
@@ -702,13 +708,15 @@
         if (n <= 1) {
             return n;
         }
-        return n + sum(n-1);
+        return n + sum(n - 1);
     }
+
     console.log(sum1(4))
 
     function say(message = 'Hi') {
         console.log(message)
     }
+
     say();
     say('Hello')
 
@@ -716,6 +724,7 @@
         message = typeof message !== 'undefined' ? message : 'Hi'
         console.log(message)
     }
+
     say1();
 
     function createDiv(height = '100px', width = '100px', border = '1px solid red') {
@@ -727,6 +736,7 @@
         document.body.appendChild(div);
         return div;
     }
+
     createDiv()
 
     createDiv(undefined, undefined, '2px solid blue')
@@ -767,19 +777,21 @@
     function add33(x = 1, y = x, z = x + y) {
         return z + y + z;
     }
+
     console.log(add33())
 
 
     function subtract(x = y, y = 1) {
         return x - y;
     }
+
     console.log(subtract(10))
 
     let taxRate = () => 0.1;
-    let getPrice = function(price, tax = price * taxRate()) {
+    let getPrice = function (price, tax = price * taxRate()) {
         return price + tax
     }
-     let fullPrice = getPrice(100)
+    let fullPrice = getPrice(100)
     console.log(fullPrice)
 
 
@@ -787,6 +799,7 @@
         console.log(arguments.length)
         return x + y + z;
     }
+
     add222(10)
 
 
@@ -795,7 +808,7 @@
         lastName: 'Doe'
     }
 
-    persona.greet = function() {
+    persona.greet = function () {
         console.log('Hello')
     }
 
@@ -819,7 +832,7 @@
     let personc = {
         firstName: 'John',
         lastName: 'Doe',
-        greet: function() {
+        greet: function () {
             console.log('Hello World')
         }
     }
@@ -836,10 +849,10 @@
     let persone = {
         firstName: 'John',
         lastName: 'Doe',
-        greet: function() {
+        greet: function () {
             console.log('Hello World')
         },
-        getFullName: function() {
+        getFullName: function () {
             return this.firstName + ' ' + this.lastName
         }
     }
@@ -861,7 +874,7 @@
     function Person1(firstName, lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.getFullName = function() {
+        this.getFullName = function () {
             return this.firstName + ' ' + this.lastName
         }
     }
@@ -883,7 +896,7 @@
 
         this.firstName = firstName;
         this.lastName = lastName;
-        this.getFullName = function() {
+        this.getFullName = function () {
             return this.firstName + ' ' + this.lastName;
         }
     }
@@ -913,7 +926,7 @@
     console.log(persono)
     console.log(persono.toString());
 
-    console.log(typeof(Object))
+    console.log(typeof (Object))
 
     // Khi tim phuong thuc voi doi tuong, neu ko co thi tim trong Prototype
     console.log(Object.prototype)
@@ -929,7 +942,7 @@
     console.log(PersonA)
     console.log(PersonA.prototype)
 
-    PersonA.prototype.greet = function() {
+    PersonA.prototype.greet = function () {
         return "Hi, I'm " + this.name + "!"
     }
 
@@ -945,7 +958,7 @@
     // greeting2.fly();
 
     let p2 = new PersonA('Jane');
-    p2.draw = function() {
+    p2.draw = function () {
         return 'I can draw';
     }
     p2.draw();
@@ -961,7 +974,7 @@
         this.lastName = lastName;
     }
 
-    Person_1.prototype.getFullname = function() {
+    Person_1.prototype.getFullname = function () {
         return this.firstName + ' ' + this.lastName;
     }
 
@@ -984,7 +997,7 @@
     }
 
     let personA_1 = new PersonAA('John', 'Doe');
-    personA_1.abc = function() {
+    personA_1.abc = function () {
         return 'abc';
     }
     let personA_2 = new PersonAA('Jane', 'Doe');
@@ -996,7 +1009,7 @@
 
     let person_aa = {
         name: 'John Doe',
-        greet: function() {
+        greet: function () {
             return "Hi, I'm " + this.name
         }
     }
@@ -1019,7 +1032,7 @@
 
     let person_bb = {
         name: 'john doe',
-        greet: function() {
+        greet: function () {
             return "Hi, I'm " + this.name
         }
     };
@@ -1036,9 +1049,13 @@
     console.log(teacher_bb)
 
     let teacher_cc = Object.create(person_bb, {
-        fullname: { value: 'abc'},
-        email: {value: 'def' },
-        teach: {value: function() { return 'dsadsadsa'}}
+        fullname: {value: 'abc'},
+        email: {value: 'def'},
+        teach: {
+            value: function () {
+                return 'dsadsadsa'
+            }
+        }
     })
     console.log(teacher_cc)
 
@@ -1050,7 +1067,7 @@
 
     let counter1 = {
         count: 0,
-        next: function() {
+        next: function () {
             return ++this.count
         }
     };
@@ -1068,13 +1085,14 @@
         console.log(this)
         console.log(this === window)
     }
+
     show_aa()
     // window.show_aa()
 
 
     let car_aa = {
         brand: 'Honda',
-        getBrand: function() {
+        getBrand: function () {
             return this.brand
         }
     }
@@ -1089,7 +1107,7 @@
 
     let car_cc = {
         brand: 'Honda',
-        getBrand: function() {
+        getBrand: function () {
             return this.brand;
         }
     }
@@ -1116,7 +1134,7 @@
         this.brand = brand;
     }
 
-    CarDD.prototype.getBrand = function() {
+    CarDD.prototype.getBrand = function () {
         return this.brand;
     }
 
@@ -1142,7 +1160,7 @@
     let audi = {
         brand: 'Audi'
     }
-     let abdef = getBrand;
+    let abdef = getBrand;
     abdef.call(honda, "It's a ", 'xccccccccccccccc');
     abdef.call(audi, "It's an ")
 
@@ -1200,7 +1218,6 @@
     // })
 
 
-
     let person_ii = {}
     person_ii.age = 25;
     person_ii.ssn = '012-345-567';
@@ -1226,7 +1243,7 @@
     };
 
     Object.defineProperty(person_kk, 'fullName', {
-        get: function() {
+        get: function () {
             return this.firstName + ' ' + this.lastName
         },
         set: function (value) {
@@ -1255,7 +1272,7 @@
             value: 0.1
         },
         netPrice: {
-            get: function() {
+            get: function () {
                 return this.price * (1 + this.tax)
             }
         }
@@ -1297,7 +1314,6 @@
             console.log(prop)
         }
     }
-
 
 
     const items1 = [10, 20, 30];
@@ -1519,9 +1535,9 @@
 
     function createPerson1a(firstName, lastName) {
         let person = Object.create(personActions1a);
-         person.firstName = firstName;
-         person.lastName = lastName;
-         return person;
+        person.firstName = firstName;
+        person.lastName = lastName;
+        return person;
     }
 
     let person1a_1 = createPerson1a('John', 'Doe');
@@ -1537,7 +1553,7 @@
     let lastName_d = person_d.lastName;
 
     // su dungj object destructuring trong ES6
-    let { firstName: fname, lastName: lname } = person_d;
+    let {firstName: fname, lastName: lname} = person_d;
     console.log(fname)
     console.log(lname)
 
@@ -1555,7 +1571,7 @@
         currentAge: 28
     };
 
-    let { firstName, lastName, middleName = '', currentAge = 18 } = person_e;
+    let {firstName, lastName, middleName = '', currentAge = 18} = person_e;
     console.log(firstName)
     console.log(lastName)
     console.log(middleName)
@@ -1566,7 +1582,7 @@
         return null;
     }
 
-    let {firstName1, lastName1 } = getPerson1() || {}; //tranh truong hop null
+    let {firstName1, lastName1} = getPerson1() || {}; //tranh truong hop null
     console.log(firstName1, lastName1)
 
     let employee11 = {
@@ -1603,13 +1619,14 @@
     }
 
     display2(person2b)
+
     //
 
     function getUser(id) {
         if (id <= 0) {
             return null;
         }
-        return  {
+        return {
             id: id,
             username: 'admin',
             profile: {
@@ -1624,7 +1641,7 @@
     console.log(profile1)
     //ES2020
     let user2 = getUser(2);
-    let profile2 = user2 ?. profile;
+    let profile2 = user2?.profile;
     console.log(profile2)
     let user3 = getUser(3);
     let profile3 = (user3 !== null || user3 !== undefined) ? user3.profile : undefined;
@@ -1632,7 +1649,7 @@
 
     //
     let user44 = getUser(-1);
-    let avatar44 = user44 ?. profile ?. avatar;
+    let avatar44 = user44?.profile?.avatar;
     console.log(avatar44)
 
     let defaultProfile = {
@@ -1640,7 +1657,7 @@
         language: 'English'
     };
     let user55 = getUser(2);
-    let profile55 = user55 ?. profile ?? defaultProfile;
+    let profile55 = user55?.profile ?? defaultProfile;
     console.log(profile55)
 
     let file1 = {
@@ -1655,7 +1672,7 @@
 
     let data1 = file1.read();
     console.log(data1)
-    let compressdData = file1.compress ?. ();
+    let compressdData = file1.compress?.();
     console.log(compressdData)
 
 
@@ -1668,7 +1685,7 @@
         // if (callback) {
         //     callback(user);
         // }
-        callback ?. (user);
+        callback?.(user);
         return user;
     }
 
@@ -1750,7 +1767,7 @@
         this.name = name;
     }
 
-    PersonAAA.prototype.getName = function() {
+    PersonAAA.prototype.getName = function () {
         return this.name;
     }
 
@@ -1765,10 +1782,12 @@
         constructor(name) {
             this.name = name;
         }
+
         getName() {
             return this.name;
         }
     }
+
     let john_bbb = new PersonBBB('John Doe');
     let name_bbb = john_bbb.getName();
     console.log(name_bbb)
@@ -1781,10 +1800,12 @@
         constructor(name) {
             this.name = name;
         }
+
         getName() {
             return this.name;
         }
     }
+
     // let person_c1 = PersonC('name');
 
     class PersonDD {
@@ -1841,6 +1862,7 @@
             this._name = newName;
         }
     }
+
     let person_ff1 = new PersonFF('manhnv');
     let person_name = person_ff1.name;
     console.log(person_ff1)
@@ -1860,6 +1882,7 @@
             return this._name;
         }
     }
+
     let person_gg1 = new PersonGG1('def');
     console.log(person_gg1)
     console.log(person_gg1.name)
@@ -1895,6 +1918,7 @@
         constructor(name) {
             this.name = name;
         }
+
         getName() {
             return this.name;
         }
@@ -1908,7 +1932,9 @@
     }
 
     let greeting = factory(class {
-        sayHi() { console.log('Hi')}
+        sayHi() {
+            console.log('Hi')
+        }
     })
     greeting.sayHi();
 
@@ -1916,6 +1942,7 @@
         constructor(name) {
             this.name = name;
         }
+
         start() {
             console.log(`Starting the ${this.name}...`);
         }
@@ -1953,7 +1980,7 @@
         this.legs = legs;
     }
 
-    Animal.prototype.walk = function() {
+    Animal.prototype.walk = function () {
         console.log('walking on ' + this.legs + ' legs');
     }
 
@@ -1965,11 +1992,11 @@
     Bird.prototype = Object.create(Animal.prototype);
     Bird.prototype.constructor = Animal;
 
-    Bird.prototype.fly = function() {
+    Bird.prototype.fly = function () {
         console.log('flying');
     }
 
-    Object.prototype.fly = function() {
+    Object.prototype.fly = function () {
         console.log('flying');
     }
     var pigeon = new Bird(2);
@@ -1984,6 +2011,7 @@
         constructor(legs) {
             this.legs = legs;
         }
+
         walk() {
             console.log('walking on ' + this.legs + ' legs');
         }
@@ -1994,9 +2022,11 @@
             super(legs); // tuong duong voi Animal.call(this, legs);
             this.color = color;
         }
+
         fly() {
             console.log('flying');
         }
+
         getColor() {
             return this.color;
         }
@@ -2017,6 +2047,7 @@
             console.log('go walking');
         }
     }
+
     let bingo = new DogA();
     bingo.walk();
 
@@ -2025,9 +2056,11 @@
         constructor(legs) {
             this.legs = legs;
         }
+
         walk() {
             console.log('walking on ' + this.legs + ' legs');
         }
+
         static helloWorld() {
             console.log('hello world')
         }
@@ -2038,6 +2071,7 @@
             console.log('flying');
         }
     }
+
     Bird2.helloWorld();
 
     class Queue1 extends Array {
@@ -2048,9 +2082,11 @@
         dequeue() {
             return super.shift();
         }
+
         peek() {
             return !this.empty() ? this[0] : undefined
         }
+
         empty() {
             return this.length === 0;
         }
@@ -2102,7 +2138,7 @@
         this.name = name;
     }
 
-    PersonAD.prototype.getName = function() {
+    PersonAD.prototype.getName = function () {
         return this.name;
     }
 
@@ -2122,9 +2158,11 @@
         constructor(name) {
             this.name = name;
         }
+
         getName() {
             return this.name;
         }
+
         static createAnonymous(gender) {
             let name = gender === 'male' ? 'John Doe' : 'Jane Doe';
             return new PersonAF(name);
@@ -2140,10 +2178,12 @@
     class Item {
         static count = 0;
     }
+
     console.log(Item.count)
 
     class Item1 {
         static count = 111;
+
         static getCount() {
             // return this.constructor.count;
             return Item1.count;
@@ -2154,13 +2194,16 @@
 
     class Item3 {
         fullname = 'dsadsadsad';
+
         constructor(name, quantity) {
             this.name = name;
             this.quantity = quantity;
             //truy capj thuoc tinh tinh trong constructor
             this.constructor.count++;
         }
+
         static count = 0;
+
         static getCount() {
             return Item3.count;
         }
@@ -2176,19 +2219,24 @@
     // ES2022
     class Circle {
         #radius;
+
         constructor(value) {
             this.#radius = value;
         }
+
         get area() {
             return Math.PI * Math.pow(this.#radius, 2);
         }
     }
+
     let circle1 = new Circle(10);
     console.log(circle1.area);
+
     // console.log(circle1.#radius);
 
     class Circle2 {
         #radius = 0;
+
         constructor(radius) {
             this.radius = radius; //goi setter ngay khi gan
         }
@@ -2196,6 +2244,7 @@
         get area() {
             return Math.PI * Math.pow(this.#radius, 2);
         }
+
         set radius(value) {
             if (typeof value === 'number' && value > 0) {
                 this.#radius = value;
@@ -2216,6 +2265,7 @@
 
     class Cylinder extends Circle2 {
         #height;
+
         constructor(radius, height) {
             super(radius);
             this.#height = height;
@@ -2229,9 +2279,11 @@
 
     class Circle3 {
         #radius = 0;
+
         constructor(radius) {
             this.radius = radius;
         }
+
         get area() {
             return Math.PI * Math.pow(this.radius, 2)
         }
@@ -2245,9 +2297,11 @@
                 throw 'The radius must be a positive number';
             }
         }
+
         get radius() {
             return this.#radius;
         }
+
         static hasRadius(circle) {
             // ktra private ton tai hay ko
             return #radius in circle;
@@ -2261,13 +2315,16 @@
     class Circle4 {
         #radius = 0;
         static #count = 0;
+
         constructor(radius) {
             this.radius = radius;
             Circle4.#count++;
         }
+
         get area() {
             return Math.PI * Math.pow(this.radius, 2);
         }
+
         set radius(value) {
             if (typeof value === 'number' && value > 0) {
                 this.#radius = value;
@@ -2275,12 +2332,15 @@
                 throw 'The radius must be a positive number';
             }
         }
+
         get radius() {
             return this.#radius;
         }
+
         static hasRadius(circle) {
             return #radius in circle;
         }
+
         static getCount() {
             return Circle4.#count;
         }
@@ -2293,6 +2353,7 @@
     class Person5 {
         #firstName;
         #lastName;
+
         constructor(firstName, lastName) {
             this.#firstName = firstName;
             this.#lastName = lastName;
@@ -2301,9 +2362,11 @@
         getFullname(format = true) {
             return format ? this.#firstLast() : this.#lastFirst();
         }
+
         #firstLast() {
             return `${this.#firstName} ${this.#lastName}`;
         }
+
         #lastFirst() {
             return `${this.#lastName}, ${this.#firstName}`
         }
@@ -2316,13 +2379,16 @@
     class Person6 {
         #firstName;
         #lastName;
+
         constructor(firstName, lastName) {
             this.#firstName = Person6.#validate(firstName);
             this.#lastName = Person6.#validate(lastName);
         }
+
         getFullname(format = true) {
             return format ? this.#firstLast() : this.#lastFirst();
         }
+
         static #validate(name) {
             if (typeof name === 'string') {
                 let str = name.trim();
@@ -2332,9 +2398,11 @@
             }
             throw 'The name must be a string with at least 3 character';
         }
+
         #firstLast() {
             return `${this.#firstName} ${this.#lastName}`;
         }
+
         #lastFirst() {
             return `${this.#lastName}, ${this.#firstName}`
         }
@@ -2356,6 +2424,7 @@
             this.name = name;
         }
     }
+
     let person8_1 = new Person8('John');
     console.log(person8_1 instanceof Person8);
 
@@ -2413,6 +2482,7 @@
         console.log(new.target)
         return x + y;
     }
+
     console.log(add1.length);
     console.log(add1.prototype)
 
@@ -2422,8 +2492,8 @@
     let obj11 = new add1(10, 20);
     console.log(obj11)
 
-    let cat1 = { type: 'Cat', sound: 'Meow' };
-    let dog1 = { type: 'Dog', sound: 'Woof' };
+    let cat1 = {type: 'Cat', sound: 'Meow'};
+    let dog1 = {type: 'Dog', sound: 'Woof'};
 
     const say11 = function (message) {
         console.log(message);
@@ -2438,14 +2508,14 @@
 
     let car22 = {
         speed: 5,
-        start: function() {
+        start: function () {
             console.log('Start with ' + this.speed + ' km/h');
         }
     }
 
     let aircraft22 = {
         speed: 10,
-        fly: function() {
+        fly: function () {
             console.log('Flying');
         }
     }
@@ -2585,14 +2655,14 @@
     //bind method
     let personGG = {
         name1: 'John Doe',
-        getName: function() {
+        getName: function () {
             console.log(this.name1);
         }
     }
     let f = personGG.getName;
     setTimeout(personGG.getName, 1000);
 
-    setTimeout(function() {
+    setTimeout(function () {
         personGG.getName()
     }, 1000)
 
@@ -2600,14 +2670,14 @@
 
     let runnerA = {
         name: 'Runner',
-        run: function(speed) {
+        run: function (speed) {
             console.log(this.name + ' runs at ' + speed + ' mph.');
         }
     };
 
     let flyerA = {
         name: 'Flyer',
-        fly: function(speed) {
+        fly: function (speed) {
             console.log(this.name + ' flies at ' + speed + ' mph.');
         }
     }
@@ -2617,6 +2687,7 @@
 
     //Closure
     let nameB = 'John';
+
     function greetingB() {
         let messsageB = 'Hi';
         console.log(messsageB + ' ' + nameB)
@@ -2662,30 +2733,31 @@
     console.log(sayHelloE('John'));
 
     for (var indexA = 1; indexA <= 3; indexA++) {
-        setTimeout(function() {
+        setTimeout(function () {
             console.log('after ' + indexA + ' second(s):' + indexA)
         }, indexA * 1000);
     }
 
     // IIFE = Intermediately invoked function expression
-    for (var indexB = 1; indexB <= 3; indexB++) {
-        (function(index) {
-            setTimeout(function() {
-                console.log('after ' + index + ' second(s):' + index)
-            }, index * 1000)
-        })(indexB)
-    }
-
-    for (let indexC = 1; indexC <= 3; indexC++) {
-        setTimeout(function() {
-            console.log('after ' + indexC + ' second(s):' + indexC);
-        }, indexC * 1000)
-    }
+    // for (var indexB = 1; indexB <= 3; indexB++) {
+    //     (function(index) {
+    //         setTimeout(function() {
+    //             console.log('after ' + index + ' second(s):' + index)
+    //         }, index * 1000)
+    //     })(indexB)
+    // }
+    //
+    // for (let indexC = 1; indexC <= 3; indexC++) {
+    //     setTimeout(function() {
+    //         console.log('after ' + indexC + ' second(s):' + indexC);
+    //     }, indexC * 1000)
+    // }
 
     // IIFE
     function addGG(a, b) {
-        return a+b;
+        return a + b;
     }
+
     console.log(window.addGG);
 
     var counterAA = 10;
@@ -2694,22 +2766,215 @@
     'This is a string';
     (10 + 20);
 
-    let sumBB = (function(a, b) {
-        return a+b;
+    let sumBB = (function (a, b) {
+        return a + b;
     })(10, 20);
     console.log(sumBB);
 
-    (function() {
+    (function () {
         var counter = 0;
-        function add(a,b) {
-            return a+b;
+
+        function add(a, b) {
+            return a + b;
         }
+
         console.log(add(10, 20))
-    } ())
+    }())
+
+    function getNamesA() {
+        let firstName = 'John';
+        let lastName = 'Doe';
+
+        return [firstName, lastName];
+    }
+
+    let namesA = getNamesA();
+    const firstNameA = namesA[0];
+    const lastNameA = namesA[1];
+
+    const [firstNameB, lastNameB] = getNamesA();
+
+    function getNamesB() {
+        let firstName = 'John';
+        let lastName = 'Doe';
+
+        // return {
+        //     'firstName': firstName,
+        //     'lastName': lastName
+        // }
+        return {firstName, lastName};
+    }
+
+    console.log(getNamesB())
+
+    let addBB = function (x, y) {
+        return x + y;
+    }
+
+    console.log(addBB(10, 20));
+
+    let addCC = (x, y) => x + y;
+    console.log(addCC(10, 20))
+
+    let addDD = (x, y) => {
+        return x + y
+    };
+    console.log(addDD(1, 2))
+    console.log(typeof addDD)
+
+
+    let numbersAA = [4, 2, 6];
+    numbersAA.sort(function (a, b) {
+        return b - a;
+    })
+    console.log(numbersAA)
+
+    let numbersBB = [4, 2, 6];
+    numbersBB.sort((a, b) => b - a);
+    console.log(numbersBB)
+
+    let namesFF = ['John', 'MAc', 'Peter'];
+    let lengthsFF = namesFF.map(name => name.length);
+    console.log(lengthsFF)
+
+    let logDocA = () => console.log(window.document)
+    logDocA();
+
+    let multiplyA = (x, y) =>
+        x * y;
+    console.log(multiplyA(1, 2))
+
+    // let except = msg => {
+    //     throw msg;
+    // }
+    // except('abc')
+
+    let setColorA = function (color) {
+        return {
+            value: color
+        }
+    };
+
+    let backgroundColorA = setColorA('Red');
+    console.log(backgroundColorA.value);
+
+    let setColorB = color => ({value: color});
+    console.log(setColorB('def'))
+
+    function CarJJ() {
+        this.speed = 0;
+
+        this.speedUp = function (speed) {
+            this.speed = speed;
+            let self = this;
+            setTimeout(function () {
+                console.log(self.speed)
+            }, 1000)
+        }
+    }
+
+    let carJJ = new CarJJ();
+    carJJ.speedUp(50)
+
+
+    function CarKK() {
+        this.speed = 0;
+        this.speedUp = function (speed) {
+            this.speed = speed;
+            setTimeout(() => console.log(this.speed), 1000)
+        }
+    }
+
+    let carKK = new CarKK();
+    carKK.speedUp(50);
+
+    function showKK() {
+        return x => x + arguments[0];
+    }
+
+    let displayKK = showKK(10, 20);
+    let resultKK = displayKK(5);
+    console.log(resultKK)
+
+
+    function dumpKK(message) {
+        console.log(message)
+    }
+
+    console.log(dumpKK.hasOwnProperty('prototype'))
+
+    let dumpMM = message => console.log(message);
+    console.log(dumpMM.hasOwnProperty('prototype'))
+
+
 </script>
 
+<input type="text" name="username" id="username" placeholder="Enter a username">
+<div id="greeting"></div>
 <!--<script src="script.js" defer async></script>-->
 <input id="fullname" type="text">
 
+<script>
+    const greetingBB = document.querySelector('#greeting');
+    const usernameBB = document.querySelector('#username');
+    // usernameBB.addEventListener('keyup', () => {
+    //     // loi ko biet this
+    //     greetingBB.textContent = 'Hello ' + this.value;
+    // })
+    usernameBB.addEventListener('keyup', function () {
+        greetingBB.textContent = 'Hello ' + this.value
+    });
+
+    const counterAAA = {
+        count: 0,
+        next: () => ++this.count,
+        current: () => this.count
+    }
+
+    console.log(counterAAA.next())
+
+
+    const counterBBB = {
+        count: 0,
+        next() {
+            return ++this.count
+        },
+        current() {
+            return this.count
+        }
+    }
+    console.log(counterBBB.next())
+
+
+    function CounterFFF() {
+        this.count = 0;
+    }
+
+    CounterFFF.prototype.next = () => {
+        return this.count;
+    }
+
+    CounterFFF.prototype.current = () => {
+        return ++this.next;
+    }
+
+
+    // const concatA1 = (seperator) => {
+    //     let args = Array.prototype.slice.call(arguments, 1);
+    //     return args.join(seperator)
+    // }
+
+    const concatA1 = function (seperator) {
+        let args = Array.prototype.slice.call(arguments, 1);
+        return args.join(seperator)
+    }
+
+    console.log(concatA1(123))
+    // An arrow function doesn’t have its own this value. Instead, it uses the this value of the enclosing lexical scope. An arrow function also doesn’t have the arguments object.
+    //     Avoid using the arrow function for event handlers, object methods, prototype methods, and functions that use the arguments object.
+
+
+
+</script>
 
 

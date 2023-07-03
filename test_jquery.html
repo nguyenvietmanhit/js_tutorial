@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript IIFE - jQuery</title>
+</head>
+<body>
+<h1>jQuery Demo</h1>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.js"
+        integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
+<script>
+    let counter = 1;
+    $('h1').click(function () {
+        $(this).text('jQuery Demo' + ' Clicked ' + counter++);
+    });
+    // let counter = 1;
+    // let counter = 2;
+    (function(_) {
+        let counter = 1;
+        _('h1').click(function() {
+            _(this).text('jquery Demo: ' + counter++);
+        });
+    })(jQuery);
+</script>
+</body>
+</html>
