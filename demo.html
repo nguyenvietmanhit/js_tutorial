@@ -2732,11 +2732,11 @@
     console.log(sayHiE('John'));
     console.log(sayHelloE('John'));
 
-    for (var indexA = 1; indexA <= 3; indexA++) {
-        setTimeout(function () {
-            console.log('after ' + indexA + ' second(s):' + indexA)
-        }, indexA * 1000);
-    }
+    // for (var indexA = 1; indexA <= 3; indexA++) {
+    //     setTimeout(function () {
+    //         console.log('after ' + indexA + ' second(s):' + indexA)
+    //     }, indexA * 1000);
+    // }
 
     // IIFE = Intermediately invoked function expression
     // for (var indexB = 1; indexB <= 3; indexB++) {
@@ -2973,6 +2973,334 @@
     // An arrow function doesn’t have its own this value. Instead, it uses the this value of the enclosing lexical scope. An arrow function also doesn’t have the arguments object.
     //     Avoid using the arrow function for event handlers, object methods, prototype methods, and functions that use the arguments object.
 
+
+    // rest parameter
+    function abc123(a, b, c, ...arrs ) {
+        console.log(arrs)
+    }
+
+    abc123(1, 2, 3, 4, 5)
+
+    function sumBB1(...args) {
+        let total = 0;
+        for (const a of args) {
+            total += a;
+        }
+        return total;
+    }
+    console.log(sumBB1(1,2,4))
+    console.log(sumBB1(1,'dsadsa',[1]))
+
+    function sumCCC(...args) {
+        let arsa = args.filter(function (e) {
+            return typeof e === 'number';
+        })
+        .reduce(function(prev, curr) {
+            return prev + curr;
+        })
+        return arsa;
+    }
+
+    let resultCCC = sumCCC(10, 'Hi', null, undefined, 20);
+    console.log(resultCCC)
+
+
+    function filterByA(type, ...args) {
+        return args.filter(function(e) {
+            return typeof e === type;
+        })
+    }
+
+    const combineA = (...args) => {
+        return args.reduce(function (prev, curr) {
+            return prev + ' ' + curr
+        })
+    }
+
+    let messageA2 = combineA('Javascript', 'Rest', 'Parameters')
+    console.log(messageA2)
+
+
+    var showNumbers = new Function('...numbers', 'console.log(numbers)');
+    showNumbers(1, 2, 3);
+
+
+    // Callback
+    function filterAA(numbers) {
+        let results = [];
+        for (const number of numbers) {
+            if (number % 2 != 0) {
+                results.push(number);
+            }
+        }
+        return results;
+    }
+
+    let numbersAA1 = [1, 2, 4, 7, 3];
+    console.log(filterAA(numbersAA1))
+
+
+    function isOddAB(number) {
+        return number % 2 != 0;
+    }
+
+    function isEvenAB(number) {
+        return number % 2 == 0;
+    }
+
+    function filterAB(numbers, fn) {
+        let results = [];
+        for (const number of numbers) {
+            if (fn(number)) {
+                results.push(number);
+            }
+        }
+        return results;
+    }
+
+    let numbersAB = [1, 2, 4, 6, 7];
+    console.log(filterAB(numbersAB, isOddAB))
+    console.log(filterAB(numbersAB, isEvenAB))
+
+
+    function filterAC(numbers, callback) {
+        let results = [];
+        for (const number of numbers) {
+            if (callback(number)) {
+                results.push(number);
+            }
+        }
+        return results;
+    }
+
+    let numbersAC = [1, 2, 4, 3, 5, 6, 7];
+    let oddNumbersAC = filterAC(numbersAC, function(number) {
+        return number % 2 != 0;
+    })
+    console.log(oddNumbersAC)
+
+    //ES6
+    function filterAD(numbers, callback) {
+        let results = [];
+        for (const number of numbers) {
+            if (callback(number)) {
+                results.push(number);
+            }
+        }
+        return results;
+    }
+    let numbersAD = [1, 2,3, 4, 5, 6];
+    let oddNumbersAD = filterAD(numbersAD, (number) => number % 2 != 0);
+    console.log(oddNumbersAD)
+
+
+    // Synchronous and Asynchronous
+    function downloadAA(url) {
+        setTimeout(() => {
+            console.log(`Downloading ${url} ...`);
+        }, 1000)
+    }
+
+    function processAA(picture) {
+        console.log(`Processing ${picture}`);
+    }
+
+    let urlAA = 'https://www.javascripttutorial.net/pic.jpg';
+    downloadAA(urlAA)
+    processAA(urlAA)
+
+
+    function downloadAB(url, callback) {
+        setTimeout(() => {
+            console.log(`Downloading ${url}...`);
+
+            callback(url);
+        }, 1000)
+    }
+    function processAB(picture) {
+        console.log(`Processing ${picture}`);
+    }
+
+    let urlAB = 'https://wwww.javascripttutorial.net/pic.jpg';
+    // downloadAB(urlAB, processAB);
+
+
+    function downloadAC(url, callback) {
+        setTimeout(() => {
+            console.log(`Downloading ${url}...`);
+
+            callback(url);
+        }, 1000)
+    }
+
+    let urlAC = 'https://wwww.javascripttutorial.net/pic.jpg';
+    // downloadAC(urlAC, function(picture) {
+    //     console.log(`Processing ${picture}`);
+    // })
+
+
+    function downloadAD(url, success, failure) {
+        setTimeout(() => {
+            console.log(`Downloading the picture from ${url} ...`);
+            !url ? failure(url) : success(url);
+        }, 1000);
+    }
+
+    downloadAD(
+        '',
+        url => console.log(`Processing the picture ${url}`),
+        url => console.log(`The ${url} is not valid`)
+    )
+    //Nesting callbacks and the Pyramid of Doom/ callback hell
+    function downloadAE(url, callback) {
+        setTimeout(() => {
+            console.log(`Downloading ${url} ... `);
+            callback(url);
+        }, 1000);
+    }
+
+    const url1AD = 'https://www.javascripttutorial.net/pic1.jpg';
+    const url2AD = 'https://www.javascripttutorial.net/pic2.jpg';
+    const url3AD = 'https://www.javascripttutorial.net/pic3.jpg';
+
+    // downloadAE(url1AD, function (url) {
+    //     console.log(`Processing ${url}`);
+    //     downloadAE(url2AD, function (url) {
+    //         console.log(`Processing ${url}`);
+    //         downloadAE(url3AD, function (url) {
+    //             console.log(`Processing ${url3AD}`);
+    //         })
+    //     });
+    // })
+
+    // JavaScript Promises
+    function getUsersAB() {
+        return [
+            { username: 'john', email: 'john@test.com' },
+            { username: 'jane', email: 'jane@test.com' },
+        ]
+    }
+
+    function findUserAB(username) {
+        const users = getUsersAB();
+        const user = users.find((user) => user.username === username);
+        return user;
+    }
+
+    console.log(findUserAB('john'))
+
+    function getUserAC() {
+        let users = [];
+
+        setTimeout(() => {
+            users = [
+                { username: 'john', email: 'john@test.com'},
+                { username: 'jane', email: 'jane@test.com'},
+            ]
+        }, 1000);
+        return users;
+    }
+
+    function findUserAC(username) {
+        const users = getUserAC();
+        const user = users.find((user) => user.username === username);
+        return user;
+    }
+
+    console.log(findUserAC('john'));
+
+
+    function getUsersAD(callback) {
+        setTimeout(() => {
+            callback([
+                { username: 'john', email: 'john@test.com'},
+                { username: 'jane', email: 'jane@test.com'},
+            ])
+        }, 1000);
+    }
+
+    function findUserAD(username, callback) {
+        getUsersAD((users) => {
+            const user = users.find((user) => user.username === username);
+            callback(user);
+        })
+    }
+
+    findUserAD('john', console.log)
+    //Understanding JavaScript Promises
+    const promiseA = new Promise((resolve, reject) => {
+
+    })
+
+    function getUsersAE() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve([
+                    { username: 'john', email: 'john@test.com' },
+                    { username: 'jane', email: 'jane@test.com' },
+                ]);
+            }, 1000)
+        })
+    }
+
+    function onFulfilledAE(users) {
+        console.log(users)
+    }
+
+    const promiseAE = getUsersAE();
+    console.log(promiseAE)
+
+    // resolve, la tu pending toi fulfilled
+    promiseAE.then(onFulfilledAE)
+
+    promiseAE.then((users) => {
+        console.log(users);
+    })
+
+    getUsersAE().then((users) => {
+        console.log(users)
+    })
+
+    //
+    let successAF = true;
+    function getUsersAF() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (successAF) {
+                    resolve([
+                        { username: 'john', email: 'john@test.com' },
+                        { username: 'jane', email: 'jane@test.com' },
+                    ])
+                } else {
+                    reject('Failed to the user list')
+                }
+            }, 1000)
+        })
+    }
+
+    function onFulfilled(users) {
+        console.log(users);
+    }
+
+    function onRejected(error) {
+        console.log(error)
+    }
+
+    const promiseAF = getUsersAF();
+    // promiseAF.then(onFulfilled, onRejected)
+
+    promiseAF.then(
+        users => console.log(users),
+        error => console.log(error)
+    )
+
+    // catch chi de bat reject, tuong duong voi then(undefined, reject)
+    promiseAF.catch(error => console.log(error))
+
+    //finally thuc thi ko qtam promise la fulfilled hay reject
+    promiseAF.finally(() => {
+        console.log('finally')
+    })
 
 
 </script>
