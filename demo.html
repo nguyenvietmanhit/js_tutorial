@@ -3303,6 +3303,225 @@
     })
 
 
+
+    // promise chaning
+
+    let pAA = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(10);
+        }, 3 * 1000)
+    })
+
+    pAA.then((result) => {
+        console.log(result);
+        return result * 2;
+    })
+
+    let pAB = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(10)
+        }, 3 * 1000);
+    });
+
+    pAB.then((result) => {
+        console.log(result);
+        return result * 2;
+    }).then((result) => {
+        console.log(result);
+        return result * 3;
+    })
+
+    let pAC = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(10)
+        }, 3 * 1000)
+    });
+    pAC.then((result) => {
+        console.log(result);
+        return result * 2;
+    })
+
+    pAC.then((result) => {
+        console.log(result);
+        //tra ve 1 promise moi
+        return result * 3;
+    })
+
+    pAC.then((result) => {
+        console.log(result);
+        return result * 4;
+    })
+
+    let pAD = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(10)
+        }, 3 * 1000)
+    });
+
+    pAD.then((result) => {
+        console.log(result);
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(result * 2);
+            }, 3 * 1000)
+        })
+    }).then((result) => {
+        console.log(result);
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(result * 3);
+            }, 3 * 1000)
+        })
+    }).then(result => console.log(result))
+
+    function generateNumberA(number) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(number)
+            }, 3 * 1000)
+        })
+    }
+
+    generateNumberA(10)
+        .then((result) => {
+            console.log(result);
+            return generateNumberA(result * 2);
+        })
+        .then((result) => {
+            console.log(result);
+            return generateNumberA(result * 3);
+        })
+        .then((result) => console.log(result))
+
+
+    function getUserAE(userId) {
+        return new Promise((resolve, reject) => {
+            console.log('Get the user from the database');
+            setTimeout(() => {
+                resolve({
+                    userId: userId,
+                    username: 'admin'
+                })
+            }, 1000)
+        })
+    }
+
+    function getServicesAE(user) {
+        return new Promise((resolve, reject) => {
+            console.log(`Get the services of ${user.username} from the API`);
+            setTimeout(() => {
+                resolve(['Email', 'VPN', 'CDN'])
+            }, 3 * 1000)
+        })
+    }
+
+    function getServiceCostAE(services) {
+        return new Promise((resolve, reject) => {
+            console.log(`Calculate the service cost of ${services}`);
+            setTimeout(() => {
+                resolve(services.length * 100);
+            }, 2 * 1000);
+        })
+    }
+
+    getUserAE(100)
+    .then(getServicesAE)
+    .then(getServiceCostAE)
+    .then(console.log)
+
+
+    // Promiss.all
+    const p1BA = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('The first promise has resolved');
+            resolve(10);
+        }, 1 * 1000);
+    })
+
+    const p2BA = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('The second promise has resolved');
+            resolve(20);
+        }, 2 * 1000)
+    })
+
+    const p3BA = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('The third promise has resolved');
+            resolve(30);
+        }, 3 * 1000)
+    });
+
+    Promise.all([p1BA, p2BA, p3BA])
+    .then((results) => {
+        const total = results.reduce((p, c) => p+c);
+        console.log(`Results: ${results}`);
+        console.log(`Total: ${total}`)
+    })
+
+    const p1BB = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p1BB The first promise has resolved');
+            resolve(10);
+        }, 1 * 1000);
+    })
+
+    const p2BB = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p2BB The second promise has rejected');
+            reject('Failed');
+        }, 2 * 1000)
+    })
+
+    const p3BB = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p3BB The third promise has resolved');
+            resolve(30)
+        }, 3 * 1000)
+    })
+
+    Promise.all([p1BB, p2BB, p3BB])
+        .catch(console.log)
+    .then(console.log)
+    .then(console.log)
+
+    // Promise.race: ai win trc tra ve trc
+    const p1BC = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p1BC The first promise has resolved');
+            resolve(10);
+        }, 1 * 1000);
+    })
+
+    const p2BC = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p2BC The second promise has resolved')
+            resolve(20);
+        }, 2 * 1000);
+    })
+
+    Promise.race([p1BC, p2BC])
+        .then(value => console.log(`p1BCp2BC Resolved: ${value}`))
+        .catch(reason => console.log(`Rejected: ${reason}`))
+
+    const p1BD = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p1BD The first promise has resolved');
+            resolve(10)
+        }, 1 * 1000);
+    })
+
+    const p2BD = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p2BD The second promise has rejected');
+            reject(20);
+        }, 2 * 1000)
+    })
+
+    Promise.race([p1BD, p2BD])
+    .then(value => console.log(`pBD Resolved: ${value}`))
+    .catch(reason => console.log(`pBD Reject: ${reason}`));
+
 </script>
 
 
