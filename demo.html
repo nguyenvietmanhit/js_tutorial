@@ -3430,7 +3430,7 @@
     .then(console.log)
 
 
-    // Promiss.all
+    // Promiss.all: tra ve resolve het khi tat ca promise deu fulfill, nguoc lai tra ve reject ngay khi co promise bi reject dong thoi bo ra moi resolve
     const p1BA = new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log('The first promise has resolved');
@@ -3522,6 +3522,89 @@
     .then(value => console.log(`pBD Resolved: ${value}`))
     .catch(reason => console.log(`pBD Reject: ${reason}`));
 
+
+    // Promise.any: tra ve promise dau tien dc resolve, ko qtam den reject, neu tat ca promise la reject thi tra ve aggregate error
+    const p1CA = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p1CA Promise 1 fulfilled');
+            resolve(1);
+        }, 1000)
+    })
+
+    const p2CA = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p2CA Promise 2 fulfilled');
+            resolve(2);
+        }, 2000);
+    })
+
+    const pCA = Promise.any([p1CA, p2CA]);
+    pCA.then((value) => {
+        console.log('pCA Returned Promise');
+        console.log('pCA ' + value)
+    })
+
+
+    const p1CB = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p1cb Promise 1 rejected');
+            reject('p1cb error')
+        }, 1000)
+    })
+
+    const p2CB = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p2cb Promise 2 fulfilled');
+            resolve(2)
+        }, 2000)
+    })
+
+    const pCB = Promise.any([p1CB, p2CB]);
+    pCB.then((value) => {
+        console.log('pcb Returned Promise');
+        console.log('pcb ' + value)
+    })
+
+
+    const p1CD = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p1cd promise 1 rejected');
+            reject('p1cd error1')
+        }, 1000);
+    })
+
+    const p2CD = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p2cd promise 2 rejected');
+            reject('p2cd error2');
+        }, 2000);
+    })
+
+    const pCD = Promise.any([p1CD, p2CD]);
+    pCD.catch((e) => {
+        console.log('pcd returned Promise');
+        console.log(e, e.errors)
+    })
+
+    const p1CE = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p1ce promise 1 rejected');
+            reject('p1ce error1')
+        }, 1000);
+    });
+
+    const p2CE = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('p2ce Promise 2 rejected');
+            reject('p2ce error2');
+        }, 2000)
+    })
+
+    const pCE = Promise.any([p1CE, p2CE]);
+    pCE.catch((e) => {
+        console.log('pce Returned Promise');
+        console.log(e, e.errors);
+    })
 </script>
 
 
