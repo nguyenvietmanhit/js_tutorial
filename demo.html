@@ -3606,7 +3606,7 @@
         console.log(e, e.errors);
     })
 
-    // Promise.allSettled: tra ve mang cac promise ma ko quan tam ve ket qua
+    // Promise.allSettled: tra ve mang cac promise
     const p1DE = new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log('The first promise has resolved');
@@ -3625,6 +3625,20 @@
     .then((result) => {
         console.log(result);
     });
+
+    class ConnectDE {
+        execute(query) {
+            if (query != 'Insert' && query != 'Update' && query != 'Delete') {
+                throw new Error(`The ${query} is not supported`);
+            }
+            console.log(`Execute the ${query}`);
+        }
+        close() {
+            console.log('Close the connection')
+        }
+    }
+
+    const success =
 </script>
 
 
