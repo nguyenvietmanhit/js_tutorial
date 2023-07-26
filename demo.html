@@ -3605,6 +3605,26 @@
         console.log('pce Returned Promise');
         console.log(e, e.errors);
     })
+
+    // Promise.allSettled: tra ve mang cac promise sau khi hoan thanh het
+    const p1DE = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('The first promise has resolved');
+            resolve(10);
+        }, 1 * 1000);
+    });
+
+    const p2DE = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('The second promise has rejected');
+            reject(20);
+        }, 2 * 1000);
+    })
+
+    Promise.allSettled([p1DE, p2DE])
+    .then((result) => {
+        console.log(result);
+    });
 </script>
 
 
