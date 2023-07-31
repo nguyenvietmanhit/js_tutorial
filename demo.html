@@ -3638,7 +3638,106 @@
         }
     }
 
-    const success =
+    const successDE = true;
+    function connectDE() {
+        return new Promise((resolve, reject) => {
+            if (successDE) {
+                resolve(new ConnectDE());
+            } else {
+                reject('Could not open the database connection');
+            }
+        })
+    }
+
+    let globalConnectionDE;
+
+    connectDE()
+    .then((connection) => {
+        globalConnectionDE = connection;
+        return globalConnectionDE.execute('Insert');
+    })
+    .then((connection) => {
+        globalConnectionDE = connection;
+        return connection.execute('Select');
+    })
+    .catch(console.log)
+    .finally(() => {
+        if (globalConnectionDE) {
+            globalConnectionDE.close();
+        }
+    })
+
+    function getUserByIdDF(id) {
+        if (typeof id !== 'number' || id <= 0) {
+            throw new Error('Invalid id argument');
+        }
+
+        return new Promise((resolve, reject) => {
+            resolve({
+                id: id,
+                username: 'admin'
+            })
+        })
+    }
+
+    try {
+        getUserByIdDF('a')
+            .then(user => console.log(user.username))
+            .catch(err => console.log(`Caught by .catch ${err}`))
+    } catch (error) {
+        console.log(`Caught by try/catch ${error}`)
+    }
+
+    let authorizedDG = false;
+    function getUserByIdDG(id) {
+        return new Promise((resolve, reject) => {
+            if (!authorizedDG) {
+                throw new Error('Unauthorized access to the user data');
+            }
+
+            resolve({
+                id: id,
+                username: 'admin'
+            })
+        })
+    }
+
+    try {
+        getUserByIdDG(10)
+        .then(user => console.log(user.username))
+        .catch(err => console.log(`Caught by .catch ${err}`))
+    } catch (error) {
+        console.log(`Caught by try/catch ${error}`)
+    }
+
+
+    let authorizedDH = false;
+
+    function getUserByIdDH(id) {
+        return new Promise((resolve, reject) => {
+            if (!authorizedDH) {
+                reject('Unauthorized access to the user data');
+            }
+
+            resolve({
+                id: id,
+                username: 'admin'
+            })
+        })
+    }
+
+    try {
+        getUserByIdDH(10)
+            .then(user => console.log(user.username))
+            .catch(err => console.log(`Caught by .catch ${err}`));
+    } catch (error) {
+        console.log(`Caught by try/catch ${error}`);
+    }
+
+
+    // async/await
 </script>
+
+
 
 
