@@ -1,0 +1,35 @@
+<script>
+    //async/await
+
+    function getUserA(userId, callback) {
+        console.log('Get user from the database');
+        setTimeout(() => {
+            callback({
+                userId: userId,
+                username: 'john'
+            })
+        }, 1000)
+    }
+
+    function getServicesA(user, callback) {
+        console.log(`Get services of ${user.username} from the API`);
+        setTimeout(() => {
+            callback(['Email', 'VPN', 'CDN'])
+        }, 2000)
+    }
+
+    function getServiceCostA(services, callback) {
+        console.log(`Calculate service costs of ${services}`);
+        setTimeout(() => {
+            callback(services.length * 100);
+        })
+    }
+
+    getUserA(100, (user) => {
+        getServicesA(user, (services) => {
+            getServiceCostA(services, (cost) => {
+                console.log(`The service cost is ${cost}`);
+            })
+        })
+    })
+</script>
