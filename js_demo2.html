@@ -32,4 +32,222 @@
             })
         })
     })
+
+    // use promise instead
+    function getUserB(userId) {
+        return new Promise((resolve, reject) => {
+            console.log('Get user from the database');
+            setTimeout(() => {
+                resolve({
+                    userId: userId,
+                    username: 'john'
+                })
+            }, 1000)
+        })
+    }
+
+    function getServicesB(user) {
+        return new Promise((resolve, reject) => {
+            console.log(`Get services of ${user.username} from the API`);
+            setTimeout(() => {
+                resolve(['Email', 'VPN', 'CDN'])
+            }, 2000)
+        })
+    }
+
+    function getServiceCostB(services) {
+        return new Promise((resolve, reject) => {
+            console.log(`Calculate service costs of ${services}`);
+            setTimeout(() => {
+                resolve(services.length * 100)
+            }, 3000)
+        })
+    }
+
+    getUserB(200)
+    .then(getServicesB)
+    .then(getServiceCostB)
+    .then(console.log)
+
+    //
+    async function showServiceCostC() {
+        let user = await getUserB(500);
+        let services = await getServicesB(user);
+        let cost = await getServiceCostB(services);
+        console.log(`The service cost is ${cost}`)
+    }
+
+    showServiceCostC();
+
+    // async luon tra ve promise
+    async function sayHiA() {
+        return 'Hi';
+    }
+   sayHiA().then(console.log)
+
+   async function sayHiB() {
+        return new Promise((resolve, reject) => {
+            resolve('Hi sayHiB')
+        })
+   }
+
+   sayHiB().then(console.log);
+
+    let sayHiC = async function() {
+        return 'Hi sayHiC'
+    }
+    sayHiC().then(console.log)
+
+
+    let sayHiD = async () => 'Hi sayhiD';
+    sayHiD().then(console.log)
+
+    class GreeterA {
+        async sayHiE() {
+            return 'Hi sayHiE';
+        }
+    }
+    new GreeterA().sayHiE().then(console.log)
+
+    async function displayA() {
+        let result = await sayHiE();
+        console.log(result)
+    }
+
+    async function getUserF(userId) {
+        await Promise.reject(new Error('Invalid User Id'))
+    }
+
+    async function getUserG(userId) {
+        throw new Error('Invalid User Id')
+    }
+
+    async function getUserH(userId) {
+        try {
+            const user = await Promise.reject(new Error('Invalid User Id'));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function showServiceCostF() {
+        try {
+            let user = await getUserB(100);
+            let services = await getServicesB(user);
+            let cost = await getServiceCostB(services);
+            console.log(`The service cost is ${cost}`)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // Iterator
+    let ranksA = ['A', 'B', 'C'];
+    for (let i = 0; i < ranksA.length; i++) {
+        console.log(ranksA[i])
+    }
+
+    // ES6
+    for(let rank of ranksA) {
+        console.log(rank)
+    }
+
+    class SequenceA {
+        constructor(start = 0, end = Infinity, interval = 1) {
+            this.start = start;
+            this.end = end;
+            this.interval = interval;
+        }
+
+        [Symbol.iterator]() {
+            let counter = 0;
+            let nextIndex = this.start;
+            return {
+                next: () => {
+                    if (nextIndex <= this.end) {
+                        let result = {value: nextIndex, done: false }
+                        nextIndex += this.interval;
+                        counter++;
+                        return result;
+                    }
+                    return {value: counter, done: true}
+                }
+            }
+        }
+    }
+
+    let evenNumbersA = new SequenceA(2, 10, 2);
+    for (const num of evenNumbersA) {
+        console.log(num)
+    }
+
+    let evenNumbersB = new SequenceA(2, 10, 2);
+    let iteratorB = evenNumbersB[Symbol.iterator]();
+    let resultB = iteratorB.next();
+    while(!resultB.done) {
+        console.log(resultB.value);
+        resultB = iteratorB.next();
+    }
+
+
+    class SequenceB {
+        constructor(start = 0, end = Infinity, interval = 1) {
+            this.start = start;
+            this.end = end;
+            this.interval = interval;
+        }
+        [Symbol.iterator]() {
+            let counter = 0;
+            let nextIndex = this.start;
+            return {
+                next: () => {
+                    if (nextIndex <= this.end) {
+                        let result = { value: nextIndex, done: false}
+                        nextIndex += this.interval
+                        counter++;
+                        return result;
+                    }
+                    return {value: counter, done: true}
+                },
+                return: () => {
+                    console.log('cleaning up ....');
+                    return { value: undefined, done: true}
+                }
+            }
+        }
+    }
+
+    let oddNumbersB = new SequenceB(1, 10, 2);
+    for (const num of oddNumbersB) {
+        if ( num > 7) {
+            break;
+        }
+        console.log(num)
+    }
+
+    // Javascript Generator
+    function fooA() {
+        console.log('I');
+        console.log('cannot');
+        console.log('pause');
+    }
+    fooA()
+
+    // ES6
+    // ham generator la 1 iterator, su dung yield de pause generator va return ve gia tri cua yield
+    function * generateA() {
+        console.log('invoked 1st time');
+        yield 1;
+        console.log('invoked 2nd time');
+        yield 2;
+    }
+    let genA = generateA();
+    console.log(genA)
+
+    let resultA = genA.next();
+    console.log(resultA)
+    let resultBB = genA.next();
+    console.log(resultBB)
+    let resultBC = genA.next();
+    console.log(resultBC)
 </script>
