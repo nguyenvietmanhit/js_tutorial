@@ -250,4 +250,149 @@
     console.log(resultBB)
     let resultBC = genA.next();
     console.log(resultBC)
+
+    for (const g of genA) {
+        console.log(g)
+    }
+
+    function * foreverA() {
+        let index = 0;
+        while (true) {
+            yield index++;
+        }
+    }
+    let fA = foreverA();
+    console.log(fA.next())
+    console.log(fA.next())
+    console.log(fA.next())
+
+
+    class SequenceM {
+        constructor(start = 0, end = Infinity, interval = 1) {
+            this.start = start;
+            this.end = end;
+            this.interval = interval;
+        }
+        [Symbol.iterator]() {
+            let counter = 0;
+            let nextIndex = this.start;
+            return {
+                next: () => {
+                    if (nextIndex < this.end) {
+                        let result = { value: nextIndex, done: false }
+                        nextIndex += this.interval;
+                        counter++;
+                        return result;
+                    }
+                    return { value: counter, done: true }
+                }
+            }
+        }
+    }
+
+    class SequenceN {
+        constructor(start = 0, end = Infinity, interval = 1) {
+            this.start = start;
+            this.end = end;
+            this.interval = interval;
+        }
+        * [Symbol.iterator]() {
+            for (let index = this.start; index <= this.end; index += this.interval) {
+                yield index;
+            }
+        }
+    }
+
+    let oddNumbersN = new SequenceN(1, 10, 2);
+    for (const num of oddNumbersN) {
+        console.log(num)
+    }
+
+    class BagA {
+        constructor() {
+            this.elements = [];
+        }
+        isEmpty() {
+            return this.elements.length === 0;
+        }
+        add(element) {
+            this.elements.push(element);
+        }
+        * [Symbol.iterator]() {
+            for (let element of this.elements) {
+                yield element;
+            }
+        }
+    }
+
+    let bagA = new BagA();
+    bagA.add(1)
+    bagA.add(2)
+    bagA.add(3)
+    for (let e of bagA) {
+        console.log(e)
+    }
+
+    // Yield
+    function * fooB() {
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+
+    let fB = fooB();
+    console.log(fB.next())
+
+
+    function * barA() {
+        yield;
+    }
+    let bA = barA();
+    console.log(bA.next())
+
+    function * generateAA() {
+        let result = yield;
+        console.log(`result is ${result}`)
+    }
+    let gA = generateAA();
+    console.log(gA.next());
+
+    console.log(gA.next(1000))
+
+    function * bazA() {
+        let arr = [yield, yield];
+        console.log(arr)
+    }
+
+    var zA = bazA();
+    console.log(zA.next());
+    console.log(zA.next(1));
+    console.log(zA.next(2));
+
+    function * yieldArrayA() {
+        yield 1;
+        yield [ 20, 30, 40 ];
+    }
+    let yA = yieldArrayA();
+    console.log(yA.next());
+    console.log(yA.next());
+    console.log(yA.next());
+
+    function * yieldArrayElementsA() {
+        yield 1;
+        yield * [ 20, 30, 40 ];
+    }
+    let aA = yieldArrayElementsA();
+    console.log(aA.next());
+    console.log(aA.next());
+    console.log(aA.next());
+    console.log(aA.next());
+
+
+    //for ...of
+    let scoresA = [80, 90, 70];
+    for (let score of scoresA) {
+        score += 5;
+        console.log(score)
+    }
 </script>
