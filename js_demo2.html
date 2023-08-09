@@ -395,4 +395,63 @@
         score += 5;
         console.log(score)
     }
+
+    let scoresB = [80, 90, 100];
+    for (const score of scoresB) {
+        console.log(score)
+    }
+
+    let colorsA = ['Red', 'Green', 'Blue'];
+    console.log(colorsA.entries())
+    for (const [index, color] of colorsA.entries()) {
+        console.log(`${color} is at index ${index}`);
+    }
+
+    const ratingsA = [
+        {user: 'John', score: 3},
+        {user: 'Jane', score: 4},
+        {user: 'David', score: 5},
+        {user: 'Peter', score: 2},
+    ];
+    let sumA = 0;
+    for (const {score} of ratingsA) {
+        sumA += score;
+    }
+    console.log(`Total scores: ${sumA}`);
+
+    let strA = 'abc';
+    for (let c of strA) {
+        console.log(c)
+    }
+
+    let colorsB = new Map();
+    colorsB.set('red', 'red1');
+    colorsB.set('green', 'green1');
+    colorsB.set('blue', 'blue1');
+    for (let color of colorsB) {
+        console.log(color)
+    }
+
+    let numsA = new Set([1, 2, 3]);
+    for (let num of numsA) {
+        console.log(num)
+    }
+    //for in lap cac enumerable properties, con for of lap collection maf co Symbol.iterator
+    let scoresC = [10, 20, 30];
+    scoresC.messages = 'Hi';
+    console.log('for...in');
+    for (let score in scoresC) {
+        console.log(score)
+    }
+
+    console.log('for...of');
+    for (let score of scoresC) {
+        console.log(score)
+    }
+    //nhu vayj for in lap qua cac thuoc tinh, con for of lap qua gia tri
+    // Javascript Asynchronous Iterators
+    class SequenceG {
+
+    }
+
 </script>
