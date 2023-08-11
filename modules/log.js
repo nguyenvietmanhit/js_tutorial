@@ -1,12 +1,10 @@
-///log.js
-// Bat buoc ham hoac class phai co name, ko dung anonymous dc
-export let message = 'Hi logs';
-
+//log.js
+export let message = 'Hi';
 export function getMessage() {
-    return message;
+    return message
 }
 
-export function setMessage(msg) {
+export function setMessage() {
     message = msg;
 }
 

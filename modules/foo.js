@@ -1,2 +1,2 @@
-// foo.js
-export let foo = 123456;
+//foo.js
+export let fooA = 10;

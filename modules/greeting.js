@@ -1,5 +1,5 @@
-export let message = 'Hi';
-
-export function setMessage(msg) {
-    message = msg;
+//greeting.js
+export let messageB = 'Hi greeting.js';
+export function setMessageB(msg) {
+    messageB = msg;
 }

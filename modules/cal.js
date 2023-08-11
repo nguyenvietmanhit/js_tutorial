@@ -1,12 +1,14 @@
 //cal.js
-export let a = 10, b = 20, result = 0;
+export let aA = 10,
+           bA = 20,
+           resultA = 0;
 
-export function sum() {
-    result = a+b;
-    return result;
+export function sumA() {
+    resultA = aA + bA;
+    return resultA;
 }
 
-export function multiply() {
-    result = a*b;
-    return result;
+export function multiplyA() {
+    resultA = aA * bA;
+    return resultA;
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ES6 Modules</title>
+</head>
+<body>
+<button id="showC">Show Dialog</button>
+</body>
+</html>
+
+<script type="module">
+    import {showC} from "./modules/dialog.js";
+    let btnC = document.querySelector('#showC');
+    btnC.addEventListener('click', function() {
+        // Truoc ES2020, import dong nhu sau se loi cu phap
+        // import {showC} from "./modules/dialog.js";
+        showC('Hi import dynamically')
+    })
+</script>
+
+<script type="module">
+    import {messageA} from "./modules/message.js";
+    const h1 = document.createElement('h1');
+    h1.textContent = messageA;
+
+    document.body.appendChild(h1)
+
+    // Khi import thi cac binding la const
+    import {messageB, setMessageB} from "./modules/greeting.js"
+    console.log(messageB)
+
+    setMessageB('Hello greeting.js');
+    console.log(messageB)
+
+    import {fooA} from "./modules/foo.js";
+    console.log(fooA)
+    // fooA = 1212121; // error const
+
+    import {aA, bA, resultA, sumA, multiplyA} from "./modules/cal.js";
+    sumA();
+    console.log(resultA)
+
+    multiplyA();
+    console.log(resultA)
+
+
+    // namespace import, * import all
+    import * as calB from "./modules/cal_1.js";
+
+    console.log(calB)
+
+    // Import chi thuc hien 1 lan duy nhat, neu import nhieu lan cung 1 module thi module dc load vao lan dau tien
+    console.log(calB.aB);
+    console.log(calB.bB);
+    console.log(calB.sumB());
+
+    // import va export phai dc su dung ben ngoai cac cau lenh va ham
+    // if (true) {
+    //     import {testA} from "./modules/test.js";
+    // }
+
+    // Su dung alias
+    import { sumB} from "./modules/math.js";
+    console.log(sumB(1, 3))
+    import {sumB as sumB1} from "./modules/math.js";
+    console.log(sumB1(2, 4))
+
+    // import ma ko binding
+    import './modules/array.js';
+    [1, 2, 3].contain(2)
+
+    //default export
+    // import sort from "./modules/sort.js";
+    // sort([1, 2, 3])
+    // Import default dau tien r moi den binding binh thuong
+    import sort, {heapSort} from "./modules/sort.js";
+    sort([1, 2, 3]);
+    heapSort([2, 3, 4])
+    // rename default
+    import {default as quicksort, heapSort as heapSortA} from './modules/sort.js';
+
+</script>
+
