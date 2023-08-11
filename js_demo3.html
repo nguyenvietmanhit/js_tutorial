@@ -10,13 +10,26 @@
 </html>
 
 <script type="module">
-    import {showC} from "./modules/dialog.js";
+    // import {showC} from "./modules/dialog.js";
+    // let btnC = document.querySelector('#showC');
+    // btnC.addEventListener('click', function() {
+    //     // Truoc ES2020, import dong nhu sau se loi cu phap
+    //     // import {showC} from "./modules/dialog.js";
+    //     showC('Hi import dynamically')
+    // })
+
+    // Ham import dung de load module dynamic, tra ve promise
     let btnC = document.querySelector('#showC');
     btnC.addEventListener('click', function() {
-        // Truoc ES2020, import dong nhu sau se loi cu phap
-        // import {showC} from "./modules/dialog.js";
-        showC('Hi import dynamically')
+        import('./modules/dialog.js')
+        .then((dialog) => {
+            dialog.showC('sadasdasdsa');
+        })
+        .catch(error => {
+            //handle error here
+        })
     })
+
 </script>
 
 <script type="module">
