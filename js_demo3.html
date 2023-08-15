@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>ES6 Modules</title>
-</head>
-<body>
-<button id="showC">Show Dialog</button>
-</body>
-</html>
 
-<script type="module">
-    // import {showC} from "./modules/dialog.js";
-    // let btnC = document.querySelector('#showC');
-    // btnC.addEventListener('click', function() {
-    //     // Truoc ES2020, import dong nhu sau se loi cu phap
-    //     // import {showC} from "./modules/dialog.js";
-    //     showC('Hi import dynamically')
-    // })
-
-    // Ham import dung de load module dynamic, tra ve promise
-    let btnC = document.querySelector('#showC');
-    btnC.addEventListener('click', function() {
-        import('./modules/dialog.js')
-        .then((dialog) => {
-            dialog.showC('sadasdasdsa');
-        })
-        .catch(error => {
-            //handle error here
-        })
-    })
-
-</script>
 
 <script type="module">
     import {messageA} from "./modules/message.js";
@@ -93,5 +61,109 @@
     // rename default
     import {default as quicksort, heapSort as heapSortA} from './modules/sort.js';
 
+
+    // Javascript import dynamically
+
 </script>
 
+
+<script type="module">
+    // import {showC} from "./modules/dialog.js";
+    // let btnC = document.querySelector('#showC');
+    // btnC.addEventListener('click', function() {
+    //     // Truoc ES2020, import dong nhu sau se loi cu phap
+    //     // import {showC} from "./modules/dialog.js";
+    //     showC('Hi import dynamically')
+    // })
+
+    // Ham import dung de load module dynamic, tra ve promise
+    // let btnC = document.querySelector('#showC');
+    // btnC.addEventListener('click', function() {
+    //     import('./modules/dialog.js')
+    //         .then((dialog) => {
+    //             console.log(dialog)
+    //             dialog.showC('sadasdasdsa');
+    //         })
+    //         .catch(error => {
+    //             //handle error here
+    //         })
+    // })
+    // Use async/await
+    let btnD = document.querySelector('#showC');
+    btnD.addEventListener('click', function() {
+        (async () => {
+            try {
+                let dialog = await import('./modules/dialog.js');
+                dialog.showC('btnD alert')
+            } catch (error) {
+                console.log(error)
+            }
+        })();
+    })
+
+    eventHandlerA()
+
+    function eventHandlerA() {
+        import('./modules/sort.js')
+        .then(sort => {
+            console.log(sort)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    if (true) {
+        import('./modules/dialog.js')
+        .then(dialog => {
+            console.log(dialog)
+        })
+        .catch((error, abc) => {
+            console.log(error)
+        })
+    }
+
+    if (true) {
+        // Destructuring
+        (async () => {
+            try {
+                let {showD, hideD } = await import('./modules/destructure.js');
+                // showD('showDDDDDDD');
+                // hideD();
+            } catch (err) {
+                console.log(err)
+            }
+        })()
+
+        // Load multiple modules
+        Promise.all([
+            import('./modules/destructure.js'),
+            import('./modules/foo.js'),
+        ]).then(([destructure, foo]) => {
+            console.log(destructure);
+            console.log(foo);
+        })
+
+        // Accessing the default export
+        import('./modules/test_default.js')
+        .then(module => {
+            module.default('aaaaaaaaaaaaaaaaaaaaa');
+        })
+    }
+
+    // Top level await
+
+</script>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ES6 Modules</title>
+</head>
+<body>
+<button id="showC">Show Dialog</button>
+</body>
+</html>
