@@ -1,0 +1,148 @@
+<script>
+    // Symbol (ES6)
+    // Primitive type JS: number, boolean, null, undefined, string
+    let sA = Symbol('foo');
+    console.log(sA)
+    console.log(typeof sA)
+    console.log(Symbol() === Symbol())
+
+    let firstNameA = Symbol('first name a');
+    let lastNameA = Symbol('last name a');
+    console.log(firstNameA)
+    console.log(firstNameA)
+    console.log(lastNameA)
+
+    // let sB = new Symbol('abc'); // error because symbol is a primitive value
+
+    let ssnA = Symbol.for('ssnA');
+    console.log(ssnA)
+    let citizenIDA = Symbol.for('ssnA');
+    console.log(citizenIDA)
+    console.log(ssnA === citizenIDA)
+    console.log(Symbol.keyFor(citizenIDA))
+
+    let systemIDA = Symbol('sys');
+    console.log(Symbol.keyFor(systemIDA))
+
+    let statusesB = {
+        OPEN: Symbol('Open'),
+        IN_PROGRESS: Symbol('In progress'),
+        COMPLETED: Symbol('Completed'),
+        HOLD: Symbol('On hold'),
+        CANCELED: Symbol('Canceled')
+    }
+
+    let statusB = Symbol('status');
+    let taskA = {
+        [statusB]: statusesB.OPEN,
+        description: 'Learn ES6 Symbol'
+    }
+    console.log(taskA)
+
+    console.log(Object.keys(taskA))
+    console.log(Object.getOwnPropertyNames(taskA))
+    console.log(Object.getOwnPropertySymbols(taskA))
+
+    class StackA {
+
+    }
+    console.log([] instanceof StackA); //false
+
+    class StackB {
+        static [Symbol.hasInstance](obj) {
+            return Array.isArray(obj);
+        }
+    }
+    console.log([] instanceof StackB); //true
+
+    var numbersA = [1, 2, 3];
+    for (let num of numbersA) {
+        console.log(num)
+    }
+    var iteratorA = numbersA[Symbol.iterator]();
+    console.log(iteratorA)
+    console.log(iteratorA.next());
+    console.log(iteratorA.next());
+    console.log(iteratorA.next());
+    console.log(iteratorA.next());
+
+    class ListA {
+        constructor() {
+            this.elements = [];
+        }
+
+        add(element) {
+            this.elements.push(element);
+            return this;
+        }
+
+        *[Symbol.iterator]() {
+            for (let element of this.elements) {
+                yield element;
+            }
+        }
+    }
+
+    let charsA = new ListA();
+    charsA.add('A').add('B').add('C');
+    console.log(charsA)
+
+    for (let c of charsA) {
+        console.log(c)
+    }
+
+    let oddA = [1, 3];
+    let evenA = [2, 4];
+    let allA = oddA.concat(evenA, [5, 6]);
+    console.log(oddA)
+    console.log(allA)
+
+    let extrasA = allA.concat(999);
+    console.log(extrasA)
+
+    let listB = {
+        0: 'Javascript',
+        1: 'Symbol',
+        length: 2
+    };
+    let messageB  = ['Learning'].concat(listB);
+    console.log(messageB)
+
+    let listC = {
+        0: 'Javascript',
+        1: 'Symbol',
+        length: 2,
+        [Symbol.isConcatSpreadable]: true
+    };
+    let messageC = ['Learning'].concat(listC);
+    console.log(messageC);
+
+    function MoneyA(amount, currency) {
+        this.amount = amount;
+        this.currency = currency;
+    }
+    MoneyA.prototype[Symbol.toPrimitive] = function(hint) {
+        console.log(hint)
+        var result;
+        switch (hint) {
+            case 'string':
+                result = this.amount + this.currency;
+                break;
+            case 'number':
+                result = this.amount;
+                break;
+            case 'default':
+                result = this.amount + this.currency;
+                break;
+        }
+        return result;
+    }
+    var priceA = new MoneyA(799, 'USD');
+    console.log('Price is ' + priceA);
+    console.log(+priceA + 1);
+    console.log(String(priceA))
+
+    // Map Object
+
+
+</script>
