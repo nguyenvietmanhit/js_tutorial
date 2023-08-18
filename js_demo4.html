@@ -46,6 +46,7 @@
     class StackA {
 
     }
+
     console.log([] instanceof StackA); //false
 
     class StackB {
@@ -53,6 +54,7 @@
             return Array.isArray(obj);
         }
     }
+
     console.log([] instanceof StackB); //true
 
     var numbersA = [1, 2, 3];
@@ -76,7 +78,7 @@
             return this;
         }
 
-        *[Symbol.iterator]() {
+        * [Symbol.iterator]() {
             for (let element of this.elements) {
                 yield element;
             }
@@ -105,7 +107,7 @@
         1: 'Symbol',
         length: 2
     };
-    let messageB  = ['Learning'].concat(listB);
+    let messageB = ['Learning'].concat(listB);
     console.log(messageB)
 
     let listC = {
@@ -121,7 +123,8 @@
         this.amount = amount;
         this.currency = currency;
     }
-    MoneyA.prototype[Symbol.toPrimitive] = function(hint) {
+
+    MoneyA.prototype[Symbol.toPrimitive] = function (hint) {
         console.log(hint)
         var result;
         switch (hint) {
@@ -150,7 +153,7 @@
     let userRolesA = new Map();
     console.log(userRolesA)
     console.log(userRolesA.size)
-    console.log(typeof(userRolesA));
+    console.log(typeof (userRolesA));
     console.log(userRolesA instanceof Map)
 
     userRolesA.set(johnA, 'admin').set(lilyA, 'editor').set(peterA, 'subscriber');
@@ -237,7 +240,7 @@
         [peterG, 'subscriber']
     ]);
 
-    userRolesG.forEach(function(role, user) {
+    userRolesG.forEach(function (role, user) {
         console.log(`${user.name}: ${role}`)
     })
 
@@ -319,5 +322,78 @@
     if (equipmentC.has(serverC)) {
         console.log('We have a server');
     }
+
+    // try ... catch: mac dinh khi phat hien loi, JS engine se dung thuc thi tai doan bi loi, try catch giup xu ly loi va van tip tuc thuc thi
+    // let resultD = addD(10, 20);
+    // console.log(resultD);
+    // console.log('Bye')
+
+    try {
+        let resultE = addE(10, 20);
+        console.log(resultE)
+    } catch (e) {
+        console.log('aaaaaaaaaaaa')
+        console.log({name: e.name, message: e.message})
+    }
+    console.log('ByeE');
+
+    const addF = (x, y) => x + y;
+    try {
+        let resultF = addF(10, 20);
+        console.log(resultF);
+    } catch (e) {
+        console.log({name: e.name, message: e.message});
+    }
+    console.log('ByeFFFFFF')
+
+    const isValidJSONA = (str) => {
+        try {
+            var aaa = JSON.parse(str);
+            console.log(aaa)
+            return true;
+        } catch {
+            return false;
+        }
+    }
+    let validA = isValidJSONA(`{"language": "Javascript"}`);
+    // var ccc = JSON.parse('sadsads'); //gay ra exception lam dung chuong trinh, nen thuong de vao try catch
+    console.log(validA)
+    console.log('aaaaaaaaaaaa')
+
+    let resultH = 0;
+    try {
+        resultH = addH(10, 20);
+    } catch (e) {
+        console.log(e.message);
+    } finally {
+        console.log({resultH})
+    }
+
+    const addI = (x, y) => x + y;
+    let resultI = 0;
+    try {
+        resultI = addI(10, 20);
+    } catch (e) {
+        console.log(e.message)
+    } finally {
+        console.log({resultI})
+    }
+
+    function fnA() {
+        try {
+            return 1;
+        } catch {
+            return 2;
+        } finally {
+            return 3;
+            console.log('3333333333333333')
+        }
+    }
+
+    // Trong try catch finally thi return se bi bo qua o try va catch khi ma finally co return
+    console.log(fnA()); //3
+
+
+    // Throw
 
 </script>
