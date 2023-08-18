@@ -142,7 +142,182 @@
     console.log(+priceA + 1);
     console.log(String(priceA))
 
-    // Map Object
+    // Map Object: giai quyet van de 1 obj luon co 1 key mac dinh la prototype, 1 key cua obj phai la string hoac symbol, va obj ko co thuoc tinh quy dinh size
+    // let mapA = new Map
+    let johnA = {name: 'John Doe'},
+        lilyA = {name: 'Lily Bush'},
+        peterA = {name: 'Peter Drucker'};
+    let userRolesA = new Map();
+    console.log(userRolesA)
+    console.log(userRolesA.size)
+    console.log(typeof(userRolesA));
+    console.log(userRolesA instanceof Map)
 
+    userRolesA.set(johnA, 'admin').set(lilyA, 'editor').set(peterA, 'subscriber');
+    console.log(userRolesA)
+
+    let userRolesB = new Map([
+        [johnA, 'admin'],
+        [lilyA, 'editor'],
+        [peterA, 'subscriber'],
+    ])
+    console.log(userRolesB)
+
+    console.log(userRolesA.get(johnA))
+    console.log(userRolesA.get('dsadssd'))
+
+    console.log(userRolesA.has(johnA))
+    console.log(userRolesA.has('abc'))
+    console.log(userRolesA.size)
+
+    console.log(userRolesA.keys())
+
+
+    let johnC = {name: 'John Doe'},
+        lilyC = {name: 'Lily Bush'},
+        peterC = {name: 'Peter Drucker'};
+    let userRolesC = new Map([
+        [johnC, 'admin'],
+        [lilyC, 'editor'],
+        [peterC, 'subscriber']
+    ])
+
+    for (const user of userRolesC.keys()) {
+        console.log(user.name)
+    }
+
+    let johnD = {name: 'John Doe'},
+        lilyD = {name: 'Lily Bush'},
+        peterD = {name: 'Peter Drucker'};
+    let userRolesD = new Map([
+        [johnD, 'admin'],
+        [lilyD, 'editor'],
+        [peterD, 'subscriber']
+    ]);
+    for (let role of userRolesD.values()) {
+        console.log(role)
+    }
+
+
+    let johnE = {name: 'John Doe'},
+        lilyE = {name: 'Lily Bush'},
+        peterE = {name: 'Peter Drucker'}
+    let userRolesE = new Map([
+        [johnE, 'admin'],
+        [lilyE, 'editor'],
+        [peterD, 'subscriber']
+    ])
+
+    console.log(userRolesE.entries())
+    for (const role of userRolesE.entries()) {
+        console.log(`Username: ${role[0].name} with role ${role[1]}`)
+    }
+
+    let johnF = {name: 'John Doe'},
+        lilyF = {name: 'Lily Bush'},
+        peterF = {name: 'Peter Drucker'}
+
+    let userRolesF = new Map([
+        [johnF, 'admin'],
+        [lilyF, 'editor'],
+        [peterF, 'subscriber']
+    ]);
+    for (let [user, role] of userRolesF.entries()) {
+        console.log(`${user.name}: ${role}`)
+    }
+    // for..of la vong lap cho cac doi tuong iterator
+
+    // forEach
+    let johnG = {name: 'John Doe'},
+        lilyG = {name: 'Lily Bush'},
+        peterG = {name: 'Peter Drucker'};
+    let userRolesG = new Map([
+        [johnG, 'admin'],
+        [lilyG, 'editor'],
+        [peterG, 'subscriber']
+    ]);
+
+    userRolesG.forEach(function(role, user) {
+        console.log(`${user.name}: ${role}`)
+    })
+
+    var keysA = [...userRolesA.keys()];
+    console.log(keysA)
+    var rolesA = [...userRolesA.values()];
+    console.log(rolesA)
+    rolesA.forEach((role) => {
+        console.log(`Role: ${role}`)
+    })
+
+    console.log(userRolesA)
+    console.log(userRolesA.size)
+    userRolesA.clear();
+    console.log(userRolesA)
+    console.log(userRolesA.size)
+
+    // WeakMap tuong tu nhu Map ngoai tru  key bat buoc phai la obj, WeakMap ko the lap, ko the xoa tat ca element cung 1 luc, ko the check dc size
+    // cua WeakMap
+    var weakMap = new WeakMap([
+        [{name: 'abc1'}, {age: 123}],
+        [{name: 'abc1'}, {age: 234}],
+        [{name: 'abc2'}, {age: 345}],
+        // ['aaaa', {age: 345}],
+    ])
+    weakMap.delete({name: 'abc'});
+    console.log(weakMap)
+    console.log(weakMap.size)
+
+    // for (const a of weakMap) {
+    //     console.log(a)
+    // }
+
+    // Set object: luu cac gia tri unique, key luon trung value
+    let setObjectA = new Set();
+    console.log(setObjectA)
+
+    let charsB = new Set(['a', 'a', 'b', 'c', 'c']);
+    console.log(charsB)
+    console.log(typeof charsB)
+
+    let resultB = charsB instanceof Set;
+    console.log(resultB)
+    console.log(charsB.size);
+
+    charsB.add('d').add('e').add('f')
+    console.log(charsB)
+    charsB.add('a')
+    console.log(charsB)
+
+    let existB = charsB.has('z');
+    console.log(existB)
+
+    charsB.delete('a');
+    // charsB.clear();
+    console.log(charsB)
+
+    let rolesC = new Set();
+    rolesC.add('admin').add('editor').add('subscriber');
+
+    for (let role of rolesC) {
+        console.log(role)
+    }
+
+    for (let [key, value] of rolesC.entries()) {
+        console.log(key)
+        console.log(value)
+    }
+
+    rolesC.forEach(role => {
+        console.log(role.toUpperCase())
+    })
+
+    //WeakSet: giong Set nhung chi chua obj, WeakSet/WeakMap co co che auto garbage, ko co size, it khi su dung trong
+    //thuc te
+    let computerC = {type: 'laptop'};
+    let serverC = {type: 'server'};
+    let equipmentC = new WeakSet([computerC, serverC]);
+    if (equipmentC.has(serverC)) {
+        console.log('We have a server');
+    }
 
 </script>
