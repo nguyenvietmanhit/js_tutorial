@@ -394,6 +394,78 @@
     console.log(fnA()); //3
 
 
-    // Throw
+    // Throw: neu gap catch nao thi show ra loi, neu ko co catch nao thi dung ngay lap tuc
+    function addG(x, y) {
+        if (typeof x !== 'number') {
+            throw 'The first argument must be a number';
+            // throw {name: 'sadsadsa'};
+        }
+        if(typeof y !== 'number') {
+            throw 'The second argument must be a number';
+        }
+        return x + y;
+    }
 
+    // const resultG = addG('a', 10); // do throw ko co try catch nen se stop immediate
+    // console.log(resultG)
+
+    try {
+        const resultG = addG('a', 10);
+        console.log(resultG);
+    } catch (e) {
+        console.log(e)
+    }
+
+    console.log('aaaaaaa')
+
+
+    function addH(x, y) {
+        if (typeof x !== 'number') {
+            throw new Error('The first argument must be a number');
+        }
+        if (typeof y !== 'number') {
+            throw new Error('The second argument must be a number');
+        }
+        return x + y;
+    }
+
+    try {
+        const resultH = addH('a', 10);
+        console.log(resultH)
+    } catch (e) {
+        console.log(e.name, ':', e.message)
+    }
+
+
+    // user-defined exception
+    class NumberErrorI extends Error {
+        constructor(value) {
+            super(`"${value}" is not a valid number`);
+            this.name = 'InvalidNumber';
+        }
+    }
+
+    function addJ(x, y) {
+        if (typeof x !== 'number') {
+            throw new NumberErrorI(x);
+        }
+        if (typeof y !== 'number') {
+            throw new NumberErrorI(y);
+        }
+        return x + y;
+    }
+
+    try {
+        const resultI = addJ('a', 10) ;
+        console.log(resultI)
+    } catch (e) {
+        console.log(e.name, ':', e.message);
+    }
+
+     // Tu ES2019, co the bo qua catch bind nhu sau
+    try {
+
+    } catch {
+
+    }
 </script>
