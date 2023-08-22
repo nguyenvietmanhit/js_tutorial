@@ -468,4 +468,129 @@
     } catch {
 
     }
+
+    // function test1() {
+    //     var aaa = '5';
+    // }
+    // console.log(aaa)
+
+    // let Keyword
+    // block dc the hien boi {}
+    let xA = 10;
+    if (xA == 10) {
+        let xA = 20;
+        console.log(xA);// 20
+    }
+    console.log(xA); //10
+    // Mac dinh dung var se set cho window
+    var aA = 10;
+    console.log(window.aA)
+
+    let bA = 20;
+    console.log(window.bA); // let ko them vao window
+
+    // for (var iA = 0; iA < 5; iA++) {
+    //     setTimeout(() => {
+    //         console.log(iA)
+    //     }, 1000)
+    // }
+    // //ES5 fix su dung IIFE Immediately Invoked Function Expression
+    // for (var iB = 0; iB < 5; iB++) {
+    //     (j => {
+    //         setTimeout(() => {
+    //             console.log(j)
+    //         }, 1000)
+    //     })(iB);
+    // }
+    //ES6 fix dung let
+    for (let iC = 0; iC < 5; iC++) {
+        setTimeout(() => console.log(iC), 1000)
+    }
+
+    // var khai bao lai bien thoai mai
+    var counterA = 0;
+    var counterA;
+    console.log(counterA)
+
+    // let thi ko the khai bao lai
+    let counterB = 0;
+    // let counterB; // error
+    console.log(counterB)
+
+    //Hoisting: thuc te JS van hoist voi let, nhung se JS se ko khoi tao bien nen khi truy cap se bi ReferenceError
+    {
+        //console.log(counterC); //ReferenceError
+        //let counterC = 10;
+    }
+
+    // TDZ Temporal Death Zone: laf thoi gian tinh tu luc bat dau block den luc bien dc xu ly
+    // giup ngan ngua viec truy cap 1 bien ma chua khoi tao no
+    {
+        let logA = function() {
+            console.log(messageA)
+        }
+
+        let messageA = 'Hello';
+        logA();
+    }
+
+    {
+        console.log(typeof myVarBB);
+        // console.log(typeof messageBB); // ReferenceError do chua khai bao ma da su dung
+        let messageBB;
+    }
+
+    // const keyword: ko the gan lai gia tri sau khi da khai bao
+    let a1 = 10;
+    a1 = 20;
+    a1 = a1 + 5;
+    console.log(a1);
+
+    const RATEA = 0.1;
+    //RATEA = 0.2; //TypeError do gan lai const
+    // const REDA; //SyntaxError do khai bao ma ko khoi taoj
+
+    const personF = {age: 20};
+    personF.age = 30; // ok
+    console.log(personF)
+
+    //personF = 111; //error do gan laij
+
+    // const personG = Object.freeze({age: 50});
+    // console.log(personG)
+    // personG.age = 100;
+    // console.log(personG)
+
+    const companyA = Object.freeze({
+        name: 'ABC corp',
+        address: {
+            street: 'North 1st street',
+            city: 'San Jose',
+            state: 'CA',
+            zipcode: 95134
+        }
+    })
+    companyA.address.country = 'USA'
+    console.log(companyA)
+
+    const colorsG = ['red'];
+    colorsG.push('green');
+    console.log(colorsG);
+
+    colorsG.pop()
+    colorsG.pop()
+
+    // colorsG = []
+    let scoresG = [75, 80,95];
+    //for of dung cho iterable object nhu array map va set
+    for (let score of scoresG) {
+        console.log(score)
+    }
+
+    for (const score of scoresG) {
+        console.log(score)
+    }
+
+    // for (const i = 0; i < scoresG.length; i++) {
+    // }
 </script>
