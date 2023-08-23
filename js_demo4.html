@@ -593,4 +593,106 @@
 
     // for (const i = 0; i < scoresG.length; i++) {
     // }
+
+    // var vs let
+    var counterC; // global
+    function increaseD() {
+        var counterD = 10; //local
+    }
+
+    for (var i = 0; i < 5; i++) {
+        console.log("Inside the loop: " + i);
+    }
+    console.log("Outside the loop: " + i)
+
+
+    for (let j = 0; j < 5; j++) {
+        console.log("Inside the loop: " + j);
+    }
+    // console.log("Outside the loop: " + j); //Reference Error
+
+    // Proxy
+    // let proxyA = new Proxy()
+    const userB = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'abc@gmail.com'
+    }
+    const handlerB = {
+        get(target, property) {
+            console.log(`Property ${property} has been read`)
+            return target[property]
+        }
+    }
+
+    const proxyUserB = new Proxy(userB, handlerB);
+    console.log(proxyUserB)
+    console.log(proxyUserB.firstName)
+    console.log(proxyUserB.lastName)
+
+
+    const userC = {
+        firstName: 'John',
+        lastName: 'Doe'
+    }
+    const handlerC = {
+        // traps get chay moi khi dung proxy lay gia tri cho props cua doi tuong
+        get(target, property) {
+            return property === 'fullName' ?
+                `${target.firstName} ${target.lastName}` :
+                target[property]
+        }
+    }
+
+    const proxyUserC = new Proxy(userC, handlerC);
+    console.log(proxyUserC.fullName)
+
+
+    const userD = {
+        firstName: 'John',
+        lsatName: 'Doe',
+        age: 20
+    }
+
+    const handlerD = {
+        // traps set chay moi khi dung proxy set gia tri cho props cua doi tuong
+        set(target, property, value) {
+            if (property === 'age') {
+                if (typeof value !== 'number') {
+                    throw new Error('Age must be a number');
+                }
+                if (value < 18) {
+                    throw new Error('The user must be 18 or older')
+                }
+            }
+            target[property] = value
+        }
+    }
+    try {
+        const proxyUserD = new Proxy(userD, handlerD)
+        proxyUserD.age = '16'
+    } catch(e){
+        console.log(e)
+    }
+    console.log('dsads')
+
+
+    const userE = {
+        firstName: 'Manh',
+        lastName: 'Nguyen Viet'
+    }
+
+    const getFullNameE = function(user) {
+        return `${user.firstName} ${user.lastName}`
+    }
+
+    const getFullNameProxyE = new Proxy(getFullNameE, {
+        apply(target, thisArg, args) {
+            return target(...args).toUpperCase();
+        }
+    })
+
+    console.log(getFullNameProxyE(userE))
+
+    // Reflection
 </script>
