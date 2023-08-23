@@ -695,4 +695,67 @@
     console.log(getFullNameProxyE(userE))
 
     // Reflection
+    class PersonM {
+        constructor(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName
+        }
+        get fullName() {
+            return `${this.firstName} ${this.lastName}`;
+        }
+    }
+
+    let argsM = ['MAnh', 'Nguyen Viet'];
+    let johnM = Reflect.construct(PersonM, argsM);
+    console.log(johnM)
+
+    let resultN = Function.prototype.apply.call(Math.max, Math, [10, 20, 30]);
+    console.log(resultN)
+    let resultO = Reflect.apply(Math.max, Math, [10, 20, 30])
+    console.log(resultO)
+
+    // JS Execution Context
+    // JS Call Stack: LIFO
+
+    function addP(a, b) {
+        return a+b;
+    }
+    function averageP(a,b) {
+        return addP(a,b) / 2;
+    }
+
+    let xP = averageP(10, 20)
+
+    // stack overflow do vuot qua kich thuoc stack
+    // function fnP() {
+    //     fnP();
+    // }
+
+    // fnP();
+
+    // Event loop
+    function taskP(message) {
+        let n = 10000000000;
+        while(n > 0) {
+            n--;
+        }
+        console.log(message)
+    }
+    // console.log('Start script...');
+    // taskP('Call an API');
+    // console.log('Done!');
+
+    // Khi co async, ham async se dc Event loop chuyen vao Callback Queue, va cho den khi Call stack rong thi moi thuc thi Callback queue
+    console.log('Start script...');
+    setTimeout(() => {
+        taskP('Download a file');
+    }, 1000);
+    console.log('Done!');
+
+
+    console.log('Hi');
+    setTimeout(() => {
+        console.log('Execute immediately');
+    }, 0);
+    console.log('Bye')
 </script>
