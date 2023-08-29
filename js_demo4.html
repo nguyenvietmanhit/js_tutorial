@@ -892,4 +892,80 @@
     var distanceA = 19.006;
     console.log(distanceA.toFixed(2));
     console.log(typeof distanceA.toFixed(2));
+
+    var xNN = 10, yNN = 100, zNN = 1000;
+    console.log(xNN.toExponential())
+    console.log(yNN.toExponential())
+    console.log(zNN.toExponential())
+
+    let xMM = 9.12345;
+    console.log(xMM.toPrecision())
+    console.log(xMM.toPrecision(1))
+    console.log(xMM.toPrecision(2))
+    console.log(xMM.toPrecision(3))
+
+    // String type
+    let strAA = new String('Javascript String Type');
+    console.log(strAA.length)
+    console.log(strAA.valueOf());
+    console.log(strAA.toString())
+    console.log(strAA.toLocaleString());
+
+    console.log(strAA[0])
+    // Truoc ES5:
+    console.log(strAA.charAt(0));
+
+    console.log('literal string'.toUpperCase());
+
+    // Useful method String
+    let firstNameAA = 'John';
+    let fullNameAA = firstNameAA.concat(' ', 'Doe')
+    console.log(fullNameAA)
+    console.log(firstNameAA)
+
+    let strNN = 'Javascript String';
+    console.log(strNN.substr(0, 10));
+    console.log(strNN.substr(11, 6));
+    console.log(strNN.substr(11));
+
+    let strMM = 'This is a string';
+    console.log(strMM.indexOf('is')); //xua hien dau tien
+    console.log(strMM.lastIndexOf('is')); //xuat hien cuoi cung
+
+    let rawStringA = '  Hi   ';
+    let strippedStringA = rawStringA.trim();
+    console.log(strippedStringA)
+    console.log(rawStringA.trimStart())
+    console.log(rawStringA.trimEnd())
+
+    let greetingAA = 'Hello';
+    console.log(greetingAA.toLowerCase());
+    console.log(greetingAA.toUpperCase());
+    // Dung them locale cho an toan vi nhieu ngon ngu co kieu chuyen doi khac nhau
+    console.log(greetingAA.toLocaleLowerCase());
+    console.log(greetingAA.toLocaleUpperCase());
+
+    //
+    console.log('A'.localeCompare('B'));
+    console.log('B'.localeCompare('B'));
+    console.log('C'.localeCompare('B'));
+
+    let expressionA = '1 + 2 = 3';
+    let matchesA = expressionA.match(/\d+/);
+    console.log(matchesA)
+
+    let expressionB = '1 + 2 = 3';
+    let matchesB = expressionB.match(/\d+/g);
+    console.log(matchesB)
+
+
+    let str12 = "This is a test of search()";
+    let pos12 = str12.search('/of/');
+    console.log(pos12)
+
+    let str22 = 'the baby kicks the ball';
+    let newStr22 = str22.replace(/the/g, "a");
+
+    console.log(newStr22)
+    console.log(str22)
 </script>
