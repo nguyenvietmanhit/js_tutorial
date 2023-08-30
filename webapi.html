@@ -3,4 +3,138 @@
     // quan ly sesion
     // luu tru thong tin ca nhan hoa
     // tracking dung cho ads
+
+    // Get
+    const strA = document.cookie;
+    // console.log(strA)
+
+    // Set
+    document.cookie = "username=admin; expires=Tue, 12-September-2023 12:10:00 GMT; path=/; domain=localhost; secure";
+    // Nen ma hoa cookie trc khi set
+    document.cookie = `${encodeURIComponent("username123  ")}=${encodeURIComponent('sdadsha  j  dh  ajk')}`;
+
+    // Remove cookie
+    document.cookie = "username=admin; expires=Tue, 12-December-2011 12:10:00 GMT; path=/; domain=localhost; secure";
+
+    class CookieA {
+        static get(name) {
+            const cookieName = `${encodeURIComponent(name)}=`;
+            const cookie = document.cookie;
+            let value = null;
+
+            const startIndex = cookie.indexOf(cookieName);
+            if (startIndex > -1) {
+                let endIndex = cookie.indexOf(';', startIndex);
+                if (endIndex == -1) {
+                    endIndex = cookie.length;
+                }
+                value = decodeURIComponent(cookie.substring(startIndex + name.length, endIndex))
+                value = value.replaceAll('=', '');
+
+            }
+            return value;
+        }
+
+        static set(name, value, expires, path, domain, secure) {
+            let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+            if (expires instanceof  Date) {
+                cookieText += `; expires=${expires.toGMTString()}`;
+            }
+            if (path) cookieText += `; path=${path}`;
+            if (domain) cookieText += `; domain=${domain}`;
+            if (secure) cookieText += `; secure`;
+            document.cookie = cookieText;
+        }
+
+        static remove(name, path, domain, secure) {
+            CookieA.set(name, '', new Date(0), path, domain, secure)
+        }
+    }
+
+    CookieA.set('usernameA', 'adminA')
+    CookieA.set('username  A', 'admin  A')
+
+    console.log(CookieA.get('usernameA'))
+
+    CookieA.remove('usernameA')
+
+
+    // Storage type
+    // localStorage luu tru data not expire, unique voi tungf url va post, chi luu tru string
+
+    // - localStorage vs cookie:
+    // localStorage ko gui data toi server nhu cookie
+    // localStorage max luu tru = 5Mb con cookie = 4Kb
+    // localStorage chi dc quan ly ben client. cookie thi ca server va client
+    console.log(window.localStorage)
+    console.log(localStorage instanceof Storage)
+
+    window.localStorage.setItem('themeA', 'dark')
+
+    console.log(window.localStorage.length)
+
+    console.log(localStorage.getItem('themeA'))
+
+    localStorage.removeItem('themeA');
+    console.log(window.localStorage.length)
+
+
+    localStorage.setItem('themeB', 'lightB');
+    localStorage.setItem('backgroundColor', 'whiteB');
+    localStorage.setItem('colorB', '#111B');
+
+    let keysB = Object.keys(localStorage);
+    console.log(keysB)
+
+    for (let key of keysB) {
+        console.log(`${key}: ${localStorage.getItem(key)}`)
+    }
+
+    const settingsC = {
+        backgroundColorC: '#fff',
+        colorC: '#111',
+        themeC: 'light'
+    }
+
+    // Do Storage chi luu dc string, nen not string can chuyen ve string bang kieu JSON
+    localStorage.setItem('settingsC', JSON.stringify(settingsC))
+
+    console.log(JSON.parse(localStorage.getItem('settingsC')))
+
+    // su kien storage: xay ra khi set, remove, clear storage
+
+    addEventListener('storage', function(e) {
+        console.log(`The value of the ${e.key} changed for the ${e.domain}`)
+    })
+
+    //- sessionStorage:
+    // bi xoa khi close browser
+    // mo tab hoac window se tao sessionStorage moi, data trong tung tab cung url ko the truy cap dc cua nhau
+    // seperate theo giao thuc http va https
+    console.log(sessionStorage instanceof Storage)
+
+    sessionStorage.setItem('modeA', 'darkA')
+    sessionStorage.setItem('modeA111', 'darkA111')
+
+    const modeA = sessionStorage.getItem('modeA');
+    console.log(modeA)
+
+    // sessionStorage.removeItem('modeA')
+
+    let keysC = Object.keys(sessionStorage);
+    for (let key of keysC) {
+        console.log(`${key}: ${sessionStorage.getItem(key)}`);
+    }
+
+    // sessionStorage.clear()
+
+
+    //indexedDB: luu tru du lieu online va offline cho ung dung web dang key-value, phu hop voi ung luu tru so luong lon data va ko can connect internet
+    // - luu tru cap key-value
+    // - Co transaction, dam bao data dc toan ven khi user mo app trong 2 tab/window
+    // - Hau het la cac thao tac async
+    // - La NoSQL system, ko su dung sql de truy van du lieuj, su dung query de tra ve 1 cursor va su dung cursor nay de lap tren result set
+    // - La same-origin: 1 origin la URL cung domain, protocol va port. 1 origin co DB cua no, va ko the truy cap DB tu origin khac
+    // VD: http://localhost co domain=localhost,protocol=http,port=80
+    // Neen http://localhost/abc.php se cung origin vi chung domain,protocol,port
 </script>
