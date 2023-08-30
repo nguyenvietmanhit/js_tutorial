@@ -33,6 +33,12 @@
         })
 
         getContactById(db, 1);
+
+        getContactByEmail(db, "manhnv33@gmail.com"	);
+
+        getAllContacts(db);
+
+        deleteContact(db, 1)
     }
 
     // trigger khi version DB thay doi
@@ -86,6 +92,63 @@
 
         txn.oncomplete = () => {
             db.close();
+        }
+    }
+
+    function getContactByEmail(db, email) {
+        const txn = db.transaction('Contacts', "readonly");
+        const store = txn.objectStore('Contacts');
+        const index = store.index('email');
+        let query = index.get(email);
+
+        query.onsuccess = event => {
+            console.log(query)
+            console.table(query.result)
+        }
+
+        query.onerror = event => {
+            console.log(event.target.errorCode)
+        }
+
+        txn.oncomplete = () => {
+            db.close();
+        }
+    }
+
+    function getAllContacts(db) {
+        const txn = db.transaction('Contacts', "readonly");
+        const objectStore = txn.objectStore('Contacts');
+
+        objectStore.openCursor().onsuccess = event => {
+            let cursor = event.target.result;
+            console.log(cursor)
+            if (cursor) {
+                let contact = cursor.value;
+                console.log(contact);
+                cursor.continue();
+            }
+        }
+
+        txn.oncomplete = () => {
+            db.close();
+        }
+    }
+
+    function deleteContact(db, id) {
+        const txn = db.transaction('Contacts', 'readwrite');
+        const store = txn.objectStore('Contacts');
+        let query = store.delete(id);
+
+        query.onsuccess = event => {
+            console.log(event)
+        }
+
+        query.onerror = event => {
+            console.log(event.target.errorCode);
+        }
+
+        txn.oncomplete = () => {
+            db.close()
         }
     }
 

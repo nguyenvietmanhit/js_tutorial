@@ -137,4 +137,75 @@
     // - La same-origin: 1 origin la URL cung domain, protocol va port. 1 origin co DB cua no, va ko the truy cap DB tu origin khac
     // VD: http://localhost co domain=localhost,protocol=http,port=80
     // Neen http://localhost/abc.php se cung origin vi chung domain,protocol,port
+
+    // indexeddb, tham khao app indexeddb
+
+    // Form API
+</script>
+
+
+<form id="subscription">
+    <h1>Subscribe</h1>
+    <div id="message"></div>
+    <div class="field">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your fullname" required />
+        <small></small>
+    </div>
+    <div class="field">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="Enter your email address" required />
+        <small></small>
+    </div>
+    <div class="field">
+        <button type="submit" class="full" id="submit">Subscribe</button>
+    </div>
+</form>
+
+<script>
+    // FormData API
+    const form = document.querySelector('#subscription')
+    const btn = document.querySelector('#submit');
+    btn.addEventListener('click', e => {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        // append noi them chu ko override nhu set khi trung key
+        formData.append('append_name', 'append value111')
+        formData.append('append_name', 'append value222')
+        formData.append('email', 'email value')
+
+        // delete xoa theo key
+        // formData.delete('append_name')
+
+        // get tra ve gia tri dau tien
+        const email = formData.get('email')
+        console.log(email)
+
+        // getAll tra ve mang
+        const emailAll = formData.getAll('email');
+        console.log(emailAll)
+
+        // ktra theo key
+        const isEmailField = formData.has('email');
+        console.log(isEmailField)
+
+        // keys lay ra tat ca key cua form, tra ve iterator
+        const keys = formData.keys();
+        console.log([...keys]); //do tra ve iterator nen can dung spread operator de lay du lieu
+
+        // set override neu trung key
+        formData.set('email', 'aaaaaaaaaaaaaaa');
+        formData.set('new_attr', 'new_attr value');
+
+        // values lay tat ca value, tra ve iterator nen can dung spread operator de lay du lieu
+        const valuesAbc = formData.values();
+        console.log([...valuesAbc])
+
+
+        // entries tra ve iterator nen can dung spread operator de lay cac phan tu
+        const values = [...formData.entries()];
+        console.log(values)
+    })
+
 </script>
