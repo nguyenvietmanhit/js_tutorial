@@ -1,4 +1,112 @@
 <script>
     // BOM: Browser Object Model la core cua Javascript, cung cap cac obj cua trinh duyet
+    // window
+    const widthA = window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth;
 
+    const heightA = window.innerHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight
+    console.log(widthA, heightA)
+
+    // let urlA = 'http://localhost/js_tutorial/bom.html';
+    // let jsWindowA = window.open(urlA, 'About')
+    // // neu chi dinh width height se ko mo trong tab moi
+    // let urlB = 'http://localhost/js_tutorial/bom.html', featuresB = 'height=600,width=800';
+    // let jsWindowB = window.open(urlB, 'about', featuresB)
+    //
+    // let jsWindowC = window.open(
+    //     'http://localhost/js_tutorial/readme.txt',
+    //     'about',
+    //     'height=600,width=800'
+    // )
+    // setTimeout(() => {
+    //     // jsWindowC.resizeTo(600, 300)
+    //     jsWindowC.moveTo(600, 300)
+    // }, 1000)
+
+    // - alert: la ham dong bo
+    // setTimeout(() => {
+    //     alert('3 seconds has been passed!')
+    // }, 3000);
+
+    // console.log('dsads')
+
+    // - confirm
+    // - prompt
+    // - setTimeout: la ham ko dong bo, cho trong Callstack empty thi moi dc goi vao, lien quan den Event Loop va Callback Queue
+
+
+</script>
+<p id="flashtext">JavScript setInterval Demo</p>
+<button onclick="start()">Start</button>
+<button onclick="stop()">Stop</button>
+
+<script>
+    // - setInterval: lap di lap lai sau  ms, la ham ko dong bo
+    let intervalID;
+    function toggleColor() {
+        let e = document.getElementById('flashtext');
+        e.style.color = e.style.color === 'red' ? 'blue' : 'red';
+        console.log('test')
+    }
+
+    function stop() {
+        clearInterval(intervalID)
+    }
+
+    function start() {
+        intervalID = setInterval(toggleColor, 1000)
+        // console.log(intervalID)
+    }
+
+    console.log('bbbbbbbbbbbbb')
+
+    // - location: mo ta url hien tai
+    console.log(window.location)
+    console.log(location.href)
+    console.log(location.protocol)
+    console.log(location.port)
+    console.log(location.pathname); //Mo ta chuoi url sau / dau tien
+    console.log(location.search);
+    console.log(location.hash);
+    console.log(location.origin);
+    // console.log(location.username);
+
+    // location.assign('http://google.vn'); //chuyen huong, dc goi tu dong khi window.location or location.href, tao entry nen click back page dc
+    // location.replace('http://google.vn'); //chuyen huong ko tao entry nen ko click back page dc
+    setTimeout(() => {
+        // location.assign('http://localhost/js_tutorial/test.html');
+    }, 2000);
+
+    setTimeout(() => {
+        // location.reload()
+    }, 3000)
+
+
+    // - Redirect: chuyen huong tu trnag nay toi trang khac
+    // - URLSearchParams: thao tac voi query string
+    console.log(location.search)
+    const urlParams = new URLSearchParams(location.search);
+    console.log(urlParams)
+
+    for (const [key, value] of urlParams) {
+        console.log(`${key}: ${value}`)
+    }
+
+    // console.log([...urlParams.keys()])
+        for (const key of urlParams.keys()) {
+            console.log(key)
+        }
+
+    for (const value of urlParams.values()) {
+        console.log(value)
+    }
+
+    for (const entry of urlParams.entries()) {
+        console.log(entry)
+    }
+
+    console.log(urlParams.has('name'))
 </script>
