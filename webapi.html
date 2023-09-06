@@ -230,5 +230,55 @@
         console.error('Your browser doesnt support Geolocation')
     }
 
+
+    // Notification: hien thi thong bao toi user, mac dinh phai dc su dong y cua user va https
+    const greetingA = new Notification('Hi, how are you?');
+console.log(greetingA)
+
+    const greetingB = new Notification('Hi, How are you', {
+        body: 'Have a good day',
+    })
+    greetingB.addEventListener('click', (e) => {
+        window.open('dsads')
+    })
+
+
+
 </script>
 
+<canvas width="500" height="300" id="canvas">dsadsa</canvas>
+<script>
+    // Canvas: ve
+    const canvasA = document.querySelector('#canvas');
+    const widthA = canvasA.width;
+    const heightA = canvasA.height;
+    // canvasA.width = 100;
+    // canvasA.height = 100;
+
+    let canvasB = document.querySelector('#canvas');
+    let ctx = canvasB.getContext('2d')
+    // set fill and stroke styles
+    ctx.fillStyle = '#F0DB4F';
+    ctx.strokeStyle = 'red';
+
+    // draw a rectangle with fill and stroke
+    ctx.fillRect(50, 50, 150, 100);
+    ctx.strokeRect(50, 50, 150, 100);
+
+    // pushState: them vao ngan xep lich su trinh duyet
+
+    // Fetch API: gui http request toi server tu trinh duyet
+    fetch('readme.txt')
+    .then(response => response.text())
+    .then(data => console.log(data))
+
+    // hay viet kieu dung async await
+    async function fetchTextA() {
+        let response = await fetch('readme.txt');
+        console.log(response)
+        let data  = await response.text();
+        console.log(data)
+    }
+
+    fetchTextA()
+</script>
