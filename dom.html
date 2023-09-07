@@ -1,0 +1,27 @@
+<script>
+    // DOM - Document Object Model: la api cho phep thao tac voi document HTML
+    // Mo ta HTML nhu 1 cay nodes, add-remove-modify document
+</script>
+<html>
+<head>
+    <title>JavaScript DOM</title>
+</head>
+<body>
+<p>Hello DOM!</p>
+</body>
+</html>
+<script>
+    // trong DOM, Document la node goc, co 1 child node la html, goi la document element
+    const nodeHtmla = document.querySelector('html');
+    console.log(nodeHtmla.nodeType)
+    console.log(nodeHtmla.nodeName)
+    console.log(document.querySelector('title').nodeType)
+    console.log(document.querySelector('title').nodeName)
+    console.log(document.querySelector('title').nodeValue)
+
+    if (nodeHtmla.nodeType === Node.ELEMENT_NODE) {
+        let nameA = nodeHtmla.nodeName;
+        console.log(nameA)
+    }
+    // Node vs Element? Node la kieu chung cua moi element, trong khi Element la kieu cu the cua node voi node type = Node.ELEMENT_NODE
+</script>
