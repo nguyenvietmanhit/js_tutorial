@@ -8,11 +8,75 @@
 </head>
 <body>
 <p>Hello DOM!</p>
+
+<div id="id1">Id1</div>
+<div id="id2">Id2</div>
+
+<input type="radio" name="language1" value="Javascript">
+<input type="radio" name="language1" value="Typescript">
+
+<p>Please rate the service:</p>
+<p>
+    <label for="very-poor">
+        <input type="radio" name="rate" value="Very poor" id="very-poor"> Very poor
+    </label>
+    <label for="poor">
+        <input type="radio" name="rate" value="Poor" id="poor"> Poor
+    </label>
+    <label for="ok">
+        <input type="radio" name="rate" value="OK" id="ok"> OK
+    </label>
+    <label for="good">
+        <input type="radio" name="rate" value="Good"> Good
+    </label>
+    <label for="very-good">
+        <input type="radio" name="rate" value="Very Good" id="very-good"> Very Good
+    </label>
+</p>
+<p>
+    <button id="btnRate">Submit</button>
+</p>
+<p id="output"></p>
+
+
+
+<h1>JavaScript getElementsByTagName() Demo</h1>
+<h2>First heading</h2>
+<p>This is the first paragraph.</p>
+<h2>Second heading</h2>
+<p>This is the second paragraph.</p>
+<h2>Third heading</h2>
+<p>This is the third paragraph.</p>
+
+<button id="btnCount">Count H2</button>
+
+
+<header>
+    <nav>
+        <ul id="menu">
+            <li class="item">HTML</li>
+            <li class="item">CSS</li>
+            <li class="item highlight">JavaScript</li>
+            <li class="item">TypeScript</li>
+            <li class="itemabc">abc</li>
+        </ul>
+    </nav>
+    <h1>getElementsByClassName Demo</h1>
+</header>
+<section>
+    <article>
+        <h2 class="secondary">Example 1</h2>
+    </article>
+    <article>
+        <h2 class="secondary">Example 2</h2>
+    </article>
+</section>
 </body>
 </html>
 <script>
     // trong DOM, Document la node goc, co 1 child node la html, goi la document element
     const nodeHtmla = document.querySelector('html');
+    console.log(nodeHtmla)
     console.log(nodeHtmla.nodeType)
     console.log(nodeHtmla.nodeName)
     console.log(document.querySelector('title').nodeType)
@@ -24,4 +88,104 @@
         console.log(nameA)
     }
     // Node vs Element? Node la kieu chung cua moi element, trong khi Element la kieu cu the cua node voi node type = Node.ELEMENT_NODE
+
+    // - getElementById: return HTMLElement
+    // If same id, return first html appear
+    const id1A = document.getElementById('id1');
+    console.log(id1A)
+    // - getElementsByName: get all elements by name, return NodeList, is array-like object, not an array object
+    const language1 = document.getElementsByName('language1');
+    console.log(language1)
+
+    let btnA = document.getElementById('btnRate')
+    let outputA = document.getElementById('output');
+    btnA.addEventListener('click', () => {
+        let rates = document.getElementsByName('rate');
+        rates.forEach((rate) => {
+            if (rate.checked) {
+                outputA.innerText = `You selected: ${rate.value}`
+            }
+        })
+    })
+    // - getElementsByTagName: return child element of element HTMLCollection
+    let btnB = document.getElementById('btnCount');
+    btnB.addEventListener('click', () => {
+        let headings = document.getElementsByTagName('h2');
+        console.log(headings)
+        alert(`The number of H2 tags: ${headings.length}`)
+    })
+
+    // - getElementsByClassName
+    let menuA = document.getElementById('menu');
+    let itemsA = menuA.getElementsByClassName('item');
+    let dataA = [].map.call(itemsA, item => item.textContent);
+    console.log(itemsA)
+
+    // - querySelector: find element base on CSS selector
+    // - querySelectorAll return NodeList, use forEach or for...of
+
+
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JavaScript parentNode</title>
+</head>
+<body>
+<div id="main">
+    <p class="note">This is a note!</p>
+</div>
+</body>
+</html>
+<script>
+    // - parentNode: get parent of node, not available on Document, read only
+    let nodeA = document.querySelector('.note');
+    console.log(nodeA)
+    console.log(nodeA.parentNode)
+</script>
+
+<ul id="menu1">
+    <li>Home</li>
+    <li>Products</li>
+    <li class="current">Customer Support</li>
+    <li>Careers</li>
+    <li>Investors</li>
+    <li>News</li>
+    <li>About Us</li>
+</ul>
+<script>
+    // - nextElementSibling: attribute get next sibling element
+    var nextSiblingA = document.querySelector('.current');
+    console.log(nextSiblingA.nextElementSibling);
+    // get all next sibling
+    while (nextSiblingA) {
+        console.log(nextSiblingA);
+        nextSiblingA = nextSiblingA.nextElementSibling;
+    }
+    //  - previousElementSibling: attr get prev sibling element
+    var prevSiblingA = document.querySelector('.current');
+    console.log(prevSiblingA.previousElementSibling);
+
+    // function get all sibling
+    let getSiblings = (e) => {
+        let siblings = [];
+        if (!e.parentNode) {
+            return siblings;
+        }
+
+        let sibling = e.parentNode.firstChild;
+        while (sibling) {
+            if (sibling.nodeType == 1 && sibling !== e) {
+                siblings.push(sibling)
+            }
+            sibling = sibling.nextSibling;
+        }
+        return siblings;
+    }
+    var siblingsB = getSiblings(document.querySelector('.current'));
+    for (const sil of siblingsB) {
+        console.log(sil)
+    }
 </script>
