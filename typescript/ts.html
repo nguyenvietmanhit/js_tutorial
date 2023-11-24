@@ -1,0 +1,32 @@
+<script>
+// - TS build on JS
+// - TS is superset of JS
+// - Introduce optional types to JS and planned feature, prevent error in compile time instead of runtime
+// - Setup TS:
+// + Node.js
+// + TS compiler
+// + EditorCode
+
+function getProductA(id) {
+    return {
+        id: id,
+        name: `Awesome Gadget ${id}`,
+        price: 99.5
+    }
+}
+
+const productA = getProductA(1);
+// + Refernce a property doesn't exists on the object is a common issue when working in javascript
+console.log(`The product ${productA.Name} costs $${productA.price}`); //Name not name
+
+const showProductA = (name, price) => {
+    console.log(`The product ${name} costs $${price}`);
+}
+
+const productB = getProductA(1);
+// + Pass the argument in the wrong order is another common problem with JS
+showProductA(productB.price, productB.name)
+
+
+
+</script>
