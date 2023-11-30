@@ -163,3 +163,29 @@ let employeeC: {
     jobTitle: 'web'
 }
 console.log(employeeC)
+
+// object and Object
+// object is not primitive - type and Object contain functions can be accessible by any object
+// Empty type {}
+let vacantA = {};
+// vacantA.firstName = 'abc'; //
+ let vacantB: {} = {};
+ console.log(vacantB.toString());
+
+ // TypeScript Array Type
+// let skillsA: string[]; // Array of string
+// skillsA.push('111')
+// console.log(skillsA)
+
+let seriesA = [1, 2, 3];
+console.log(seriesA.length)
+
+let seriesB = [1, 2, 3];
+let doubleItB = seriesB.map(e => e * 2);
+console.log(doubleItB);
+
+let scoresA = ['Programming', 5, 'Software Design', 4];
+console.log(typeof scoresA)
+let scoresB: (string | number)[];
+scoresB = ['Programming', 1, 'abc', 2];
+console.log(scoresB)

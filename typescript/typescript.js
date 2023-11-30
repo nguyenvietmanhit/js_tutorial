@@ -101,6 +101,7 @@ employeeB = {
     jobTitle: 'Web Developer'
 };
 console.log(employeeB.firstName);
+// Combine declare type and assign value
 var employeeC = {
     firstName: 'Manhnv',
     lastName: 'Viet',
@@ -108,3 +109,24 @@ var employeeC = {
     jobTitle: 'web'
 };
 console.log(employeeC);
+// object and Object
+// object is not primitive - type and Object contain functions can be accessible by any object
+// Empty type {}
+var vacantA = {};
+// vacantA.firstName = 'abc'; //
+var vacantB = {};
+console.log(vacantB.toString());
+// TypeScript Array Type
+// let skillsA: string[]; // Array of string
+// skillsA.push('111')
+// console.log(skillsA)
+var seriesA = [1, 2, 3];
+console.log(seriesA.length);
+var seriesB = [1, 2, 3];
+var doubleItB = seriesB.map(function (e) { return e * 2; });
+console.log(doubleItB);
+var scoresA = ['Programming', 5, 'Software Design', 4];
+console.log(typeof scoresA);
+var scoresB;
+scoresB = ['Programming', 1, 'abc', 2];
+console.log(scoresB);
