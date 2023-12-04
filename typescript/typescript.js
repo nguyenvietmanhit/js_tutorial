@@ -130,3 +130,99 @@ console.log(typeof scoresA);
 var scoresB;
 scoresB = ['Programming', 1, 'abc', 2];
 console.log(scoresB);
+// Tuple: act as array but element is fixed and type of element is defined, not the same
+var skillC;
+skillC = ['Programming', 5];
+var skillD;
+// skillD = [5, 'Programming']; // error change order
+var colorD = [255, 0, 0];
+// Use question mark to allow element or not
+var bgColorA, headerColorA;
+bgColorA = [0, 255, 255, 0.5];
+headerColorA = [0, 255, 255];
+//Enum
+// use declare constant small and known type relative each other
+// under the hood, is object with named property and value
+var MonthA;
+(function (MonthA) {
+    MonthA[MonthA["Jan"] = 0] = "Jan";
+    MonthA[MonthA["Feb"] = 1] = "Feb";
+    MonthA[MonthA["Mar"] = 2] = "Mar";
+    MonthA[MonthA["Apr"] = 3] = "Apr";
+    MonthA[MonthA["May"] = 4] = "May";
+    MonthA[MonthA["Jun"] = 5] = "Jun";
+    MonthA[MonthA["Jul"] = 6] = "Jul";
+    MonthA[MonthA["Aug"] = 7] = "Aug";
+    MonthA[MonthA["Sep"] = 8] = "Sep";
+    MonthA[MonthA["Oct"] = 9] = "Oct";
+    MonthA[MonthA["Nov"] = 10] = "Nov";
+    MonthA[MonthA["Dec"] = 11] = "Dec";
+})(MonthA || (MonthA = {}));
+console.log(MonthA);
+function isItSummerA(month) {
+    var isSummer;
+    switch (month) {
+        case MonthA.Jun:
+        case MonthA.Jul:
+        case MonthA.Aug:
+            isSummer = true;
+            break;
+        default:
+            isSummer = false;
+            break;
+    }
+    return isSummer;
+}
+console.log(isItSummerA(MonthA.Jun));
+console.log(isItSummerA(6));
+var MonthB;
+(function (MonthB) {
+    MonthB[MonthB["Jan"] = 6] = "Jan";
+    MonthB[MonthB["Feb"] = 7] = "Feb";
+    MonthB[MonthB["Mar"] = 8] = "Mar";
+    MonthB[MonthB["Apr"] = 9] = "Apr";
+    MonthB[MonthB["May"] = 10] = "May";
+    MonthB[MonthB["Jun"] = 11] = "Jun";
+    MonthB[MonthB["Jul"] = 12] = "Jul";
+    MonthB[MonthB["Aug"] = 13] = "Aug";
+    MonthB[MonthB["Sep"] = 14] = "Sep";
+    MonthB[MonthB["Oct"] = 15] = "Oct";
+    MonthB[MonthB["Nov"] = 16] = "Nov";
+    MonthB[MonthB["Dec"] = 17] = "Dec";
+})(MonthB || (MonthB = {}));
+var ApprovalStatusA;
+(function (ApprovalStatusA) {
+    ApprovalStatusA[ApprovalStatusA["draft"] = 0] = "draft";
+    ApprovalStatusA[ApprovalStatusA["submitted"] = 1] = "submitted";
+    ApprovalStatusA[ApprovalStatusA["approved"] = 2] = "approved";
+    ApprovalStatusA[ApprovalStatusA["rejected"] = 3] = "rejected";
+})(ApprovalStatusA || (ApprovalStatusA = {}));
+var requestA = {
+    id: 1,
+    status: ApprovalStatusA.approved,
+    description: 'Please approve this request'
+};
+if (requestA.status === ApprovalStatusA.approved) {
+    console.log('Send email to the Applicant');
+}
+// any type: store value of any type, allow complier skip type-checking
+// Use to store a value that unknow type at the complier time or when migrate old JS to TS
+var jsonA = "{\"latitude\": 10.11, \"longitude\": 12.12}";
+var currentLocationA = JSON.parse(jsonA);
+console.log(currentLocationA);
+console.log(currentLocationA.x);
+// default, TS infer type implicity when declare variable but dont specify type
+var resultA; // implicity to any
+var resultB;
+resultB = 10.123;
+console.log(resultB.toFixed());
+// resultB.willExist(); // error at the runtime
+// void type: use when function dont return any value, use to improve clarity of code and ensure type-safe
+function logA(message) {
+    console.log(message);
+}
+var uselessA = undefined;
+uselessA = null;
+function raiseErrorA(message) {
+    throw new Error(message);
+}

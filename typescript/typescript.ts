@@ -189,3 +189,144 @@ console.log(typeof scoresA)
 let scoresB: (string | number)[];
 scoresB = ['Programming', 1, 'abc', 2];
 console.log(scoresB)
+
+// Tuple: act as array but element is fixed and type of element is defined, not the same
+let skillC: [string, number];
+skillC = ['Programming', 5];
+
+let skillD: [string, number];
+// skillD = [5, 'Programming']; // error change order
+
+let colorD: [number, number, number] = [255, 0 ,0];
+
+// Use question mark to allow element or not
+let bgColorA, headerColorA: [number, number, number, number?];
+bgColorA = [0, 255, 255, 0.5];
+headerColorA = [0, 255, 255];
+
+//Enum
+// use declare constant small and known type relative each other
+// under the hood, is object with named property and value
+enum MonthA {
+    Jan,
+    Feb,
+    Mar,
+    Apr,
+    May,
+    Jun,
+    Jul,
+    Aug,
+    Sep,
+    Oct,
+    Nov,
+    Dec
+}
+console.log(MonthA)
+
+function isItSummerA(month: MonthA) {
+    let isSummer: boolean;
+    switch (month) {
+        case MonthA.Jun:
+        case MonthA.Jul:
+        case MonthA.Aug:
+            isSummer = true;
+            break;
+        default:
+            isSummer = false;
+            break;
+    }
+    return isSummer;
+}
+
+console.log(isItSummerA(MonthA.Jun));
+console.log(isItSummerA(6));
+
+enum MonthB {
+    Jan = 6,
+    Feb,
+    Mar,
+    Apr,
+    May,
+    Jun,
+    Jul,
+    Aug,
+    Sep,
+    Oct,
+    Nov,
+    Dec
+}
+
+enum ApprovalStatusA {
+    draft,
+    submitted,
+    approved,
+    rejected
+}
+const requestA = {
+    id: 1,
+    status: ApprovalStatusA.approved,
+    description: 'Please approve this request'
+}
+
+if (requestA.status === ApprovalStatusA.approved) {
+    console.log('Send email to the Applicant');
+}
+
+// any type: store value of any type, allow complier skip type-checking
+// Use to store a value that unknow type at the complier time or when migrate old JS to TS
+const jsonA = `{"latitude": 10.11, "longitude": 12.12}`;
+const currentLocationA = JSON.parse(jsonA);
+console.log(currentLocationA)
+console.log(currentLocationA.x)
+
+// default, TS infer type implicity when declare variable but dont specify type
+let resultA; // implicity to any
+
+let resultB: any;
+resultB = 10.123;
+console.log(resultB.toFixed());
+// resultB.willExist(); // error at the runtime
+
+// void type: use when function dont return any value, use to improve clarity of code and ensure type-safe
+function logA(message): void {
+    console.log(message)
+}
+
+let uselessA: void = undefined;
+uselessA = null;
+
+// never type: use when function throw error or contain indefinite loop
+function raiseErrorA(message: string): never {
+    throw new Error(message)
+}
+
+function rejectA() {
+    throw  raiseErrorA('Rejected');
+}
+
+let loopA = function foreverA() {
+    while(true) {
+        console.log('Hello')
+    }
+}
+
+function fnA(a: string | number): boolean {
+    if (typeof a === "string") {
+        return true;
+    } else if (typeof a === 'number') {
+        return false;
+    }
+}
+
+function fnB(a: string | number): boolean {
+    if (typeof a === 'string') {
+        return true;
+    } else if (typeof a === 'number') {
+        return false;
+    }
+    return neverOccurA();
+}
+
+let neverOccurA = () => {
+    throw new Error('Never!');
+}
