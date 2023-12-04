@@ -223,6 +223,61 @@ function logA(message) {
 }
 var uselessA = undefined;
 uselessA = null;
+// never type: use when function throw error or contain indefinite loop
 function raiseErrorA(message) {
     throw new Error(message);
 }
+function rejectA() {
+    throw raiseErrorA('Rejected');
+}
+var loopA = function foreverA() {
+    while (true) {
+        console.log('Hello');
+    }
+};
+function fnA(a) {
+    if (typeof a === "string") {
+        return true;
+    }
+    else if (typeof a === 'number') {
+        return false;
+    }
+}
+function fnB(a) {
+    if (typeof a === 'string') {
+        return true;
+    }
+    else if (typeof a === 'number') {
+        return false;
+    }
+    return neverOccurA();
+}
+var neverOccurA = function () {
+    throw new Error('Never!');
+};
+// union type: store a value of multiple type, use | denotation
+function addA(a, b) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.concat(b);
+    }
+    throw new Error('Parameters must be numbers or strings');
+}
+// addA(true, false)
+var resultC;
+resultC = 10;
+resultC = 'Hi';
+// resultC = false; // false because incorrect type
+function addD(a, b) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.concat(b);
+    }
+    throw new Error('Parameters must be numbers or strings');
+}
+// Instead of any type dont show error when compile, use union type to show error when compile that call parameter
+addD(1, 2);

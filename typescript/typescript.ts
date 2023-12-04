@@ -330,3 +330,33 @@ function fnB(a: string | number): boolean {
 let neverOccurA = () => {
     throw new Error('Never!');
 }
+
+// union type: store a value of multiple type, use | denotation
+function addA(a: any, b: any) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.concat(b);
+    }
+    throw new Error('Parameters must be numbers or strings');
+}
+// addA(true, false)
+
+let resultC: number | string;
+resultC = 10;
+resultC = 'Hi';
+// resultC = false; // false because incorrect type
+
+function addD(a: number | string, b: number | string) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.concat(b)
+    }
+    throw new Error('Parameters must be numbers or strings');
+}
+// Instead of any type dont show error when compile, use union type to show error when compile that call parameter
+addD(1, 2)
+// addD(true, false); //show error when compile, parameter incorrect
