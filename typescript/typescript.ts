@@ -495,3 +495,15 @@ console.log(dayA)
 
 let dayB = getDayA(undefined, 2);
 console.log(dayB);
+
+// Rest Parameters: represent list indefinite number of arguments as an array
+// Has array type
+// Must be last in parameter list
+// Only one rest parameter in parameter list
+function getTotalA(a?: number, ...numbers: number[]): number {
+    let total = 0;
+    numbers.forEach((num) => total += num);
+    return total;
+}
+
+console.log(getTotalA(1, 2, 3, 4))

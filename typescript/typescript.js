@@ -394,3 +394,17 @@ var dayA = getDayA(2019, 2);
 console.log(dayA);
 var dayB = getDayA(undefined, 2);
 console.log(dayB);
+// Rest Parameters: represent list indefinite number of arguments as an array
+// Has array type
+// Must be last in parameter list
+// Only one rest parameter in parameter list
+function getTotalA(a) {
+    var numbers = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        numbers[_i - 1] = arguments[_i];
+    }
+    var total = 0;
+    numbers.forEach(function (num) { return total += num; });
+    return total;
+}
+console.log(getTotalA(1, 2, 3, 4));
