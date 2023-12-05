@@ -360,3 +360,138 @@ function addD(a: number | string, b: number | string) {
 // Instead of any type dont show error when compile, use union type to show error when compile that call parameter
 addD(1, 2)
 // addD(true, false); //show error when compile, parameter incorrect
+
+// type alias: use to define new type base on exist type, useful when use with union type
+type charC = string;
+let messageC: charC;
+
+type alphanumericA = string | number;
+let inputA: alphanumericA;
+inputA = 100;
+inputA = 'abc';
+
+// inputA = false; // error because incorrect type
+
+// String literal type: use to define string literal specify, combine with union type and type alias to benefit
+let clickA: 'click';
+clickA = 'click'; //valid
+
+let mouseEventA: 'click' | 'dbclick' | 'mouseup' | 'mousedown';
+mouseEventA = 'click';
+mouseEventA = 'dbclick';
+mouseEventA = 'mouseup';
+mouseEventA = 'mousedown';
+// mouseEventA = 'mouseover'; // compile error because value is not string literal type
+
+// use type alias to avoid verbose
+type MouseEventB = 'click' | 'dbclick' | 'mouseup' | 'mousedown';
+let mouseEventB: MouseEventB;
+mouseEventB = 'click';
+// mouseEventB = 'abc'; //invalid
+
+// Function: use type parameter and return for clear, if function no return, use void
+// If dont indicate return type, use infer type
+function addF(a: number, b: number) : number {
+    return a + b;
+}
+let sumF = addF(1, 5);
+
+function echoA(message: string): void {
+    console.log(message.toUpperCase());
+}
+
+// Function type
+// let addF: (x: number, y: number) => number;
+// addF = function (x: number, y: number): number {
+//     return x + y;
+// }
+// let addF = function(x: number, y: number) {
+//     return x + y;
+// }
+
+let addG: (a: number, b: number) => number = function (x:number, y:number) {
+    return x + y;
+}
+
+//compile error because param incompatible
+// addG = function (x: string, y: string): number {
+//     return x.concat(y).length
+// }
+
+// Optional Parameter: use question mark ? to optional parameter
+// Optional parameter must appear after required parameter
+function abc(a = '') {
+    console.log(a)
+}
+abc();
+
+function multiplyB(a: number, b: number, c?: number): number {
+    if (typeof c !== 'undefined') {
+        return a * b * c;
+    }
+    return a * b;
+}
+
+// compile error because optional stand before required parameter
+// function multiplyC(a: number, b?: number, c:number): number {
+//     if (typeof c !== 'undefined') {
+//         return a * b * c;
+//     }
+//     return a * b;
+// }
+
+// Default parameter, from ES2015/ES6
+function applyDiscountA(price, discount = 0.05) {
+    return price * (1 - discount);
+}
+console.log(applyDiscountA(100))
+
+function applyDiscountB(price: number, discount: number = 0.05): number {
+    return price * (1 - discount);
+}
+console.log(applyDiscountB(100)); //95
+
+// compile error when use default parameter in function type definition
+// let promotionA: (price: number, discount: number = 0.05) => number;
+
+// Default parameter is optional, can omit when call function
+// Optional parameter must be after required parameters, but default parameter is not
+// When use default parameter before required parameter, must set undefined for default parameter
+function getDayA(year: number = new Date().getFullYear(), month: number): number {
+    let day = 0;
+    switch (month) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            day = 31;
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            day = 30;
+            break;
+        case 2:
+            // leap year
+            if (((year % 4 == 0) &&
+                !(year % 100 == 0))
+                || (year % 400 == 0))
+                day = 29;
+            else
+                day = 28;
+            break;
+        default:
+            throw Error('Invalid month');
+    }
+    return day;
+}
+
+let dayA = getDayA(2019, 2);
+console.log(dayA)
+
+let dayB = getDayA(undefined, 2);
+console.log(dayB);
