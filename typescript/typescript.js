@@ -499,3 +499,30 @@ var PersonCC = /** @class */ (function () {
 }());
 var personCC = new PersonCC('dasdsa', 'john', 'doe');
 console.log(personCC.getFullName());
+// TS use ES6 class syntax and type to powerful
+// Access Modifier: private, public, protected, used in class
+// private: access inner class
+// protected: access inner class and subclass inheritance from it
+// public: access everywhere
+// Default is public if dont specify modifier
+// TS control logic access at the compile time
+var PersonDD = /** @class */ (function () {
+    function PersonDD(ssn, firstName, lastName) {
+        this.ssn = ssn;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    PersonDD.prototype.getFullname = function () {
+        return "".concat(this.firstName, " ").concat(this.lastName);
+    };
+    return PersonDD;
+}());
+var personDD = new PersonDD('1212', 'manh', 'nguyenvietmanh');
+// console.log(personDD.ssn); //compile error because access private modifier
+// readonly
+var PersonEE = /** @class */ (function () {
+    function PersonEE(birthDate) {
+        this.birthDate = birthDate;
+    }
+    return PersonEE;
+}());

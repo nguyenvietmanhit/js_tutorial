@@ -625,3 +625,61 @@ class PersonCC {
 let personCC = new PersonCC('dasdsa', 'john', 'doe');
 console.log(personCC.getFullName())
 // TS use ES6 class syntax and type to powerful
+
+// Access Modifier: private, public, protected, used in class
+// private: access inner class
+// protected: access inner class and subclass inheritance from it
+// public: access everywhere
+// Default is public if dont specify modifier
+// TS control logic access at the compile time
+class PersonDD {
+    private ssn: string;
+    private firstName: string;
+    private lastName: string;
+
+    constructor(ssn: string, firstName: string, lastName: string) {
+        this.ssn = ssn;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    getFullname(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+let personDD = new PersonDD('1212', 'manh', 'nguyenvietmanh');
+// console.log(personDD.ssn); //compile error because access private modifier
+
+// readonly: use to mark immutable property in class
+class PersonEE {
+    readonly birthDate: Date;
+    constructor(birthDate: Date) {
+        this.birthDate = birthDate;
+    }
+}
+
+let personEe = new PersonEE(new Date(1990, 12, 25));
+//
+// personEe.birthDate = 'sdsa'; // compile error because birthDate is readonly
+ // combine declare and initialize
+class PersonFF {
+    constructor(readonly birthDate: Date) {
+        this.birthDate = birthDate;
+    }
+}
+
+// Diff readonly vs const: readonly use in property class, const use in variable
+// readonly use in the declaration or constructor class, const use in the declaration
+
+// Getter and Setter
+class PersonF {
+    public age: number;
+    public firstName: string;
+    public lastName: string;
+}
+let personF = new PersonF();
+personF.age = 5;
+// Add validate
+// use validate in public is redundant and tedious, instead of use getter and setter to check
+// getter = accessor, setter = mutator
+
