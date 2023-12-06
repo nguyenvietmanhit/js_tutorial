@@ -586,4 +586,42 @@ console.log(personAA)
 console.log(typeof personAA)
 console.log(personAA.getFullname())
 
+// ES6
+class PersonBB {
+    ssn;
+    firstName;
+    lastName;
+    constructor(ssn, firstName, lastName) {
+        this.ssn = ssn;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
+    getFullname() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+
+let personBB = new PersonBB('123', 'manh', 'nguyenviet');
+console.log(personBB.getFullname())
+
+// TS add type annotation to class
+class PersonCC {
+    ssn: string;
+    firstName: string;
+    lastName: string
+
+    constructor(ssn: string, firstName: string, lastName: string) {
+        this.ssn = ssn;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    getFullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+
+let personCC = new PersonCC('dasdsa', 'john', 'doe');
+console.log(personCC.getFullName())
+// TS use ES6 class syntax and type to powerful

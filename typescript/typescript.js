@@ -456,6 +456,7 @@ console.log(counterM.count());
 console.log(counterM.count(20));
 // Class
 // ES5 use constructor function or prototype inheritance to create a 'class'
+// ES5 use constructor function
 function PersonA(ssn, firstName, lastName) {
     // console.log(this)
     this.ssn = ssn;
@@ -470,3 +471,31 @@ var personAA = new PersonA('123', 'viet', 'manh');
 console.log(personAA);
 console.log(typeof personAA);
 console.log(personAA.getFullname());
+// ES6
+var PersonBB = /** @class */ (function () {
+    function PersonBB(ssn, firstName, lastName) {
+        this.ssn = ssn;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    PersonBB.prototype.getFullname = function () {
+        return "".concat(this.firstName, " ").concat(this.lastName);
+    };
+    return PersonBB;
+}());
+var personBB = new PersonBB('123', 'manh', 'nguyenviet');
+console.log(personBB.getFullname());
+// TS add type annotation to class
+var PersonCC = /** @class */ (function () {
+    function PersonCC(ssn, firstName, lastName) {
+        this.ssn = ssn;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    PersonCC.prototype.getFullName = function () {
+        return "".concat(this.firstName, " ").concat(this.lastName);
+    };
+    return PersonCC;
+}());
+var personCC = new PersonCC('dasdsa', 'john', 'doe');
+console.log(personCC.getFullName());
