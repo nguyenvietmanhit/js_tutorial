@@ -408,3 +408,65 @@ function getTotalA(a) {
     return total;
 }
 console.log(getTotalA(1, 2, 3, 4));
+// Function Overloading: use to describe clearly more than use union type, relationship between parameter types and the results of a function
+function addNumbersA(a, b) {
+    return a + b;
+}
+function addStringsA(a, b) {
+    return a + b;
+}
+function addH(a, b) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a + b;
+    }
+}
+function addM(a, b) {
+    return a + b;
+}
+console.log(addM(1, 2));
+function sumM(a, b, c) {
+    if (c) {
+        return a + b + c;
+    }
+    return a + b;
+}
+// method overloading: same as function overloading
+var CounterM = /** @class */ (function () {
+    function CounterM() {
+        this.current = 0;
+    }
+    CounterM.prototype.count = function (target) {
+        if (target) {
+            var values = [];
+            for (var start = this.current; start <= target; start++) {
+                values.push(start);
+            }
+            this.current = target;
+            return values;
+        }
+        return ++this.current;
+    };
+    return CounterM;
+}());
+var counterM = new CounterM();
+console.log(counterM.count());
+console.log(counterM.count(20));
+// Class
+// ES5 use constructor function or prototype inheritance to create a 'class'
+function PersonA(ssn, firstName, lastName) {
+    // console.log(this)
+    this.ssn = ssn;
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+console.log(typeof PersonA);
+PersonA.prototype.getFullname = function () {
+    return "".concat(this.firstName, " ").concat(this.lastName);
+};
+var personAA = new PersonA('123', 'viet', 'manh');
+console.log(personAA);
+console.log(typeof personAA);
+console.log(personAA.getFullname());

@@ -507,3 +507,83 @@ function getTotalA(a?: number, ...numbers: number[]): number {
 }
 
 console.log(getTotalA(1, 2, 3, 4))
+
+// Function Overloading: use to describe clearly more than use union type, relationship between parameter types and the results of a function
+function addNumbersA(a: number, b: number): number {
+    return a + b;
+}
+
+function addStringsA(a: string, b: string): string {
+    return a + b;
+}
+
+function addH(a: number | string, b: number | string): number | string {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a + b;
+    }
+}
+
+function addM(a: number, b: number): number;
+function addM(a: string, b: string): string;
+function addM(a: any, b: any): any {
+    return a+ b;
+}
+
+console.log(addM(1, 2));
+
+// If overload has more parameter, must be optional parameter when define function
+function sumM(a: number,b: number): number;
+function sumM(a: number, b: number, c:number): number
+function sumM(a: number, b: number, c?: number): number {
+    if (c) {
+        return a + b + c;
+    }
+    return a + b;
+}
+
+// method overloading: same as function overloading
+class CounterM {
+    private current: number = 0;
+    count(): number;
+    count(target: number): number[];
+    count(target?: number): number | number[] {
+        if (target) {
+            let values = [];
+            for (let start = this.current; start <= target; start++) {
+                values.push(start);
+            }
+            this.current = target;
+            return values;
+        }
+        return ++this.current;
+    }
+}
+
+let counterM = new CounterM();
+console.log(counterM.count());
+console.log(counterM.count(20))
+
+// Class
+// ES5 use constructor function or prototype inheritance to create a 'class'
+// ES5 use constructor function
+function PersonA(ssn, firstName, lastName) {
+    // console.log(this)
+    this.ssn = ssn;
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+console.log(typeof PersonA)
+
+PersonA.prototype.getFullname = function() {
+    return `${this.firstName} ${this.lastName}`;
+}
+
+let personAA = new PersonA('123', 'viet', 'manh');
+console.log(personAA)
+console.log(typeof personAA)
+console.log(personAA.getFullname())
+
+
