@@ -868,3 +868,5 @@ class EmployeeO {
 let employeeO1 = new EmployeeO('1', '2', '3');
 let employeeO2 = new EmployeeO('1', '2', '3');
 console.log(EmployeeO.getHeadcount())
+
+// abstract class
