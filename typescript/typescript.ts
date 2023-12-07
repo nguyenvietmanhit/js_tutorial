@@ -683,3 +683,188 @@ personF.age = 5;
 // use validate in public is redundant and tedious, instead of use getter and setter to check
 // getter = accessor, setter = mutator
 
+
+// Step:
+// Change visibility from public -> private
+// Change property to prefix _
+// Define get and set function, notice set function must be param, check validate in set function
+class PersonJ {
+    private _age: number;
+    private _firstName: string;
+    private _lastName: string;
+
+    public get age() {
+        return this._age;
+    }
+
+    public set age(theAge: number) {
+        if (theAge <= 0 || theAge >= 200) {
+            throw new Error('The age is invalid');
+        }
+        this._age = theAge;
+    }
+
+    public getFullname(): string {
+        return `${this._firstName} ${this._lastName}`;
+    }
+}
+
+let personJ = new PersonJ();
+personJ.age = 10; // auto call setter
+console.log(personJ.age); //auto call getter
+
+//
+class PersonK {
+    private _age: number;
+    private _firstName: string;
+    private _lastName: string;
+
+    public get age() {
+        return this._age;
+    }
+
+    public set age(theAge: number) {
+        if (theAge <= 0 || theAge >= 20) {
+            throw new Error('The age is invalid');
+        }
+        this._age = theAge;
+    }
+
+    public get firstName() {
+        return this._firstName;
+    }
+
+    public set firstName(theFirstName: string) {
+        if (!theFirstName) {
+            throw new Error('Invalid first name');
+        }
+        this._firstName = theFirstName;
+    }
+
+    public get lastName() {
+        return this._lastName;
+    }
+
+    public set lastName(theLastName: string) {
+        if (!theLastName) {
+            throw new Error('Invalid last name');
+        }
+        this._lastName = theLastName;
+    }
+
+    public getFullname(): string {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+
+var personK = new PersonK();
+personK.age = 10;
+personK.firstName = 'manh';
+personK.lastName = 'nguyen viet';
+console.log(personK.getFullname())
+
+
+class PersonL {
+    private _firstName;
+    private _lastName;
+
+    public get firstName() {
+        return this._firstName;
+    }
+
+    public set firstName(theFirstName: string) {
+        this._firstName = theFirstName;
+    }
+
+    public get lastName() {
+        return this._lastName;
+    }
+
+    public set lastName(theLastName: string) {
+        this._lastName = theLastName;
+    }
+
+    public get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+
+    public set fullName(name: string) {
+        console.log(name)
+        let parts = name.split(' ');
+        if (parts.length != 2) {
+            throw new Error('Invalid name format: first last');
+        }
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+}
+
+let personL = new PersonL();
+personL.fullName = 'nguyen viet';
+console.log(personL.fullName)
+
+
+// Inheritance
+// JS use prototype inheritance, not classical inheritance like C or Java.
+// From ES6 use class for sugar syntax
+// - Use extend keyword for inheritance
+// - Use super() at child class to call constructor or super.method() to call method in parent class
+class PersonM {
+    constructor(private firstName: string, private lastName: string) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    public getFullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+
+    public describe(): string {
+        return `This is ${this.firstName} ${this.lastName}`;
+    }
+}
+
+class EmployeeM extends PersonM {
+    constructor(firstName: string, lastName: string, private jobTitle: string) {
+        super(firstName, lastName);
+    }
+    // override method
+    describe(): string {
+        return super.describe() + `I'm a ${this.jobTitle}`;
+    }
+}
+
+let employeeM = new EmployeeM('manh', 'viet', 'BE');
+console.log(employeeM.getFullName())
+console.log(employeeM.describe())
+
+
+// static method and property
+// use by all instance of class
+// use static keyword before property or method
+class EmployeeN {
+    static headcount: number = 0;
+
+    constructor(private firstName: string, private lastName: string, private jobTitle: string) {
+        EmployeeN.headcount++;
+    }
+}
+
+let employeeN1 = new EmployeeN('1', '2', '3');
+let employeeN2 = new EmployeeN('1', '2', '3');
+console.log(EmployeeN.headcount)
+
+// static methods
+class EmployeeO {
+    private static headcount: number = 0;
+    constructor(private firstName: string, private lastName: string, private jobTitle: string) {
+        EmployeeO.headcount++;
+    }
+
+    public static getHeadcount() {
+        return EmployeeO.headcount;
+    }
+}
+
+let employeeO1 = new EmployeeO('1', '2', '3');
+let employeeO2 = new EmployeeO('1', '2', '3');
+console.log(EmployeeO.getHeadcount())

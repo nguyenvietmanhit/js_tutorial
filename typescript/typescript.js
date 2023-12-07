@@ -1,3 +1,18 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 function getProductA(id) {
     return {
         id: id,
@@ -519,10 +534,227 @@ var PersonDD = /** @class */ (function () {
 }());
 var personDD = new PersonDD('1212', 'manh', 'nguyenvietmanh');
 // console.log(personDD.ssn); //compile error because access private modifier
-// readonly
+// readonly: use to mark immutable property in class
 var PersonEE = /** @class */ (function () {
     function PersonEE(birthDate) {
         this.birthDate = birthDate;
     }
     return PersonEE;
 }());
+var personEe = new PersonEE(new Date(1990, 12, 25));
+//
+// personEe.birthDate = 'sdsa'; // compile error because birthDate is readonly
+// combine declare and initialize
+var PersonFF = /** @class */ (function () {
+    function PersonFF(birthDate) {
+        this.birthDate = birthDate;
+        this.birthDate = birthDate;
+    }
+    return PersonFF;
+}());
+// Diff readonly vs const: readonly use in property class, const use in variable
+// readonly use in the declaration or constructor class, const use in the declaration
+// Getter and Setter
+var PersonF = /** @class */ (function () {
+    function PersonF() {
+    }
+    return PersonF;
+}());
+var personF = new PersonF();
+personF.age = 5;
+// Add validate
+// use validate in public is redundant and tedious, instead of use getter and setter to check
+// getter = accessor, setter = mutator
+// Step:
+// Change visibility from public -> private
+// Change property to prefix _
+// Define get and set function, notice set function must be param, check validate in set function
+var PersonJ = /** @class */ (function () {
+    function PersonJ() {
+    }
+    Object.defineProperty(PersonJ.prototype, "age", {
+        get: function () {
+            return this._age;
+        },
+        set: function (theAge) {
+            if (theAge <= 0 || theAge >= 200) {
+                throw new Error('The age is invalid');
+            }
+            this._age = theAge;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    PersonJ.prototype.getFullname = function () {
+        return "".concat(this._firstName, " ").concat(this._lastName);
+    };
+    return PersonJ;
+}());
+var personJ = new PersonJ();
+personJ.age = 10; // auto call setter
+console.log(personJ.age); //auto call getter
+//
+var PersonK = /** @class */ (function () {
+    function PersonK() {
+    }
+    Object.defineProperty(PersonK.prototype, "age", {
+        get: function () {
+            return this._age;
+        },
+        set: function (theAge) {
+            if (theAge <= 0 || theAge >= 20) {
+                throw new Error('The age is invalid');
+            }
+            this._age = theAge;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PersonK.prototype, "firstName", {
+        get: function () {
+            return this._firstName;
+        },
+        set: function (theFirstName) {
+            if (!theFirstName) {
+                throw new Error('Invalid first name');
+            }
+            this._firstName = theFirstName;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PersonK.prototype, "lastName", {
+        get: function () {
+            return this._lastName;
+        },
+        set: function (theLastName) {
+            if (!theLastName) {
+                throw new Error('Invalid last name');
+            }
+            this._lastName = theLastName;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    PersonK.prototype.getFullname = function () {
+        return "".concat(this.firstName, " ").concat(this.lastName);
+    };
+    return PersonK;
+}());
+var personK = new PersonK();
+personK.age = 10;
+personK.firstName = 'manh';
+personK.lastName = 'nguyen viet';
+console.log(personK.getFullname());
+var PersonL = /** @class */ (function () {
+    function PersonL() {
+    }
+    Object.defineProperty(PersonL.prototype, "firstName", {
+        get: function () {
+            return this._firstName;
+        },
+        set: function (theFirstName) {
+            this._firstName = theFirstName;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PersonL.prototype, "lastName", {
+        get: function () {
+            return this._lastName;
+        },
+        set: function (theLastName) {
+            this._lastName = theLastName;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PersonL.prototype, "fullName", {
+        get: function () {
+            return "".concat(this.firstName, " ").concat(this.lastName);
+        },
+        set: function (name) {
+            console.log(name);
+            var parts = name.split(' ');
+            if (parts.length != 2) {
+                throw new Error('Invalid name format: first last');
+            }
+            this.firstName = parts[0];
+            this.lastName = parts[1];
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return PersonL;
+}());
+var personL = new PersonL();
+personL.fullName = 'nguyen viet';
+console.log(personL.fullName);
+// Inheritance
+// JS use prototype inheritance, not classical inheritance like C or Java.
+// From ES6 use class for sugar syntax
+// - Use extend keyword for inheritance
+// - Use super() at child class to call constructor or super.method() to call method in parent class
+var PersonM = /** @class */ (function () {
+    function PersonM(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    PersonM.prototype.getFullName = function () {
+        return "".concat(this.firstName, " ").concat(this.lastName);
+    };
+    PersonM.prototype.describe = function () {
+        return "This is ".concat(this.firstName, " ").concat(this.lastName);
+    };
+    return PersonM;
+}());
+var EmployeeM = /** @class */ (function (_super) {
+    __extends(EmployeeM, _super);
+    function EmployeeM(firstName, lastName, jobTitle) {
+        var _this = _super.call(this, firstName, lastName) || this;
+        _this.jobTitle = jobTitle;
+        return _this;
+    }
+    // override method
+    EmployeeM.prototype.describe = function () {
+        return _super.prototype.describe.call(this) + "I'm a ".concat(this.jobTitle);
+    };
+    return EmployeeM;
+}(PersonM));
+var employeeM = new EmployeeM('manh', 'viet', 'BE');
+console.log(employeeM.getFullName());
+console.log(employeeM.describe());
+// static method and property
+
+var EmployeeN = /** @class */ (function () {
+    function EmployeeN(firstName, lastName, jobTitle) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.jobTitle = jobTitle;
+        EmployeeN.headcount++;
+    }
+    EmployeeN.headcount = 0;
+    return EmployeeN;
+}());
+var employeeN1 = new EmployeeN('1', '2', '3');
+var employeeN2 = new EmployeeN('1', '2', '3');
+console.log(EmployeeN.headcount);
+// static methods
+var EmployeeO = /** @class */ (function () {
+    function EmployeeO(firstName, lastName, jobTitle) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.jobTitle = jobTitle;
+        EmployeeO.headcount++;
+    }
+    EmployeeO.getHeadcount = function () {
+        return EmployeeO.headcount;
+    };
+    EmployeeO.headcount = 0;
+    return EmployeeO;
+}());
+var employeeO1 = new EmployeeO('1', '2', '3');
+var employeeO2 = new EmployeeO('1', '2', '3');
+console.log(EmployeeO.getHeadcount());
