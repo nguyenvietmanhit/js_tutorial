@@ -870,3 +870,238 @@ let employeeO2 = new EmployeeO('1', '2', '3');
 console.log(EmployeeO.getHeadcount())
 
 // abstract class
+abstract class EmployeeP {
+    constructor(private firstName: string, private lastName: string) {
+
+    }
+
+    abstract getSalary(): number
+    get fullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+    compensationStatement(): string {
+        return `${this.fullName} makes ${this.getSalary()} a month`;
+    }
+}
+
+// let employeeP = new EmployeeP(); // error, cannot create an instance of an abstract class
+class FullTimeEmployeeP extends EmployeeP {
+    constructor(firstName: string, lastName: string, private salary: number) {
+        super(firstName, lastName);
+    }
+
+    getSalary(): number {
+        return this.salary;
+    }
+}
+
+class ContractorP extends EmployeeP {
+    constructor(firstName: string, lastName: string, private rate: number, private hours: number) {
+        super(firstName, lastName);
+    }
+
+    getSalary(): number {
+        return this.rate * this.hours;
+    }
+}
+
+let joinP = new FullTimeEmployeeP('John', 'Doe', 120000);
+let janeP = new ContractorP('Jane', 'Doe', 100, 160);
+console.log(joinP.compensationStatement())
+console.log(janeP.compensationStatement())
+// Abstract class use to share code among instances, cannot instance, must be least one abstract method
+
+// - Interface
+function getFullNameP(person: {
+    firstName: string;
+    lastName: string
+}) {
+    return `${person.firstName} ${person.lastName}`;
+}
+
+let personP = {
+    firstName: 'John',
+    lastName: 'Doe'
+}
+console.log(getFullNameP(personP));
+// type annotation as above make code hard to read -> use interface instead
+interface PersonQ {
+    firstName: string;
+    lastName: string;
+}
+// use camel case for name interface
+
+function getFullnameQ(person: PersonQ) {
+    return `${person.firstName} ${person.lastName}`;
+}
+
+let johnQ = {
+    firstName: 'John',
+    lastName: 'Doe'
+}
+
+console.log(getFullnameQ(johnQ));
+//
+
+let janeQ = {
+    firstName: 'Jane',
+    middleName: 'K.',
+    lastName: 'Doe',
+    age: 22
+}
+
+console.log(getFullnameQ(janeQ))
+
+// Use question mark to make property is optional
+interface PersonO {
+    firstName: string;
+    middleName?: string;
+    lastName: string;
+}
+
+function getFullnameO(person: PersonO) {
+    if (person.middleName) {
+        return `${person.firstName} ${person.middleName} ${person.lastName}`;
+    }
+    return `${person.firstName} ${person.lastName}`;
+}
+
+// readonly properties
+interface PersonS {
+    readonly ssn: string;
+    firstName: string;
+    lastName: string;
+}
+
+let personS: PersonS;
+personS = {
+    ssn: '123-456-',
+    firstName: 'John',
+    lastName: 'Doe'
+}
+//personS.ssn = 'abc'; // error, readonly only use to read, cannot modify
+// function type for interface: use to define function type, parameter dont need match with argument
+interface StringFormatA {
+    (str: string, isUper: boolean): string
+}
+
+let formatA: StringFormatA;
+formatA = function (src: string, upper: boolean) {
+    return upper ? src.toLocaleUpperCase() : src.toLocaleLowerCase();
+}
+console.log(formatA('hi', true));
+console.log(typeof formatA)
+
+let lowerCaseA: StringFormatA;
+lowerCaseA = function (str: string) {
+    return str.toLowerCase();
+}
+
+console.log(lowerCaseA('Hi', false));
+
+// class types
+// interface JsonA {
+//     toJSON(): string
+// }
+// class PersonAA implements JsonA {
+//     constructor(private firstName: string, private lastName: string) {
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+//     }
+//
+//     toJSON(): string {
+//         return JSON.stringify(this);
+//     }
+// }
+//
+// let personAAA = new PersonAA('John', 'Doe');
+// console.log(personAAA.toJSON())
+
+// - Extend interface
+interface MailableA {
+    send(email: string): boolean
+    queue(email: string): boolean
+}
+// If many class already implement MailableA, after want add more function to interface cause break code,
+//use extend interface instead
+interface FutureMailableA extends MailableA {
+    later(email: string, after: number): boolean
+}
+
+class MailA implements FutureMailableA {
+    later(email: string, after: number): boolean {
+        console.log(`Send email to ${email} in ${after} ms.`);
+        return true;
+    }
+    send(email: string): boolean {
+        console.log(`Send email to ${email} after ms`);
+        return true;
+    }
+    queue(email: string): boolean {
+        console.log(`Queue an email to ${email}`)
+        return true;
+    }
+}
+// A interface can extend multiple interfaces, separate by comma
+// Interface can extend class, inherit properties and methods of class, even private and protected member
+class ControlB {
+    private state: boolean;
+}
+
+interface StatefulControlB extends ControlB {
+    enable(): void
+}
+
+class ButtonB extends ControlB implements StatefulControlB {
+    enable() {
+
+    }
+}
+
+class TextBoxB extends ControlB implements StatefulControlB {
+    enable() {
+    }
+}
+
+class LabelB extends ControlB {
+
+}
+
+// class ChartB implements StatefulControlB {
+//     enable() {
+//     }
+// }
+// error, class cannot implement interface as interface is inheriting another class
+// - Interface vs Abstract
+// Both use designing and organizing code
+// Interface: define structure, only contain method, support multiple implement, easily extend by add new property/method
+// no constructor, object follow to the structure, cannot instance, for design contract and structure
+// Abstract: provide common function and structure, contain implement method and abstract method, single inheritance,
+// have constructor ...
+
+// - Intersection Type: use & to combine
+interface BusinessPartnerA {
+    name: string;
+    credit: number;
+}
+
+interface IdentityA {
+    id: number;
+    name: string;
+}
+
+interface ContactA {
+    email: string;
+    phone: string;
+}
+
+type EmployeeAAA = IdentityA & ContactA;
+let eAAA: EmployeeAAA = {
+    id: 100,
+    name: 'John Doe',
+    email: 'manhnv@a.b',
+    phone: '12345'
+}
+
+type CustomerAAA = BusinessPartnerA & ContactA;
+

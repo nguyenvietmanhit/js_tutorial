@@ -727,7 +727,8 @@ var employeeM = new EmployeeM('manh', 'viet', 'BE');
 console.log(employeeM.getFullName());
 console.log(employeeM.describe());
 // static method and property
-
+// use by all instance of class
+// use static keyword before property or method
 var EmployeeN = /** @class */ (function () {
     function EmployeeN(firstName, lastName, jobTitle) {
         this.firstName = firstName;
@@ -758,3 +759,156 @@ var EmployeeO = /** @class */ (function () {
 var employeeO1 = new EmployeeO('1', '2', '3');
 var employeeO2 = new EmployeeO('1', '2', '3');
 console.log(EmployeeO.getHeadcount());
+// abstract class
+var EmployeeP = /** @class */ (function () {
+    function EmployeeP(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    Object.defineProperty(EmployeeP.prototype, "fullName", {
+        get: function () {
+            return "".concat(this.firstName, " ").concat(this.lastName);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    EmployeeP.prototype.compensationStatement = function () {
+        return "".concat(this.fullName, " makes ").concat(this.getSalary(), " a month");
+    };
+    return EmployeeP;
+}());
+// let employeeP = new EmployeeP(); // error, cannot create an instance of an abstract class
+var FullTimeEmployeeP = /** @class */ (function (_super) {
+    __extends(FullTimeEmployeeP, _super);
+    function FullTimeEmployeeP(firstName, lastName, salary) {
+        var _this = _super.call(this, firstName, lastName) || this;
+        _this.salary = salary;
+        return _this;
+    }
+    FullTimeEmployeeP.prototype.getSalary = function () {
+        return this.salary;
+    };
+    return FullTimeEmployeeP;
+}(EmployeeP));
+var ContractorP = /** @class */ (function (_super) {
+    __extends(ContractorP, _super);
+    function ContractorP(firstName, lastName, rate, hours) {
+        var _this = _super.call(this, firstName, lastName) || this;
+        _this.rate = rate;
+        _this.hours = hours;
+        return _this;
+    }
+    ContractorP.prototype.getSalary = function () {
+        return this.rate * this.hours;
+    };
+    return ContractorP;
+}(EmployeeP));
+var joinP = new FullTimeEmployeeP('John', 'Doe', 120000);
+var janeP = new ContractorP('Jane', 'Doe', 100, 160);
+console.log(joinP.compensationStatement());
+console.log(janeP.compensationStatement());
+// Abstract class use to share code among instances, cannot instance, must be least one abstract method
+// - Interface
+function getFullNameP(person) {
+    return "".concat(person.firstName, " ").concat(person.lastName);
+}
+var personP = {
+    firstName: 'John',
+    lastName: 'Doe'
+};
+console.log(getFullNameP(personP));
+// use camel case for name interface
+function getFullnameQ(person) {
+    return "".concat(person.firstName, " ").concat(person.lastName);
+}
+var johnQ = {
+    firstName: 'John',
+    lastName: 'Doe'
+};
+console.log(getFullnameQ(johnQ));
+//
+var janeQ = {
+    firstName: 'Jane',
+    middleName: 'K.',
+    lastName: 'Doe',
+    age: 22
+};
+console.log(getFullnameQ(janeQ));
+function getFullnameO(person) {
+    if (person.middleName) {
+        return "".concat(person.firstName, " ").concat(person.middleName, " ").concat(person.lastName);
+    }
+    return "".concat(person.firstName, " ").concat(person.lastName);
+}
+var personS;
+personS = {
+    ssn: '123-456-',
+    firstName: 'John',
+    lastName: 'Doe'
+};
+var formatA;
+formatA = function (src, upper) {
+    return upper ? src.toLocaleUpperCase() : src.toLocaleLowerCase();
+};
+console.log(formatA('hi', true));
+console.log(typeof formatA);
+var lowerCaseA;
+lowerCaseA = function (str) {
+    return str.toLowerCase();
+};
+console.log(lowerCaseA('Hi', false));
+var MailA = /** @class */ (function () {
+    function MailA() {
+    }
+    MailA.prototype.later = function (email, after) {
+        console.log("Send email to ".concat(email, " in ").concat(after, " ms."));
+        return true;
+    };
+    MailA.prototype.send = function (email) {
+        console.log("Send email to ".concat(email, " after ms"));
+        return true;
+    };
+    MailA.prototype.queue = function (email) {
+        console.log("Queue an email to ".concat(email));
+        return true;
+    };
+    return MailA;
+}());
+// A interface can extend multiple interfaces, separate by comma
+// Interface can extend class, inherit properties and methods of class, even private and protected member
+var ControlB = /** @class */ (function () {
+    function ControlB() {
+    }
+    return ControlB;
+}());
+var ButtonB = /** @class */ (function (_super) {
+    __extends(ButtonB, _super);
+    function ButtonB() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ButtonB.prototype.enable = function () {
+    };
+    return ButtonB;
+}(ControlB));
+var TextBoxB = /** @class */ (function (_super) {
+    __extends(TextBoxB, _super);
+    function TextBoxB() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    TextBoxB.prototype.enable = function () {
+    };
+    return TextBoxB;
+}(ControlB));
+var LabelB = /** @class */ (function (_super) {
+    __extends(LabelB, _super);
+    function LabelB() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return LabelB;
+}(ControlB));
+var eAAA = {
+    id: 100,
+    name: 'John Doe',
+    email: 'manhnv@a.b',
+    phone: '12345'
+};
