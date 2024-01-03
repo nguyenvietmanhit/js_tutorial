@@ -1096,6 +1096,7 @@ interface ContactA {
 }
 
 type EmployeeAAA = IdentityA & ContactA;
+// Contain all property of combine
 let eAAA: EmployeeAAA = {
     id: 100,
     name: 'John Doe',
@@ -1104,4 +1105,35 @@ let eAAA: EmployeeAAA = {
 }
 
 type CustomerAAA = BusinessPartnerA & ContactA;
+let cAAA: CustomerAAA = {
+    name: 'abc',
+    credit: 100000,
+    email: 'abc@gmail.com',
+    phone: '123-456'
+}
+
+type EmployeeBBB = IdentityA & BusinessPartnerA & ContactA;
+let eBBB: EmployeeBBB = {
+    id: 200,
+    credit: 123,
+    email: 'abc',
+    phone: '12121',
+    name: 'abc'
+}
+// Type order is not important when combine type
+
+// - Type guard
+
+type alphanumericB = string | number;
+function addBB(a: alphanumericB, b: alphanumericB) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof  b === 'string') {
+        return a.concat(b);
+    }
+
+    throw new Error('Invalid arguments. Both arguments must be either numbers or strings')
+}
+
 
