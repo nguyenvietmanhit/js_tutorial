@@ -906,9 +906,84 @@ var LabelB = /** @class */ (function (_super) {
     }
     return LabelB;
 }(ControlB));
+// Contain all property of combine
 var eAAA = {
     id: 100,
     name: 'John Doe',
     email: 'manhnv@a.b',
     phone: '12345'
 };
+var cAAA = {
+    name: 'abc',
+    credit: 100000,
+    email: 'abc@gmail.com',
+    phone: '123-456'
+};
+var eBBB = {
+    id: 200,
+    credit: 123,
+    email: 'abc',
+    phone: '12121',
+    name: 'abc'
+};
+function addBB(a, b) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.concat(b);
+    }
+    throw new Error('Invalid arguments. Both arguments must be either numbers or strings');
+}
+// instanceof
+var CustomerBB = /** @class */ (function () {
+    function CustomerBB() {
+    }
+    CustomerBB.prototype.isCreditAllowed = function () {
+        return true;
+    };
+    return CustomerBB;
+}());
+var SupplierBB = /** @class */ (function () {
+    function SupplierBB() {
+    }
+    SupplierBB.prototype.isInShortList = function () {
+        return true;
+    };
+    return SupplierBB;
+}());
+function signContractBB(partner) {
+    var message;
+    if (partner instanceof CustomerBB) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    }
+    if (partner instanceof SupplierBB) {
+        message = partner.isInShortList() ? 'Sign a new contract the supplier' : 'Need to evaluate further';
+    }
+    return message;
+}
+// in
+function signContractCC(partner) {
+    var message;
+    if ('isCreditAllowed' in partner) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    }
+    else {
+        message = partner.isInShortList() ? 'Sign a new contract the supplier ' : 'Need to evaluate further';
+    }
+    return message;
+}
+// user-defined type guard
+function isCustomerA(partner) {
+    return partner instanceof CustomerBB;
+}
+function signContractC(partner) {
+    var message;
+    if (isCustomerA(partner)) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    }
+    else {
+        message = partner.isInShortList() ? 'Sign a new contract with the supplier' : 'Need to evaluate further';
+    }
+    return message;
+}

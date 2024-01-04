@@ -1124,6 +1124,7 @@ let eBBB: EmployeeBBB = {
 
 // - Type guard
 
+//typeof
 type alphanumericB = string | number;
 function addBB(a: alphanumericB, b: alphanumericB) {
     if (typeof a === 'number' && typeof b === 'number') {
@@ -1136,4 +1137,52 @@ function addBB(a: alphanumericB, b: alphanumericB) {
     throw new Error('Invalid arguments. Both arguments must be either numbers or strings')
 }
 
+// instanceof
+class CustomerBB {
+    isCreditAllowed(): boolean {
+        return true;
+    }
+}
 
+class SupplierBB {
+    isInShortList(): boolean {
+        return true;
+    }
+}
+
+type BusinessPartnerBB = CustomerBB | SupplierBB;
+function signContractBB(partner: BusinessPartnerBB): string {
+    let message: string;
+    if (partner instanceof CustomerBB) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    }
+
+    if (partner instanceof SupplierBB) {
+        message = partner.isInShortList() ? 'Sign a new contract the supplier' : 'Need to evaluate further';
+    }
+    return message;
+}
+
+// in
+function signContractCC(partner: BusinessPartnerBB): string {
+    let message: string;
+    if ('isCreditAllowed' in partner) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    } else {
+        message = partner.isInShortList() ? 'Sign a new contract the supplier ' : 'Need to evaluate further';
+    }
+    return message;
+}
+// user-defined type guard
+function isCustomerA(partner: any): partner is CustomerBB {
+    return partner instanceof CustomerBB;
+}
+function signContractC(partner: BusinessPartnerBB): string {
+    let message: string;
+    if (isCustomerA(partner)) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    } else {
+        message = partner.isInShortList() ? 'Sign a new contract with the supplier' : 'Need to evaluate further';
+    }
+    return message;
+}
