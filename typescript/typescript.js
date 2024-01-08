@@ -1047,3 +1047,12 @@ function mergeA(obj1, obj2) {
 }
 var resultAAAA = mergeA({ name: 'John' }, { jobTitle: 'FE' });
 console.log(resultAAAA);
+// Use generic to develop reusable, generalized, type-safe functions, interfaces, classess
+// - Generic constraint
+function mergeB(obj1, obj2) {
+    return __assign(__assign({}, obj1), obj2);
+}
+var personB = mergeB({ name: 'John' }, { age: 25 });
+console.log(personB);
+var personC = mergeB({ name: 'John' }, 25);
+console.log(personC);

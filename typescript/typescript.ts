@@ -1254,3 +1254,20 @@ console.log(resultAAAA)
 // Use generic to develop reusable, generalized, type-safe functions, interfaces, classess
 
 // - Generic constraint
+function mergeB<U, V>(obj1: U, obj2: V) {
+    return {
+        ...obj1,
+        ...obj2
+    }
+}
+let personB = mergeB(
+    {name: 'John'},
+    {age: 25}
+)
+console.log(personB)
+
+let personC = mergeB(
+    {name: 'John'},
+    25
+)
+console.log(personC)
