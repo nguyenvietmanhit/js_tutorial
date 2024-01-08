@@ -1186,3 +1186,71 @@ function signContractC(partner: BusinessPartnerBB): string {
     }
     return message;
 }
+
+// - Type Casting
+// Default JS dont have type casting
+// TS use as keyword or <> to cast type
+// - Type assertion
+// Instruct complier treat a value as specified type, use as keyword or <> syntac
+function getNetPriceA(price: number, discount: number, format: boolean): number | string {
+    let netPrice = price * (1 - discount);
+    return format ? `$${netPrice}` : netPrice;
+}
+
+let netPriceA = getNetPriceA(100, 0.05, false) as number;
+console.log(netPriceA);
+
+let netPriceB = <number>getNetPriceA(100, 0.05, false);
+console.log(netPriceB)
+
+// - Generic
+function getRandomNumberElementA(items: number[]): number {
+    let randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+
+let numbersA = [1, 2, 3, 4, 5, 6];
+console.log(getRandomNumberElementA(numbersA));
+
+function getRandomStringElementA(items: string[]): string {
+    let randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+
+let colorsA = ['red', 'green', 'blue'];
+console.log(getRandomStringElementA(colorsA))
+
+// create many function for same function is not scalaable, can use any type instead of but is not safe
+//- > use generic
+function getRandomElementC<T>(items: T[]): T {
+    let randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+// above function is generic because it can work with any data type as string, number, objects
+//by convention, use freely letters such as A, B, C, T ...
+let numbersC = [1, 2, 3, 4, 5];
+let randomEleC = getRandomElementC<number>(numbersC); // pass explicity number as type
+console.log(randomEleC)
+// use type inference to complier auto set T automatically
+let numbersD = [1, 2, 3, 4, 5];
+let randomEleD = getRandomElementC(numbersD);
+console.log(randomEleD)
+
+let numbersE = [1, 2, 3];
+let returnElemE: string;
+// returnElemE = getRandomElementC(numbersE); // complier error becase type wrong
+
+function mergeA<U, V>(obj1: U, obj2: V) {
+    return {
+        ...obj1,
+        ...obj2
+    }
+}
+let resultAAAA = mergeA(
+    {name: 'John'},
+    { jobTitle: 'FE'}
+)
+console.log(resultAAAA)
+// Use generic to develop reusable, generalized, type-safe functions, interfaces, classess
+
+// - Generic constraint

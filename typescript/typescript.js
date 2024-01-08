@@ -13,6 +13,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 function getProductA(id) {
     return {
         id: id,
@@ -987,3 +998,52 @@ function signContractC(partner) {
     }
     return message;
 }
+// - Type Casting
+// Default JS dont have type casting
+// TS use as keyword or <> to cast type
+// - Type assertion
+// Instruct complier treat a value as specified type, use as keyword or <> syntac
+function getNetPriceA(price, discount, format) {
+    var netPrice = price * (1 - discount);
+    return format ? "$".concat(netPrice) : netPrice;
+}
+var netPriceA = getNetPriceA(100, 0.05, false);
+console.log(netPriceA);
+var netPriceB = getNetPriceA(100, 0.05, false);
+console.log(netPriceB);
+// - Generic
+function getRandomNumberElementA(items) {
+    var randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+var numbersA = [1, 2, 3, 4, 5, 6];
+console.log(getRandomNumberElementA(numbersA));
+function getRandomStringElementA(items) {
+    var randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+var colorsA = ['red', 'green', 'blue'];
+console.log(getRandomStringElementA(colorsA));
+// create many function for same function is not scalaable, can use any type instead of but is not safe
+//- > use generic
+function getRandomElementC(items) {
+    var randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+// above function is generic because it can work with any data type as string, number, objects
+//by convention, use freely letters such as A, B, C, T ...
+var numbersC = [1, 2, 3, 4, 5];
+var randomEleC = getRandomElementC(numbersC); // pass explicity number as type
+console.log(randomEleC);
+// use type inference to complier auto set T automatically
+var numbersD = [1, 2, 3, 4, 5];
+var randomEleD = getRandomElementC(numbersD);
+console.log(randomEleD);
+var numbersE = [1, 2, 3];
+var returnElemE;
+// returnElemE = getRandomElementC(numbersE); // complier error becase type wrong
+function mergeA(obj1, obj2) {
+    return __assign(__assign({}, obj1), obj2);
+}
+var resultAAAA = mergeA({ name: 'John' }, { jobTitle: 'FE' });
+console.log(resultAAAA);
