@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -24,6 +25,7 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 function getProductA(id) {
     return {
         id: id,
@@ -1056,3 +1058,105 @@ var personB = mergeB({ name: 'John' }, { age: 25 });
 console.log(personB);
 var personC = mergeB({ name: 'John' }, 25);
 console.log(personC);
+// use constraint use extends keyword for generic type
+function mergeC(obj1, obj2) {
+    return __assign(__assign({}, obj1), obj2);
+}
+// let personD = mergeC(
+//     {name: 'John'},
+//     25, //error wrong type
+// )
+// function propA<T, K>(obj: T, key: K) {
+//     return obj[key]; // error type K cannot be used to index type 'T'
+// }
+function propB(obj, key) {
+    return obj[key];
+}
+var strB = propB({ name: 'John' }, 'name');
+console.log(strB);
+// Use extends keyword to constrain the type parameter to a specific type
+// Use extends keyof to constrain a type that is the property of another object
+// - TS Generic Classes
+// use <> annotation to contain list parameter, create class can work with different type while maintaining type safety
+var StackA = /** @class */ (function () {
+    function StackA(size) {
+        this.size = size;
+        this.elements = [];
+    }
+    StackA.prototype.isEmpty = function () {
+        return this.elements.length === 0;
+    };
+    StackA.prototype.isFull = function () {
+        return this.elements.length === this.size;
+    };
+    StackA.prototype.push = function (element) {
+        if (this.elements.length === this.size) {
+            throw new Error('The stack is overflow');
+        }
+        this.elements.push(element);
+    };
+    StackA.prototype.pop = function () {
+        if (this.elements.length == 0) {
+            throw new Error('The stack is empty');
+        }
+        return this.elements.pop();
+    };
+    return StackA;
+}());
+var numbersG = new StackA(5);
+console.log(numbersG);
+function randBetweenA(low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+var numbersH = new StackA(5);
+while (!numbersH.isFull()) {
+    var n = randBetweenA(1, 10);
+    console.log("Push ".concat(n, " into the stack"));
+    numbersH.push(n);
+}
+//
+var wordsA = 'The quick brown fox jumps over the lazy dog'.split(' ');
+var wordStackA = new StackA(wordsA.length);
+wordsA.forEach(function (word) { return wordStackA.push(word); });
+while (!wordStackA.isEmpty()) {
+    console.log(wordStackA.pop());
+}
+var monthA = {
+    key: 'Jan',
+    value: 1
+};
+console.log(monthA);
+var ListA = /** @class */ (function () {
+    function ListA() {
+        this.items = [];
+    }
+    ListA.prototype.add = function (o) {
+        this.items.push(o);
+    };
+    ListA.prototype.remove = function (o) {
+        var index = this.items.indexOf(o);
+        if (index > -1) {
+            this.items.splice(index, 1);
+        }
+    };
+    return ListA;
+}());
+var listA = new ListA();
+for (var i = 0; i < 10; i++) {
+    listA.add(i);
+}
+console.log(listA);
+var inputOptionsA = {
+    'disabled': false,
+    'visible': false
+};
+// - Module
+var EmailValidator_1 = require("./EmailValidator");
+var emailA = 'abc@gmail.com';
+var validatorA = new EmailValidator_1.EmailValidatorA();
+var resultBBB = validatorA.isValid(emailA);
+console.log(resultBBB);
+// TS same concept module with ES6
+// In a module, variable function class interface is private, not global
+// use export statement to export variable function class type ... from a module
+// use import statement to access exports from other modules

@@ -1271,3 +1271,139 @@ let personC = mergeB(
     25
 )
 console.log(personC)
+
+// use constraint use extends keyword for generic type
+function mergeC<U extends object, V extends object>(obj1: U, obj2: V) {
+    return {
+        ...obj1,
+        ...obj2
+    }
+}
+// let personD = mergeC(
+//     {name: 'John'},
+//     25, //error wrong type
+// )
+
+// function propA<T, K>(obj: T, key: K) {
+//     return obj[key]; // error type K cannot be used to index type 'T'
+// }
+
+function propB<T, K extends keyof T>(obj: T, key: K) {
+    return obj[key]
+}
+
+let strB = propB({name: 'John'}, 'name');
+console.log(strB)
+// Use extends keyword to constrain the type parameter to a specific type
+// Use extends keyof to constrain a type that is the property of another object
+
+// - TS Generic Classes
+// use <> annotation to contain list parameter, create class can work with different type while maintaining type safety
+class StackA<T> {
+    private elements: T[] = [];
+
+    constructor(private size: number) {
+    }
+
+    isEmpty(): boolean {
+        return this.elements.length === 0;
+    }
+    isFull(): boolean {
+        return this.elements.length === this.size
+    }
+    push(element: T): void {
+        if (this.elements.length === this.size) {
+            throw new Error('The stack is overflow');
+        }
+        this.elements.push(element);
+    }
+    pop(): T {
+        if (this.elements.length == 0) {
+            throw new Error('The stack is empty')
+        }
+        return this.elements.pop();
+    }
+}
+
+let numbersG = new StackA<number>(5);
+console.log(numbersG)
+
+function randBetweenA(low: number, high: number): number {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+let numbersH = new StackA<number>(5);
+while (!numbersH.isFull()) {
+    let n = randBetweenA(1, 10);
+    console.log(`Push ${n} into the stack`);
+    numbersH.push(n)
+}
+
+//
+let wordsA = 'The quick brown fox jumps over the lazy dog' . split(' ');
+let wordStackA = new StackA<string>(wordsA.length);
+wordsA.forEach(word => wordStackA.push(word));
+while (!wordStackA.isEmpty()) {
+    console.log(wordStackA.pop())
+}
+
+// TS generic Interface: work multiple type while maintaining type safety
+// describe property
+interface PairA<K, V> {
+    key: K;
+    value: V
+}
+let monthA: PairA<string, number> = {
+    key: 'Jan',
+    value: 1
+}
+console.log(monthA)
+
+// describe method
+interface CollectionA<T> {
+    add(o: T): void;
+    remove(o: T): void;
+}
+
+class ListA<T> implements  CollectionA<T> {
+    private items: T[] = [];
+
+    add(o: T) {
+        this.items.push(o);
+    }
+
+    remove(o: T): void {
+        let index = this.items.indexOf(o);
+        if (index > -1) {
+            this.items.splice(index, 1)
+        }
+    }
+}
+
+let listA = new ListA<number>();
+for (let i = 0; i < 10; i++) {
+    listA.add(i);
+}
+console.log(listA)
+// describe an index type
+interface OptionsA<T> {
+    [name: string]: T
+}
+
+let inputOptionsA: OptionsA<boolean> = {
+    'disabled': false,
+    'visible': false
+}
+
+// - Module
+
+import { EmailValidatorA } from "./EmailValidator";
+let emailA = 'abc@gmail.com';
+let validatorA = new EmailValidatorA();
+let resultBBB = validatorA.isValid(emailA);
+console.log(resultBBB)
+
+
+// TS same concept module with ES6
+// In a module, variable function class interface is private, not global
+// use export statement to export variable function class type ... from a module
+// use import statement to access exports from other modules
