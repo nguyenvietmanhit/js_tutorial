@@ -120,24 +120,24 @@ fsF.readdir('./myFolder', (err, files) => {
 console.log("Dsadsa")
 
 //
-const fsG = require('fs');
-fsG.rename('./newFolder/newFile.txt', './newFolder/newFileAsync.txt', (err) => {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    console.log('File renamed successfully!')
-})
+// const fsG = require('fs');
+// fsG.rename('./newFolder/newFile.txt', './newFolder/newFileAsync.txt', (err) => {
+//     if (err) {
+//         console.log(err);
+//         return;
+//     }
+//     console.log('File renamed successfully!')
+// })
 
 //
-const fsH = require('fs');
-fsH.unlink('./myFolder/myFileSync.txt', (err) => {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    console.log('File deleted successfully!');
-})
+// const fsH = require('fs');
+// fsH.unlink('./myFolder/myFileSync.txt', (err) => {
+//     if (err) {
+//         console.log(err);
+//         return;
+//     }
+//     console.log('File deleted successfully!');
+// })
 
 // Event Driven Programming: focus to event instead of logic code, by emit and on function
 const EventEmitterA = require('events');
@@ -148,3 +148,57 @@ const welcomeUserA = () => {
 
 myEmitterA.on('userJoined', welcomeUserA);
 myEmitterA.emit('userJoined')
+console.log('bcd')
+
+
+const EventEmitterB = require('events');
+const myEmitterB = new EventEmitterB();
+const sayHelloB = () => {
+    console.log('Hello User B');
+}
+
+const sayHiB = () => {
+    console.log('Hi User B');
+}
+
+const greetNewYearB = () => {
+    console.log('Happy New Year B!');
+}
+
+// Attach multiple on
+myEmitterB.on('userJoined', sayHelloB);
+myEmitterB.on('userJoined', sayHiB);
+myEmitterB.on('userJoined', greetNewYearB)
+
+myEmitterB.emit('userJoined');
+// alert('dsadsa')
+
+//
+const EventEmitterC = require('events');
+const myEmitterC = new EventEmitterC();
+
+const greetBirthdayC = (name, newAge) => {
+    console.log(`Happy birthday ${name}. You are now ${newAge}`);
+}
+
+myEmitterC.on('birthdayEvent', greetBirthdayC);
+// emit event with parameter
+myEmitterC.emit('birthdayEvent', 'John', '24')
+
+// emit must be run after on
+const EventEmitterD = require('events');
+const myEmitterD = new EventEmitterD();
+
+const sayHiD = () => {
+    console.log('Hi user D');
+}
+
+const sayHelloD = () => {
+    console.log('Hello user D');
+}
+
+myEmitterD.on('userJoinedD', sayHiD);
+
+myEmitterD.emit('userJoinedD');
+
+myEmitterD.on('userJoinedD', sayHelloD); //dont run because declare after emit
