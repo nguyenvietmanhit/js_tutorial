@@ -6,6 +6,7 @@ function myFunction2() {
     console.log('Hello from myFunction2');
 }
 
+// use object to export multiple
 module.exports = {
     foo: 'bar',
     myFunction1: myFunction1,
