@@ -140,3 +140,11 @@ fsH.unlink('./myFolder/myFileSync.txt', (err) => {
 })
 
 // Event Driven Programming: focus to event instead of logic code, by emit and on function
+const EventEmitterA = require('events');
+const myEmitterA = new EventEmitterA();
+const welcomeUserA = () => {
+    console.log('Hi there, Welcome to the server!')
+}
+
+myEmitterA.on('userJoined', welcomeUserA);
+myEmitterA.emit('userJoined')
