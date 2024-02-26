@@ -204,3 +204,62 @@ myEmitterD.emit('userJoinedD');
 myEmitterD.on('userJoinedD', sayHelloD); //dont run because declare after emit
 
 // - HTTP Module
+// + 4 method: GET, POST, PUT, DELETE
+// + Status code: 200 ok, 201 created, 204 no content, 400 bad requests, 401 unauthorized, 403 forbidden,
+// 404 not found, 500 internal server error, 503 service unavailable
+// + Create server
+const httpA = require('http');
+const serverA = httpA.createServer((req, res) => {
+    res.end('Hello world')
+})
+
+
+const httpB = require('http');
+const serverB = httpB.createServer((req, res) => {
+    res.end('Hello world B');
+    console.log(req.url)
+})
+serverB.listen(5000, () => {
+    console.log('Server listening at port 5000')
+})
+
+const httpC = require('http');
+const serverC = httpB.createServer((req, res) => {
+    if(req.url === '/'){
+        res.end('This is my Home Page');
+    } else if(req.url === '/about'){
+        res.end('This is my About Page');
+    } else if(req.url === '/contact'){
+        res.end('This is my Contact Page');
+    } else {
+        res.end('404, Resource Not Found');
+    }
+})
+serverC.listen(5001, () => {
+    console.log('Server listening at port 5001')
+})
+
+
+const httpD = require('http');
+const serverD = httpD.createServer((req, res) => {
+    if(req.url === '/'){
+        res.writeHead(200, {'content-type': 'text/html'});
+        res.write('<h1>Home Page</h1>');
+        res.end();
+    } else if(req.url === '/about'){
+        res.writeHead(200, {'content-type': 'text/html'});
+        res.write('<h1>About Page</h1>');
+        res.end();
+    } else if(req.url === '/contact'){
+        res.writeHead(200, {'content-type': 'text/html'});
+        res.write('<h1>Contact Page</h1>');
+        res.end();
+    } else {
+        res.writeHead(404, {'content-type': 'text/html'});
+        res.write('<h1>404, Resource Not Found <a href="/">Go Back Home</a></h1>');
+        res.end();
+    }
+})
+serverD.listen(5002, () => {
+    console.log('Server listening at port 5002')
+})
