@@ -26,6 +26,9 @@ mongoose.connect(
     }
 )
 
+const blogRouter = require("./routes/BlogRoutes");
+app.use("/api/blogs", blogRouter);
+
 module.exports = app;
 
 
