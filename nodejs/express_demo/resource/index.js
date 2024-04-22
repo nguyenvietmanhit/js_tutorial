@@ -64,3 +64,20 @@ var User = {
 // curl http://localhost:3000/users/1..3
 // curl -X DELETE http://localhost:3000/users/1
 app.resource('/users', User);
+
+app.get('/', (req, res) => {
+    res.send([
+        '<h1>Examples: </h1><ul>'
+        , '<li>GET /users</li>'
+        , '<li>GET /users/1</li>'
+        , '<li>GET /users/3</li>'
+        , '<li>GET /users/1..3</li>'
+        , '<li>GET /users/1..3.json</li>'
+        , '<li>DELETE /users/4</li>'
+    ].join('\n'))
+})
+
+if (!module.parent) {
+    app.listen(3000);
+    console.log('Express started on port 3000');
+}
