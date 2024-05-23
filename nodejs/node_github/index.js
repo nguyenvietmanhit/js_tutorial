@@ -41,3 +41,12 @@ console.log('Hello World'.white);
 
 //This will print the text in gray
 console.log('Hello World'.gray);
+
+console.log("dsadsads")
+
+var a = '5';
+var b = 6;
+console.log(a+b)
+
+
+console.log(process.argv)
